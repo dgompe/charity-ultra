@@ -226,6 +226,10 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .names{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
 .names li{break-inside:avoid;border-bottom:1px solid var(--soft);padding:10px 0;font-size:16px}
 @media (max-width:480px){.names{columns:1}}
+.pull{margin:0;font-family:var(--st);font-weight:400;text-transform:uppercase;font-size:clamp(30px,3.2vw,52px);line-height:.98;max-width:16em;text-wrap:balance;transition:opacity .6s ease}
+.pull.out{opacity:0}
+.ph.q{cursor:default;background:var(--ink);color:var(--paper);display:flex;align-items:flex-end;padding:clamp(10px,1.2vw,18px)}
+.ph.q p{margin:0;font-family:var(--st);text-transform:uppercase;font-size:var(--qs,22px);line-height:1;text-wrap:balance}
 /* checklist */
 .chk{list-style:none;margin:0;padding:0}
 .chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
@@ -407,7 +411,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
     <div id="runner-cells"></div>
 
-    <div class="c" style="--s:6"><span class="mono">Organisation</span><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Role</th><th class="n">Profile</th></tr></thead><tbody id="crew"></tbody></table></div></div>
+    <div class="c" style="--s:6"><span class="mono">Organisation</span><blockquote class="pull" id="pull" aria-live="polite"></blockquote><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Role</th><th class="n">Profile</th></tr></thead><tbody id="crew"></tbody></table></div></div>
     <div class="c top" style="--s:6"><span class="mono">Support crew &amp; relay</span><ul class="names" id="support"></ul></div>
     <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
   </div>
@@ -725,6 +729,22 @@ $("#n-support").dataset.scramble = String(sup.length).padStart(2,"0"); $("#n-sup
 
 /* ---------- Photo field ---------- */
 const pad2 = n => String(n).padStart(2,"0");
+const QUOTES = [
+  "Pursue the things, places and dreams that make you feel alive.",
+  "Trust what you're doing. You may be making more progress than you realise.",
+  "Let yourself believe you deserve the good things that happen to you.",
+  "Give yourself some of the care you give other people.",
+  "Choose your self-talk carefully, with more love and joy."
+];
+(function(){
+  const el = $("#pull"); let i = 0;
+  el.textContent = "“" + QUOTES[0] + "”";
+  if (reduce) return;
+  setInterval(() => {
+    el.classList.add("out");
+    setTimeout(() => { i = (i + 1) % QUOTES.length; el.textContent = "“" + QUOTES[i] + "”"; el.classList.remove("out"); }, 600);
+  }, 6000);
+})();
 const FIELD = [["lavaux1", 506, 900], ["lavaux1-d1", 372, 720], ["summit", 900, 675], ["summit-d1", 461, 576], ["night", 900, 506], ["night-d1", 660, 473], ["night-d2", 660, 507], ["climb", 675, 900], ["climb-d1", 384, 563], ["peaks", 900, 675], ["peaks-d1", 540, 495], ["ski-ridge", 900, 600], ["ski-ridge-d1", 326, 398], ["trio", 900, 600], ["trio-d1", 540, 480], ["poles", 506, 900], ["poles-d1", 338, 420], ["skin-track", 900, 600], ["skin-track-d1", 326, 362], ["ibex", 900, 506], ["ibex-d1", 540, 371], ["ibex-d2", 384, 303], ["road", 675, 900], ["road-d1", 450, 420], ["belay", 675, 900], ["belay-d1", 461, 461], ["rocky", 539, 900], ["rocky-d1", 718, 480], ["lavaux2", 506, 900], ["lavaux2-d1", 438, 600], ["ski-slope", 600, 900], ["ski-slope-d1", 362, 543], ["recovery", 675, 900], ["recovery-d1", 360, 360], ["run-poster", 506, 900], ["david", 675, 900], ["david-d1", 525, 500], ["clarinde", 900, 599], ["clarinde-d1", 489, 507]];
 const field = $("#field");
 function shuffleSeeded(arr, seed){ const a = arr.slice(); let x = seed; const r = () => (x = (x*9301 + 49297) % 233280) / 233280;
@@ -734,12 +754,15 @@ function buildField(){
   const W = field.clientWidth; if (!W) return;
   const cols = W < 560 ? 3 : W < 980 ? 5 : 7;
   if (fieldBuilt === cols) return; fieldBuilt = cols;
-  const [list, rnd] = shuffleSeeded(FIELD, 7);
+  const [list0, rnd] = shuffleSeeded(FIELD, 7);
+  const list = list0.slice();
+  const qAt = [4, 13, 22, 31, 38];
+  QUOTES.forEach((q, k) => list.splice(Math.min(qAt[k], list.length), 0, ["__q", 4, 3, q]));
   const rows = Math.ceil(list.length / cols);
   const cw = W / cols, ch = cw * 0.86;
   const H = rows * ch + cw * 0.5;
   field.style.setProperty("--fh", H + "px");
-  field.innerHTML = list.map(([n, w, h], i) => {
+  field.innerHTML = list.map(([n, w, h, qt], i) => {
     const c = i % cols, r = Math.floor(i / cols);
     const size = [0.78, 0.95, 1.18, 1.38][Math.floor(rnd()*4)];
     const tw = Math.min(cw * size * (w < h ? 0.82 : 1.08), W * 0.42);
@@ -750,11 +773,12 @@ function buildField(){
     const ox = x < W*.15 ? "0%" : x + tw > W*.85 ? "100%" : "50%";
     const oy = y < H*.1 ? "0%" : y + th > H*.9 ? "100%" : "50%";
     const z = 1 + Math.floor(rnd()*6);
+    if (n === "__q") return `<div class="ph q" style="--x:${x.toFixed(1)}px;--y:${y.toFixed(1)}px;--w:${tw.toFixed(1)}px;--r:4/3;--ox:${ox};--oy:${oy};--z0:9;--z:9;--qs:${Math.max(15, tw/11).toFixed(0)}px"><p>${esc(qt)}</p></div>`;
     return `<button class="ph" type="button" data-full="assets/field/${n}.jpg" aria-label="Open photo ${i+1}" style="--x:${x.toFixed(1)}px;--y:${y.toFixed(1)}px;--w:${tw.toFixed(1)}px;--r:${w}/${h};--ox:${ox};--oy:${oy};--z0:${z};--z:${z}"><img src="assets/field/${n}.jpg" alt="" loading="lazy" decoding="async" width="${w}" height="${h}"></button>`;
   }).join("");
   tiles = $$(".ph", field).map(el => ({el, cx:0, cy:0, w:0, z0:+el.style.getPropertyValue("--z0")}));
   measure();
-  $("#field-count").textContent = pad2(list.length) + " photos";
+  $("#field-count").textContent = pad2(FIELD.length) + " photos";
 }
 function measure(){ tiles.forEach(t => { t.cx = t.el.offsetLeft + t.el.offsetWidth/2; t.cy = t.el.offsetTop + t.el.offsetHeight/2; t.w = t.el.offsetWidth; }); }
 const hoverable = matchMedia("(hover:hover) and (pointer:fine)").matches;
