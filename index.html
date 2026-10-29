@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STRAY Lake Tour Edition</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="STRAY – Lake Tour Edition. A student-run charity ultra: 165 km around Lac Léman from IMD Lausanne, 28–29 November 2026, for Fondation Planètes Enfants Malades.">
+<style>
+[hidden]{display:none!important}body{margin:0}img{max-width:100%}
+@font-face{font-family:"Stencil";src:url(assets/fonts/stick-no-bills-latin-300-normal.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Stencil";src:url(assets/fonts/stick-no-bills-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Stencil";src:url(assets/fonts/stick-no-bills-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Stencil";src:url(assets/fonts/stick-no-bills-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Archivo V";src:url(assets/fonts/archivo-latin-standard-normal.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(assets/fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+
+/* Layout: one-screen photo landing; every section is a full-bleed grid of ruled cells with corner ticks (stadium-signage feel), stencil numerals for every figure. Single committed look: purple ink on cream. */
+:root{
+  --ink:#2e2452;
+  --ink-2:#5b4f86;
+  --line:#2e2452;
+  --soft:#2e245226;
+  --paper:#f6efe9;
+  --paper-2:#ece3db;
+  --on-photo:#f6efe9;
+  --st:"Stencil","Arial Narrow",Impact,sans-serif;
+  --f-body:"Archivo V",Helvetica,Arial,sans-serif;
+  --f-mono:"Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.7,0,.15,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--ink);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:400;line-height:1.4}
+.st{font-family:var(--st);font-weight:400;text-transform:uppercase;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+
+/* ---------- Landing ---------- */
+.landing{position:relative;min-height:100%;display:grid;grid-template-rows:auto 1fr auto;color:var(--on-photo);isolation:isolate;overflow:hidden}
+.landing::before{content:"";position:absolute;inset:0;z-index:-2;background:#3a3156 url(assets/hero-4k.jpg) center 42%/cover no-repeat}
+.landing::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);opacity:.22}
+.gut{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.bar{display:flex;justify-content:flex-end;align-items:flex-start;padding-block:24px 0}
+.brand{display:block;width:clamp(78px,7vw,104px)}
+.brand img{display:block;width:100%;height:auto}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(24px,5vw,80px);padding-block:12px;min-height:0}
+.lock{display:flex;flex-direction:column;gap:clamp(18px,3.4vh,34px);min-width:0}
+.mark{margin:0;width:min(720px,52vw,calc((100vh - 470px) * 1.98));min-width:240px;max-width:100%;font-size:inherit;line-height:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lake{display:block;width:100%;height:auto;overflow:visible;color:var(--on-photo)}
+.lake-type text{font-family:var(--st);font-weight:800;font-size:96px;letter-spacing:0}
+.lake.draw #lake-line{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 2.8s cubic-bezier(.45,0,.2,1) .25s forwards}
+.lake.draw .lake-type{opacity:0;animation:type-in 1s ease 1.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes type-in{to{opacity:1}}
+.figrow{display:flex;flex-wrap:wrap;gap:14px clamp(26px,3.4vw,56px)}
+.figs{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(14px,2.2vh,22px)}
+.fig{display:flex;flex-direction:column;gap:6px}
+.fig b{font-family:var(--st);font-weight:400;font-size:clamp(30px,3.5vw,54px);line-height:.9;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.cd{display:flex;gap:clamp(10px,1.2vw,18px);align-items:flex-start}
+.cd .u{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.cd .u b{min-width:2ch}
+.cd .u i{font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.cd .sep{font-family:var(--st);font-size:clamp(30px,3.5vw,54px);line-height:.9;opacity:.6}
+.nav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.nav a{display:inline-block;font-family:var(--st);font-weight:400;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,1.7vw,26px);line-height:1;text-decoration:none;padding:7px 0;border-bottom:1px solid transparent;transition:border-color .2s}
+.nav a:focus-visible{outline:none;border-bottom-color:currentColor}
+.nav a:hover{border-bottom-color:currentColor}
+.foot{padding-block:0 18px}
+.foot .mono{font-family:var(--st);font-size:clamp(14px,1.05vw,17px);letter-spacing:.06em;line-height:1}
+.foot .head{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid #f6efe955;padding-top:12px}
+.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px clamp(18px,2.4vw,34px);padding-top:14px}
+.logos img{display:block;width:auto;max-width:none}
+.landing .logos{flex-wrap:nowrap;justify-content:space-between;gap:12px}
+@media (max-width:1240px){.landing .logos{flex-wrap:wrap;justify-content:center;gap:10px 22px}}
+.sup-btn{display:none;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.legal{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:12px;opacity:.75;width:100%}
+@media (max-width:760px),(max-height:660px){
+  .landing .logos{display:none}
+  .sup-btn{display:inline}
+  .landing .legal{display:none}
+}
+@media (max-width:760px){
+  .gut{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+  .stage{grid-template-columns:1fr;align-content:center;gap:30px}
+  .mark{width:100%}
+  .lake-type text{font-size:96px}
+  .figs{padding-left:0;gap:16px 22px}
+  .fig.cdw{width:100%}
+  .nav{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:stretch}
+  .nav a{display:block;font-size:20px;padding:10px 0;border-bottom:1px solid #f6efe933}
+}
+
+/* ---------- Panels ---------- */
+.panel{position:fixed;inset:0;z-index:20;background:var(--paper);color:var(--ink);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.p-head{position:sticky;top:0;z-index:5;background:var(--paper);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding-block:calc(14px + env(safe-area-inset-top,0px)) 12px;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line)}
+.p-head .home{display:block;width:62px}
+.p-head .home img{display:block;width:100%;height:auto}
+.p-nav{display:flex;justify-content:space-between;gap:12px;list-style:none;margin:0;padding:0 2vw}
+.p-nav a{font-size:14px;text-decoration:none;white-space:nowrap}
+.p-nav a:hover{text-decoration:underline;text-underline-offset:3px}
+.p-nav a[aria-current="page"]{text-decoration:line-through;text-decoration-thickness:1px}
+.close{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;gap:10px;align-items:center;padding:8px 0}
+.close span{font-size:20px;line-height:0;letter-spacing:0;font-family:var(--f-body);font-weight:300}
+@media (max-width:1000px){.p-nav{display:none}.p-head{grid-template-columns:1fr auto}}
+
+/* the ruled grid */
+.cells{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border-top:0}
+.c{--s:12;position:relative;grid-column:span var(--s);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px clamp(18px,1.8vw,26px) 22px;min-width:0;min-height:var(--h,auto);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.c::before,.c::after{content:"";position:absolute;left:-12px;width:24px;height:3px;background:var(--ink);z-index:2}
+.c::before{top:-2px}
+.c::after{bottom:-2px}
+.c.flush{padding:0}
+.c.top{justify-content:flex-start}
+.c > .mono:first-child{display:block}
+.media{position:relative;overflow:hidden;min-height:var(--mh,320px);height:100%;background:var(--paper-2)}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+h1.big,.h1{font-family:var(--st);font-weight:400;text-transform:uppercase;font-size:clamp(52px,7.6vw,128px);line-height:.92;letter-spacing:.005em;margin:0;text-wrap:balance}
+h1.big:focus{outline:none}
+.h2{font-family:var(--st);font-weight:400;text-transform:uppercase;font-size:clamp(30px,3.4vw,52px);line-height:.95;margin:0;text-wrap:balance}
+.h3{font-family:var(--st);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.2vw,32px);line-height:1;margin:0}
+.num{font-family:var(--st);font-weight:400;font-size:clamp(60px,7.4vw,124px);line-height:.85;letter-spacing:.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.num small{font-size:.42em;letter-spacing:.04em;margin-left:.15em}
+.txt{font-size:15px;line-height:1.5;max-width:46em;margin:0}
+.txt + .txt{margin-top:10px}
+.lede{font-size:clamp(17px,1.5vw,20px);line-height:1.4;max-width:34em;margin:0}
+.note{color:var(--ink-2);font-size:14px;line-height:1.5;margin:0;max-width:46em}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row-b{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 18px;background:var(--ink);color:var(--paper);text-decoration:none;font-size:14px;font-weight:500;border:1px solid var(--ink)}
+.btn:hover{background:#43356f}
+.btn.ghost{background:none;color:var(--ink)}
+.btn.ghost:hover{background:var(--paper-2)}
+.btn:disabled{background:none;color:var(--ink-2);border:1px dashed #2e245266;cursor:not-allowed}
+.copy{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);padding:7px 10px}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.qr{width:190px;max-width:100%;height:auto;display:block;background:#fff;padding:10px}
+.route{width:100%;height:auto;display:block}
+.rl text{font-family:var(--f-mono);font-size:14px;letter-spacing:.06em;fill:var(--ink);text-transform:uppercase}
+.rl .rs{font-size:15px;font-weight:500}
+.fpem{width:min(300px,80%);height:auto;display:block}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:400;text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.tbl td{padding:12px 12px 12px 0;border-bottom:1px solid var(--soft);font-size:15px;vertical-align:top}
+.tbl td.n{text-align:right}
+.tbl th.n{text-align:right}
+.tbl td.k{font-family:var(--st);font-size:22px;line-height:1;text-align:right}
+.tbl td a{text-underline-offset:3px}
+.tbl-wrap{overflow-x:auto}
+.lap{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-left:8px}
+.prog{height:6px;background:var(--paper-2);position:relative}
+.prog i{position:absolute;inset:0 auto 0 0;background:var(--ink);width:0;transition:width 1.2s var(--ease)}
+.empty{padding:18px 0;color:var(--ink-2);font-size:15px;border-bottom:1px solid var(--soft)}
+.tabs{display:flex}
+.tabs button{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 13px;border:1px solid var(--ink);margin-right:-1px}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+
+/* forms */
+form{display:flex;flex-direction:column;gap:16px;max-width:680px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:7px;min-width:0}
+.f label,.f legend{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.f .opt{color:var(--ink-2)}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper-2);border:1px solid transparent;border-bottom-color:var(--ink);border-radius:0;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.seg{display:flex;flex-wrap:wrap;margin-top:7px}
+.seg label{font-family:var(--f-body);text-transform:none;letter-spacing:0;font-size:15px;border:1px solid var(--ink);padding:9px 15px;cursor:pointer;margin-right:-1px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--paper)}
+.seg label:has(input:focus-visible){outline:2px solid var(--ink);outline-offset:2px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;cursor:pointer}
+.check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.km{font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+.status{font-size:15px;line-height:1.5;padding:12px 14px;border-left:3px solid var(--ink);background:var(--paper-2)}
+.status.err{border-left-color:#a3243b}
+.closed-banner{font-size:15px;padding:12px 14px;border:1px dashed #2e245266;color:var(--ink-2)}
+form[data-closed] .f,form[data-closed] .check{opacity:.55}
+
+/* runners */
+.who{display:flex;flex-direction:column;gap:12px}
+.who .media{--mh:0;aspect-ratio:4/5;height:auto;margin:-18px calc(-1 * clamp(18px,1.8vw,26px)) 0;max-width:none}
+.who .media img{filter:grayscale(1) contrast(1.05);transition:filter .6s,transform 1.2s var(--ease)}
+.who:hover .media img{filter:grayscale(0);transform:scale(1.03)}
+.who .ini{position:absolute;left:14px;bottom:8px;font-family:var(--st);font-size:72px;line-height:.8;color:#2e245230}
+.who p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.story summary{cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:3px;list-style:none}
+.story summary::-webkit-details-marker{display:none}
+.story[open] summary{margin-bottom:8px}
+.story p{margin:0 0 8px;color:var(--ink)}
+
+/* photo field */
+.field-cell{padding:0}
+.field-head{display:flex;justify-content:space-between;gap:16px;padding:18px clamp(18px,1.8vw,26px) 0}
+.field{position:relative;height:var(--fh,1100px);margin:18px clamp(10px,1.4vw,22px) 26px}
+.ph{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:var(--r);max-width:100%;padding:0;margin:0;border:0;background:var(--paper-2);
+  transform:scale(var(--k,1));transform-origin:var(--ox,50%) var(--oy,50%);z-index:var(--z,1);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);will-change:transform;cursor:zoom-in;overflow:visible}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(var(--b,.94)) contrast(var(--ct,1));transition:filter .55s ease}
+.ph::after{content:"";position:absolute;inset:0;box-shadow:0 30px 60px -18px #1d163acc;opacity:var(--sh,0);transition:opacity .55s ease;pointer-events:none}
+.ph:focus-visible{outline:2px solid var(--ink);outline-offset:3px;z-index:300}
+.lb{position:fixed;inset:0;z-index:60;background:#1d163af2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:max(18px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) max(18px,env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+.lb img{max-width:100%;max-height:calc(100% - 60px);object-fit:contain;display:block}
+.lb button{color:var(--paper);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #f6efe988;padding:9px 14px}
+@media (prefers-reduced-motion:reduce){.ph,.ph img,.ph::after{transition:none}}
+
+/* motion: cells wipe in when a panel opens */
+.panel.play .c{animation:cell-in .9s var(--ease) both;animation-delay:calc(min(var(--i,0),10) * 60ms)}
+@keyframes cell-in{from{clip-path:inset(0 0 100% 0);transform:translateY(24px)}to{clip-path:inset(0 0 0 0);transform:none}}
+.panel.play .c .media img{animation:img-in 1.4s var(--ease) both;animation-delay:calc(min(var(--i,0),10) * 60ms + 150ms)}
+@keyframes img-in{from{transform:scale(1.15)}to{transform:scale(1)}}
+
+.p-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.p-foot a{text-decoration:none;display:flex;flex-direction:column;gap:6px}
+.p-foot a b{font-family:var(--st);font-weight:400;font-size:clamp(28px,3vw,44px);text-transform:uppercase;line-height:.95}
+.p-foot a:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.p-foot .r{text-align:right;margin-left:auto;align-items:flex-end}
+
+/* checklist */
+.chk{list-style:none;margin:0;padding:0}
+.chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
+.chk li.ok .mono{color:#2f6b45}
+.chk li.todo .mono{color:#a3243b}
+
+@media (max-width:900px){
+  .c{--s:12 !important;grid-column:span 12}
+  .c.half-m{grid-column:span 6}
+  .frow{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .panel.play .c,.panel.play .c .media img{animation:none}
+  .face .spin{animation:none}
+  .d,.tilt,.prog i{transition-duration:.01s}
+}
+</style>
+</head>
+<body>
+
+
+<!-- ================= LANDING ================= -->
+<main class="landing" id="landing">
+  <header class="bar gut">
+    <a class="brand" href="#" aria-label="STRAY home"><img src="assets/stray.png" alt="STRAY" width="600" height="319"></a>
+  </header>
+  <div class="stage gut">
+    <div class="lock">
+      <h1 class="mark"><span class="sr">STRAY – Lake Tour Edition</span>
+        <svg class="lake" viewBox="-4 -4 480 242" aria-hidden="true">
+          <path id="lake-line" d="M0.02 231.09C0.05 229.77 3.50 228.31 4.09 226.70C4.23 226.32 4.30 225.94 4.30 225.94C4.44 225.11 4.19 224.49 4.64 221.53C4.64 221.53 4.75 220.72 5.52 216.79C6.07 212.31 6.42 208.64 6.65 206.05C6.97 202.43 6.95 201.94 7.24 200.48C8.38 194.76 11.03 191.00 10.68 190.79C10.36 190.60 8.37 193.94 7.95 193.72C7.53 193.50 8.30 189.46 11.15 186.82C12.51 185.55 14.98 184.02 15.00 184.01C19.59 175.07 20.98 172.89 21.22 173.00C21.63 173.20 20.69 176.57 20.59 176.55C20.56 176.55 20.96 173.78 21.77 168.23C21.78 168.21 21.99 166.32 22.57 160.68C24.24 160.12 26.55 159.05 28.27 156.85C29.68 155.06 29.33 154.27 30.76 152.29C33.35 148.69 37.19 147.60 36.93 146.91C36.71 146.32 33.95 147.11 33.76 146.57C33.57 146.02 36.42 145.02 39.41 142.34C40.53 141.34 42.04 139.99 43.09 137.90C44.95 134.18 44.44 130.00 44.17 129.97C43.91 129.94 43.03 133.74 43.50 133.93C43.98 134.12 46.32 130.91 47.03 127.06C47.03 127.06 47.11 126.63 47.54 122.28C49.57 120.00 51.09 118.08 52.12 116.74C52.46 116.30 53.12 115.41 54.45 113.63C57.69 109.31 57.60 109.40 57.72 109.28C60.82 106.12 65.39 104.86 65.39 104.86C66.00 103.25 66.96 101.10 68.44 98.75C69.24 97.48 70.32 95.79 72.15 93.91C72.81 93.24 74.89 91.18 78.24 89.32C81.06 87.76 82.46 86.98 84.08 87.12C84.08 87.12 85.39 87.24 90.52 90.62C92.94 85.94 94.01 83.78 94.47 82.79C94.50 82.73 94.53 82.68 94.57 82.60C95.53 80.91 97.94 81.54 98.39 80.59C98.82 79.66 96.69 78.66 96.78 76.80C96.85 75.51 97.95 74.22 99.18 73.84C100.94 73.30 102.10 74.88 103.06 74.24C104.44 73.34 103.60 69.07 103.60 69.07C103.09 64.10 103.96 62.48 104.92 61.97C106.25 61.28 107.43 62.87 109.90 62.50C112.46 62.12 114.18 59.98 115.56 58.27C117.53 55.82 118.96 52.59 118.96 52.59C119.34 48.70 120.49 47.32 121.57 46.84C123.67 45.89 127.51 47.46 127.51 47.46C129.18 45.49 130.86 43.52 132.54 41.56C132.81 40.28 133.66 37.12 136.38 35.53C136.38 35.53 137.95 34.75 145.55 35.85C145.55 35.85 151.06 32.76 156.64 33.24C157.00 33.27 157.55 33.33 158.22 33.47C161.38 34.13 164.10 35.89 163.92 36.42C163.73 36.97 160.59 35.79 160.31 36.44C159.90 37.38 165.57 41.92 170.63 41.15C170.86 41.11 171.07 41.07 171.31 41.02C174.19 40.41 175.36 39.45 178.05 39.12L178.05 39.12C180.56 37.77 182.85 36.73 184.79 35.92C189.13 34.12 191.29 33.23 193.90 33.14C196.29 33.07 203.40 34.18 201.03 33.89C207.40 30.43 208.58 29.15 208.39 28.64C208.33 28.48 208.14 28.40 207.85 28.28C206.40 27.66 205.25 28.62 204.82 28.26C204.05 27.62 205.48 22.40 209.26 20.69C209.26 20.69 209.90 20.39 214.94 19.68C219.13 21.37 220.66 21.02 221.28 20.35C222.19 19.33 220.90 17.75 221.78 15.57C222.49 13.80 224.11 12.96 226.60 11.65C226.60 11.65 227.94 10.96 233.27 9.14C237.82 3.09 238.25 1.28 237.76 0.77C237.03 0.00 244.41 1.69 244.48 1.91C244.56 2.16 237.79 0.13 242.13 1.12C244.48 1.65 246.51 2.98 247.10 3.36C248.69 4.40 250.81 6.16 250.81 6.16C252.37 8.77 254.13 9.80 255.18 10.24C256.69 10.89 258.56 10.92 262.31 11.00C262.31 11.00 262.57 11.00 266.31 11.01C267.86 10.24 269.41 9.47 270.97 8.69C276.39 6.98 279.89 5.63 279.76 5.01C279.64 4.45 276.60 4.79 276.59 4.67C276.59 4.53 281.55 3.09 285.73 5.41C286.92 6.07 286.74 6.31 289.04 8.18C291.24 9.97 292.27 10.45 296.15 12.95C300.73 15.90 303.51 17.95 303.65 17.77C303.80 17.57 300.44 15.29 300.77 14.65C301.46 13.30 317.57 19.88 317.39 20.42C317.32 20.61 315.24 20.09 313.86 19.65C313.62 19.57 310.33 18.50 310.42 18.08C310.55 17.53 316.71 17.25 321.43 20.04C322.18 20.49 323.33 21.26 325.22 22.05C326.28 22.49 327.67 23.06 329.50 23.31C332.19 23.67 332.32 22.88 333.90 23.37C336.71 24.24 338.67 27.49 338.67 27.49C342.52 27.74 344.29 29.02 345.19 30.19C346.46 31.83 345.87 33.08 347.50 34.86C348.75 36.21 349.40 35.82 352.00 37.74C354.02 39.23 353.91 39.68 355.32 40.50C357.06 41.53 358.65 41.68 360.78 41.88C365.88 42.37 368.60 40.94 368.91 40.46C368.94 40.42 368.96 40.38 368.95 40.33C368.92 39.70 365.56 39.18 365.43 39.56C365.26 40.04 370.75 40.83 374.83 45.38C376.56 47.30 376.40 48.08 378.37 49.77C380.21 51.36 380.86 51.12 384.41 53.23C388.45 55.62 388.55 56.48 390.46 56.68C392.73 56.92 395.73 56.03 395.73 56.03L403.45 58.85C412.98 60.08 415.62 60.84 415.60 61.34C415.57 61.88 412.32 61.59 411.82 62.95C411.00 65.21 418.23 70.70 419.95 69.44C420.93 68.72 419.94 65.96 420.33 65.86C420.89 65.71 421.39 71.94 425.43 74.44C428.15 76.12 430.65 74.98 431.60 76.70C432.72 78.72 429.89 81.38 430.97 82.66C430.97 82.66 431.55 83.35 437.83 82.18C440.95 88.76 442.17 90.48 442.58 90.32C443.09 90.13 442.25 87.01 442.96 86.74C443.70 86.46 444.59 89.98 447.33 90.82C447.33 90.82 448.24 91.10 453.44 89.86C457.57 92.87 458.39 95.19 458.32 96.81C458.25 98.20 457.51 99.05 457.90 100.79C457.95 101.03 458.62 103.86 460.73 104.30C461.77 104.52 463.07 104.13 463.86 103.37C464.27 102.96 464.31 102.69 464.50 102.69C465.23 102.70 465.06 106.53 466.52 110.14C468.24 114.38 471.86 116.48 471.40 117.09C471.02 117.59 468.76 116.04 468.17 116.67C467.28 117.62 471.84 121.63 470.66 124.25C469.94 125.84 467.10 126.92 464.98 126.94C464.15 126.96 463.76 126.80 463.13 127.08C461.41 127.85 461.90 130.19 460.69 131.24C458.70 132.97 454.50 127.02 449.81 128.09C447.54 128.60 447.32 130.20 445.60 130.06C442.02 129.76 440.16 122.62 439.14 122.94C438.26 123.22 439.93 128.47 438.03 129.66C437.52 129.98 437.02 129.83 433.32 128.76C430.15 127.84 428.55 127.39 427.82 127.78C427.82 127.78 427.29 128.06 425.42 131.55C424.01 132.20 422.61 132.86 421.21 133.52C418.18 132.74 415.75 132.67 414.08 132.77C411.96 132.88 411.46 133.22 409.64 133.10C406.61 132.90 404.36 131.74 403.42 131.24C400.67 129.78 398.22 127.47 398.22 127.47C397.32 125.29 396.06 123.31 394.28 123.04C392.18 122.72 391.23 125.08 388.44 125.24C386.80 125.33 386.15 124.57 381.96 122.14C381.96 122.14 378.39 120.07 374.37 118.12C369.20 115.62 368.97 116.10 366.74 114.50C364.37 112.81 363.90 111.75 362.24 111.62C359.73 111.42 358.55 113.68 356.88 113.06C355.19 112.44 355.84 109.88 354.13 108.75C351.21 106.82 344.95 111.42 344.69 110.97C344.51 110.68 347.58 109.24 347.40 108.04C347.14 106.40 341.11 107.16 330.06 105.41C327.15 104.95 324.74 104.45 321.30 104.89C318.26 105.28 318.28 105.90 315.15 106.25C313.29 106.46 309.42 106.84 305.25 105.21C302.79 104.24 302.97 103.65 301.06 103.16C297.95 102.35 296.43 103.64 292.53 104.27C286.88 105.18 281.72 103.83 279.81 103.33C276.08 102.36 275.17 101.40 272.77 101.78C269.58 102.30 269.64 104.23 266.41 105.13C263.30 106.00 262.69 104.38 255.32 103.97C252.42 103.80 250.12 103.82 250.12 103.82C245.85 103.86 244.93 104.25 243.35 103.51C242.76 103.23 242.86 103.16 239.48 99.88C236.69 97.17 236.08 96.69 235.31 96.23C234.71 95.87 233.20 95.02 231.08 94.57C230.07 94.36 226.46 93.61 222.99 95.33C221.26 96.19 221.55 96.67 219.09 98.14C216.38 99.75 215.89 99.24 214.04 100.42C213.71 100.63 209.30 103.52 208.84 107.92C208.63 110.00 209.48 110.67 208.78 112.33C207.97 114.25 206.06 115.18 205.23 115.58C203.38 116.48 202.94 115.96 200.31 116.67C197.93 117.31 197.97 117.82 193.60 119.58C191.64 120.37 191.84 120.19 189.43 121.15C187.10 122.09 186.68 122.36 184.40 123.24C182.46 124.00 182.33 123.98 180.65 124.65C177.79 125.80 177.53 126.12 176.45 126.49C172.14 127.97 167.29 125.86 167.34 125.53C167.38 125.27 170.75 125.24 170.90 125.91C171.22 127.25 158.64 131.45 158.69 131.59C158.73 131.70 162.22 130.41 162.38 130.77C162.61 131.28 155.98 134.89 155.94 134.92C148.96 136.48 148.47 136.49 147.76 136.47C144.12 136.37 140.28 134.43 138.28 131.45C136.98 129.50 137.87 129.21 136.14 125.19C134.31 120.94 133.29 121.20 132.12 117.73C131.01 114.48 131.49 113.00 129.95 111.67C129.57 111.34 128.92 110.88 125.68 110.41C122.55 109.96 119.62 109.54 115.69 110.16C113.55 110.51 114.07 110.69 109.94 111.57C105.55 112.50 105.18 112.25 103.79 112.93C101.19 114.20 101.80 115.41 98.42 118.27C98.42 118.27 97.52 119.03 91.13 122.86C93.67 120.87 94.38 120.64 94.55 120.81C94.94 121.20 92.67 124.34 90.31 126.79C89.52 127.62 89.51 127.54 86.77 130.04C83.89 132.66 82.46 133.96 81.43 135.11C75.89 142.99 74.75 145.93 74.06 148.00C72.73 151.98 72.68 153.76 70.93 154.91C68.71 156.37 66.74 154.90 64.73 156.67C63.54 157.73 63.14 159.22 62.69 160.88C61.87 163.91 62.72 164.77 61.75 166.01C60.51 167.60 58.81 166.61 57.10 168.34C55.71 169.74 56.50 170.73 55.05 172.55C53.45 174.56 52.05 173.89 50.71 175.71C49.32 177.60 50.66 178.59 49.34 181.19C49.34 181.19 48.85 182.14 44.83 185.95C39.15 189.76 35.18 191.82 34.30 190.87C33.55 190.07 35.29 187.44 35.07 187.33C34.79 187.19 31.09 191.28 30.46 196.90C30.23 198.95 30.60 199.48 30.23 202.91C30.16 203.52 29.91 205.66 29.24 208.43C28.62 211.02 28.31 212.32 27.47 213.88C26.83 215.06 26.11 215.91 24.67 217.61C24.04 218.35 23.20 219.30 20.17 222.36C18.44 224.10 18.36 224.14 16.14 226.36C12.78 229.70 12.03 230.53 11.29 231.09C11.17 231.17 11.02 231.28 10.80 231.43C9.74 232.12 7.24 233.78 4.56 233.61C2.48 233.48 0.00 232.22 0.02 231.09Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <g class="lake-type" fill="currentColor">
+            <text x="98" y="110" textLength="286" lengthAdjust="spacingAndGlyphs">LAKE TOUR</text>
+            <text x="130" y="194" textLength="222" lengthAdjust="spacingAndGlyphs">EDITION</text>
+          </g>
+        </svg></h1>
+      <div class="figs">
+        <div class="fig cdw"><span class="mono" id="cd-label">Start in</span><div class="cd" id="cd" aria-live="off"></div></div>
+        <div class="figrow">
+          <div class="fig"><span class="mono">Start · IMD</span><b>28.11 · 11:00</b></div>
+          <div class="fig"><span class="mono">Distance</span><b><span id="km-count">165</span> KM</b></div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="Sections">
+      <ul class="nav">
+        <li><a href="#race" data-open>Race details</a></li>
+        <li><a href="#why" data-open>Why STRAY</a></li>
+        <li><a href="#runners" data-open>Runners &amp; crew</a></li>
+        <li><a href="#logistics" data-open>Support race logistics</a></li>
+        <li><a href="#donate" data-open>Donate to the foundation</a></li>
+        <li><a href="#pledge" data-open>Class Pledge Challenge</a></li>
+      </ul>
+    </nav>
+  </div>
+  <footer class="foot gut">
+    <div class="head">
+      <span class="mono">With thanks to</span>
+      <a class="mono sup-btn" href="#supporters" data-open>Our supporters</a>
+      <span class="mono">Partners</span>
+    </div>
+    <div class="logos" aria-label="Supporters"><img src="assets/logos/cream/imd.png" alt="IMD" style="height:15.5px"><img src="assets/logos/cream/mount-to-coast.png" alt="Mount to Coast" style="height:14.1px"><img src="assets/logos/cream/coros.png" alt="COROS" style="height:12.5px"><img src="assets/logos/cream/sems.png" alt="SEMS" style="height:13.3px"><img src="assets/logos/cream/peaq.png" alt="PEAQ" style="height:13.1px"><img src="assets/logos/cream/compressport.png" alt="Compressport" style="height:13.9px"><img src="assets/logos/cream/vitamin-well.png" alt="Vitamin Well" style="height:16.2px"><img src="assets/logos/cream/leki.png" alt="LEKI" style="height:14.0px"><img src="assets/logos/cream/poltrax.png" alt="Poltrax" style="height:14.1px"><img src="assets/logos/cream/cgn.png" alt="CGN" style="height:14.1px"><img src="assets/logos/cream/yeti.png" alt="YETI" style="height:13.6px"><img src="assets/logos/cream/lime.png" alt="Lime" style="height:15.3px"><img src="assets/logos/cream/compex.png" alt="Compex" style="height:9.7px"><img src="assets/logos/cream/condecta.png" alt="Condecta" style="height:9.8px"><img src="assets/logos/cream/new-roots.png" alt="New Roots" style="height:32.3px"><img src="assets/logos/cream/patagonia.png" alt="Patagonia" style="height:11.2px"><img src="assets/logos/cream/leukotape.png" alt="Leukotape" style="height:11.6px"></div>
+    <div class="legal mono">
+      <span>STRAY is an association and takes no financial benefit from this event.</span>
+      <span>Made in Switzerland.</span>
+    </div>
+  </footer>
+</main>
+
+<!-- ================= RACE ================= -->
+<section class="panel" data-panel="race" aria-labelledby="h-race" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race" aria-current="page">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:8;--h:62vh">
+      <span class="mono">01 — Race details</span>
+      <h1 class="big" id="h-race" tabindex="-1">165 km around Lac Léman</h1>
+    </div>
+    <div class="c flush" style="--s:4"><div class="media" style="--mh:62vh"><img src="assets/gallery/lavaux1.jpg" alt="Group run on the lakeside path below the Lavaux terraces"></div></div>
+
+    <div class="c" style="--s:3;--h:300px"><span class="mono">Start · Sat</span><div><div class="num" data-scramble="28.11">28.11</div><p class="note" style="margin-top:10px">11:00 · IMD Lausanne</p></div></div>
+    <div class="c" style="--s:3;--h:300px"><span class="mono">Expected finish · Sun</span><div><div class="num" data-scramble="29.11">29.11</div><p class="note" style="margin-top:10px">Around midday · back at IMD</p></div></div>
+    <div class="c" style="--s:3;--h:300px"><span class="mono">Distance · one loop</span><div><div class="num"><span data-scramble="165">165</span><small>KM</small></div><p class="note" style="margin-top:10px">Untimed, continuous</p></div></div>
+    <div class="c" style="--s:3;--h:300px"><span class="mono">Aid stations</span><div><div class="num" data-scramble="13">13</div><p class="note" style="margin-top:10px">Eight runners, day and night</p></div></div>
+
+    <div class="c" style="--s:4"><span class="mono">The race</span><p class="lede">STRAY is a student-run charity ultra based at IMD Lausanne. Eight runners will attempt an untimed, continuous loop around the lake. Through the day and through the night.</p></div>
+    <div class="c" style="--s:8">
+      <div class="row-b" style="justify-content:space-between"><span class="mono">Route · counterclockwise</span><span class="mono">GPX 166.9 km</span></div>
+      <svg class="route" viewBox="0 0 1000 619" role="img" aria-label="Route map: one loop of Lac Léman, starting and finishing at IMD Lausanne, run counterclockwise, with 13 aid stations">
+<path d="M594.9 56.3 L595.6 58.8 L602.0 62.6 L609.2 61.8 L619.0 65.4 L621.0 63.2 L648.1 62.2 L688.7 76.7 L713.4 95.9 L720.7 95.7 L732.9 91.1 L740.4 91.8 L750.3 97.9 L760.6 108.2 L778.1 117.2 L785.5 118.4 L793.0 117.5 L814.6 123.7 L846.9 128.3 L854.9 137.8 L867.2 145.2 L876.4 160.0 L891.5 162.2 L898.1 166.5 L899.5 171.2 L902.0 173.2 L906.9 172.2 L915.1 176.1 L925.1 175.9 L933.6 184.2 L933.4 192.1 L935.6 194.5 L937.7 195.6 L942.3 193.7 L946.2 195.5 L950.8 203.2 L950.7 209.1 L955.2 213.7 L960.0 229.8 L954.6 241.4 L953.7 247.9 L948.7 255.1 L947.3 266.5 L932.2 274.2 L920.5 276.4 L916.1 276.3 L916.2 274.5 L913.8 274.1 L909.9 275.0 L903.9 282.7 L880.3 262.9 L872.6 269.8 L868.6 269.4 L866.7 267.6 L867.2 269.1 L862.2 265.7 L840.4 269.5 L826.1 263.9 L823.9 261.6 L817.0 260.3 L811.2 254.5 L798.8 257.6 L793.6 257.3 L777.6 250.2 L772.4 249.8 L767.6 246.9 L757.9 244.1 L752.8 240.0 L730.1 236.7 L716.1 231.9 L698.6 231.4 L662.4 232.8 L649.7 237.3 L627.5 234.8 L613.2 235.3 L568.8 241.9 L557.3 240.8 L548.1 245.8 L514.7 253.0 L500.7 253.2 L490.2 259.5 L481.7 262.0 L480.0 265.1 L471.9 268.8 L466.7 273.5 L458.6 274.0 L454.2 280.5 L450.2 276.8 L444.8 277.2 L441.1 284.0 L431.9 293.9 L428.9 293.6 L428.2 295.5 L422.1 297.8 L396.0 315.8 L390.1 321.7 L382.7 325.5 L381.4 324.5 L365.3 329.3 L335.7 353.4 L313.6 360.7 L307.8 360.0 L302.4 361.8 L255.2 382.9 L245.6 391.1 L228.6 401.8 L199.6 413.9 L178.7 437.4 L156.1 454.5 L121.5 502.5 L108.4 507.7 L96.6 519.6 L82.6 539.8 L69.8 564.3 L46.4 579.2 L42.4 577.2 L40.0 573.0 L46.1 565.5 L44.2 555.4 L46.3 549.1 L40.4 539.9 L41.3 520.2 L44.9 509.8 L43.9 497.7 L49.5 490.1 L65.4 455.2 L61.1 445.1 L61.1 426.6 L64.4 419.4 L78.4 406.4 L87.0 392.8 L92.8 387.8 L96.0 380.9 L97.1 381.2 L96.0 380.9 L103.6 361.9 L104.2 352.7 L110.6 328.7 L128.1 300.7 L136.7 293.2 L142.6 284.1 L150.2 277.8 L156.5 266.1 L171.2 249.1 L173.3 248.8 L172.9 247.2 L180.3 238.7 L182.4 233.2 L203.3 207.1 L216.5 196.9 L240.4 170.4 L258.7 154.6 L269.6 138.7 L293.7 135.6 L332.5 125.8 L336.8 127.0 L345.5 118.9 L377.2 117.5 L401.5 107.3 L408.3 96.8 L415.0 90.2 L429.9 82.8 L420.0 87.1 L430.8 81.4 L441.1 64.3 L445.4 62.0 L450.1 61.8 L454.0 53.2 L458.2 48.2 L462.2 46.1 L475.4 43.9 L482.9 44.3 L507.0 51.8 L520.3 50.7 L528.9 45.8 L549.7 40.0 L550.9 43.2 L555.5 44.7 L561.2 43.1 L569.7 49.6 L570.1 48.1 L569.7 49.6 L573.1 52.7 L580.0 52.9 L584.1 54.7 L585.8 51.7 L594.4 57.7 L594.9 56.4 Z" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>
+<g fill="var(--paper)" stroke="var(--ink)" stroke-width="2"><circle cx="788.6" cy="117.9" r="5"/><circle cx="579.4" cy="240.8" r="5"/><circle cx="869.1" cy="269.5" r="5"/><circle cx="958.5" cy="223.1" r="5"/><circle cx="373.9" cy="326.8" r="5"/><circle cx="200.4" cy="414.0" r="5"/><circle cx="87.8" cy="532.2" r="5"/><circle cx="44.8" cy="507.0" r="5"/><circle cx="96.6" cy="381.0" r="5"/><circle cx="171.8" cy="249.4" r="5"/><circle cx="269.4" cy="139.4" r="5"/><circle cx="429.7" cy="82.7" r="5"/></g>
+<circle cx="594.9" cy="56.3" r="9" fill="var(--ink)"/>
+<g class="rl"><text x="788.6" y="103.9" text-anchor="middle">Rivaz</text><text x="579.4" y="262.8" text-anchor="middle">Évian</text><text x="869.1" y="291.5" text-anchor="middle">St-Gingolph</text><text x="958.5" y="245.1" text-anchor="middle">Chillon</text><text x="594.9" y="36.3" text-anchor="middle" class="rs">IMD · Start / Finish</text></g>
+</svg>
+      <div class="stack">
+        <p class="note">From IMD east through Lavaux and the Riviera, across to the French shore at St-Gingolph, west along the French side to Geneva, then home along La Côte.</p>
+        <div class="row-b"><a class="btn ghost" href="assets/stray-lake-tour.gpx" download>Download GPX</a><a class="btn ghost" href="https://ridewithgps.com/routes/56646783" target="_blank" rel="noopener">Open in Ride with GPS</a></div>
+      </div>
+    </div>
+
+    <div class="c top" style="--s:5">
+      <span class="mono">Run the first 5 km</span>
+      <h2 class="h2">Join us for the first 5 km</h2>
+      <p class="txt">Anyone can ask to join at an easy pace. We leave IMD together on Saturday 28 November at 11:00.</p>
+      <p class="txt">Send the form. It is a request, not a confirmed place. We confirm by email.</p>
+      <p class="note">Questions: <a href="mailto:david.gomezpereda@mba.imd.org">david.gomezpereda@mba.imd.org</a></p>
+    </div>
+    <div class="c" style="--s:7">
+      <form id="f-reg" novalidate>
+        <div class="frow">
+          <div class="f"><label for="r-name">Full name</label><input id="r-name" name="name" type="text" autocomplete="name" required maxlength="120"></div>
+          <div class="f"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
+        </div>
+        <div class="frow">
+          <div class="f"><label for="r-phone">Phone <span class="opt">· optional</span></label><input id="r-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"></div>
+          <div class="f"><label for="r-club">Club, class or company <span class="opt">· optional</span></label><input id="r-club" name="club" type="text" maxlength="120"></div>
+        </div>
+        <div class="f"><label for="r-note">Anything we should know <span class="opt">· optional</span></label><textarea id="r-note" name="note" maxlength="600"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="r-web">Website</label><input id="r-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="check"><input id="r-ack" type="checkbox" name="ack" required><span>I understand this is a request. My place is confirmed only once the organisers approve it.</span></label>
+        <div class="row-b"><button class="btn" type="submit">Send request</button></div>
+        <div class="msg" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="c" style="--s:12">
+      <span class="mono">Partners &amp; sponsors</span>
+      <div class="row-b" style="justify-content:space-between;align-items:flex-end">
+        <h2 class="h2">Back the race</h2>
+        <div class="row-b"><a href="mailto:david.gomezpereda@mba.imd.org" style="font-size:17px;font-weight:600;text-underline-offset:4px">david.gomezpereda@mba.imd.org</a><button class="copy" data-copy="david.gomezpereda@mba.imd.org">Copy</button></div>
+      </div>
+    </div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="panel" data-panel="why" aria-labelledby="h-why" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why" aria-current="page">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:8;--h:62vh">
+      <span class="mono">02 — Why STRAY</span>
+      <h1 class="big" id="h-why" tabindex="-1">Stray from the norm</h1>
+    </div>
+    <div class="c flush" style="--s:4"><div class="media" style="--mh:62vh"><img src="assets/gallery/night.jpg" alt="Five runners after a night session"></div></div>
+
+    <div class="c" style="--s:12;--h:220px"><span class="mono">Mission</span><p class="h2" style="max-width:24em">“Stray from the norm: promoting community through physical activity to push human limits together.”</p></div>
+
+    <div class="c top" style="--s:3;--h:300px"><span class="mono">01</span><h2 class="h3">Together</h2><p class="txt">Movement brings people together. Classmates, running clubs, families, people from the city. One loop, one weekend, one shared effort.</p></div>
+    <div class="c top" style="--s:3;--h:300px"><span class="mono">02</span><h2 class="h3">By choice</h2><p class="txt">We chose something hard. 165 km without stopping is a choice we made.</p></div>
+    <div class="c top" style="--s:3;--h:300px"><span class="mono">03</span><h2 class="h3">For them</h2><p class="txt">Many children and families face hard things they never chose. A race is not that, and we don't pretend it is. It is a way to show up for them and raise money for the people who are there every day.</p></div>
+    <div class="c top" style="--s:3;--h:300px"><span class="mono">04</span><h2 class="h3">For Lausanne</h2><p class="txt">IMD's class lives in Lausanne for a year. This is how we give something back to the city.</p></div>
+
+    <div class="c" style="--s:4;--h:340px"><span class="mono">The beneficiary · Lausanne</span><img class="fpem" src="assets/fpem-logo.png" alt="Fondation Planètes Enfants Malades" width="884" height="393"></div>
+    <div class="c" style="--s:4;--h:340px"><span class="mono">Years beside children in hospital</span><div class="num"><span data-scramble="25">25</span><small>+</small></div></div>
+    <div class="c" style="--s:4;--h:340px">
+      <p class="txt">Fondation Planètes Enfants Malades runs activities for children and teenagers in hospital, and for their families: sport, storytelling, music, a programme for teens, family support and more.</p>
+      <div class="row-b"><a class="btn" href="#donate">Donate to the foundation</a><a class="btn ghost" href="https://www.fpem.ch" target="_blank" rel="noopener">fpem.ch</a></div>
+    </div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= RUNNERS ================= -->
+<section class="panel" data-panel="runners" aria-labelledby="h-runners" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners" aria-current="page">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:6;--h:52vh"><span class="mono">03 — Runners &amp; crew</span><h1 class="big" id="h-runners" tabindex="-1">Eight runners. One loop.</h1></div>
+    <div class="c half-m" style="--s:2"><span class="mono">Runners</span><div class="num" data-scramble="08">08</div></div>
+    <div class="c half-m" style="--s:2"><span class="mono">Organisation</span><div class="num" data-scramble="04">04</div></div>
+    <div class="c half-m" style="--s:2"><span class="mono">Support crew</span><div class="num" id="n-support">00</div></div>
+
+    <div class="c flush field-cell" style="--s:12">
+      <div class="field-head"><span class="mono">The people · the miles · the mountains</span><span class="mono" id="field-count"></span></div>
+      <div class="field" id="field" aria-label="Training and team photos"></div>
+    </div>
+
+    <div class="c flush" style="--s:4"><div class="media" style="--mh:560px"><video src="assets/gallery/run.mp4" poster="assets/gallery/run-poster.jpg" muted autoplay loop playsinline preload="metadata" aria-label="Short clip of a group training run"></video></div></div>
+    <div class="c" style="--s:8"><span class="mono">Training</span><p class="h2" style="max-width:16em">Months of it. Lavaux at sunrise, alpine passes, late loops in the dark. On 28 November we run the whole lake.</p></div>
+
+    <div id="runner-cells"></div>
+
+    <div class="c" style="--s:6"><span class="mono">Organisation</span><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Role</th><th class="n">Profile</th></tr></thead><tbody id="crew"></tbody></table></div></div>
+    <div class="c" style="--s:6"><span class="mono">Support crew</span><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th></th><th class="n">Profile</th></tr></thead><tbody id="support"></tbody></table></div></div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= LOGISTICS ================= -->
+<section class="panel" data-panel="logistics" aria-labelledby="h-logistics" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics" aria-current="page">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:8;--h:52vh"><span class="mono">04 — Support race logistics</span><h1 class="big" id="h-logistics" tabindex="-1">Keep the race moving</h1></div>
+    <div class="c" style="--s:4"><span class="mono">What it pays for</span><p class="lede">The event itself: support vans, fuel, safety equipment, insurance and food for the crew.</p></div>
+
+    <div class="c" style="--s:6;--h:420px">
+      <div class="row-b" style="justify-content:space-between"><span class="mono">Revolut</span><span class="mono">@gompe</span></div>
+      <img class="qr" src="assets/revolut-qr.png" alt="Revolut QR code for @gompe" width="805" height="805">
+      <div class="stack"><div class="row-b"><a class="btn" href="https://revolut.me/gompe" target="_blank" rel="noopener">Pay with Revolut</a></div><p class="note">Works without a Revolut account.</p></div>
+    </div>
+    <div class="c" style="--s:6;--h:420px">
+      <div class="row-b" style="justify-content:space-between"><span class="mono">TWINT</span><span class="mono">To a phone number</span></div>
+      <div class="stack">
+        <div class="num" style="font-size:clamp(40px,4.6vw,76px)" data-scramble="+41 76 612 25 56">+41 76 612 25 56</div>
+        <div class="row-b"><button class="copy" data-copy="+41766122556">Copy number</button></div>
+      </div>
+      <div class="stack">
+        <span class="mono">Message</span><p class="h2">Race logistics</p>
+        <div class="row-b"><button class="copy" data-copy="Race logistics">Copy message</button></div>
+        <p class="note">In TWINT: Send, enter the number, add the message “Race logistics”.</p>
+      </div>
+    </div>
+
+    <div class="c" style="--s:12"><p class="note">This is separate from donations to the foundation. Logistics money and foundation money are never added together. Want to give to the children instead? <a href="#donate">Donate to the foundation</a>.</p></div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= DONATE ================= -->
+<section class="panel" data-panel="donate" aria-labelledby="h-donate" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate" aria-current="page">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:8;--h:52vh"><span class="mono">05 — Donate to the foundation</span><h1 class="big" id="h-donate" tabindex="-1">Every franc to the children</h1></div>
+    <div class="c" style="--s:4"><span class="mono">Goes to the foundation</span><div class="num"><span data-scramble="100">100</span><small>%</small></div></div>
+
+    <div class="c" style="--s:4;--h:400px"><div class="row-b" style="justify-content:space-between"><span class="mono">Scan with TWINT</span><span class="mono">No minimum</span></div><img class="qr" src="assets/twint-qr.png" alt="TWINT QR code for Fondation Planètes Enfants Malades" width="400" height="400"><p class="note">Open TWINT and scan the code.</p></div>
+    <div class="c" style="--s:4;--h:400px"><span class="mono">Payment comment · required</span><div class="stack"><p class="h1" style="font-size:clamp(44px,5vw,84px)">Charity Ultra</p><div class="row-b"><button class="copy" data-copy="Charity Ultra">Copy comment</button></div></div><p class="note">So the foundation can see what this race raised.</p></div>
+    <div class="c" style="--s:4;--h:400px"><span class="mono">Beneficiary</span><img class="fpem" src="assets/fpem-logo.png" alt="Fondation Planètes Enfants Malades" width="884" height="393"><p class="note">100% of donations through this route go directly to Fondation Planètes Enfants Malades. We never ask for card details on this site.</p></div>
+
+    <div class="c" style="--s:12"><p class="note">Want to cover race costs instead? <a href="#logistics">Support race logistics</a>.</p></div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= PLEDGE ================= -->
+<section class="panel" data-panel="pledge" aria-labelledby="h-pledge" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge" aria-current="page">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:8;--h:52vh"><span class="mono">06 — Class Pledge Challenge · open now</span><h1 class="big" id="h-pledge" tabindex="-1">CHF 100 = 1 km</h1></div>
+    <div class="c" style="--s:4"><span class="mono">How it works</span><p class="lede">Pledge for your class or for yourself. Every CHF 100 credits one kilometre to your name on the ranking. Pay after the race.</p></div>
+
+    <div class="c" style="--s:3;--h:260px"><span class="mono">Pledged · CHF</span><div class="num" id="s-pledged">—</div></div>
+    <div class="c" style="--s:3;--h:260px"><span class="mono">Received · CHF</span><div class="num" id="s-received">—</div></div>
+    <div class="c" style="--s:3;--h:260px"><span class="mono">Credited · km</span><div class="num" id="s-km">—</div></div>
+    <div class="c" style="--s:3;--h:260px"><span class="mono">8 runners × 165 km</span><div><div class="num"><span data-target>1'320</span><small>KM</small></div><div class="prog" id="prog" style="margin-top:14px"><i></i></div></div></div>
+
+    <div class="c top" style="--s:4"><span class="mono">Who</span><p class="txt">MBA and EMBA classes, IMD faculty, staff, academia and individuals.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">Kilometres</span><p class="txt">Fundraising kilometres, not distance you run. CHF 50 = 0.50 km. Past 165 km you start a new lap. Eight runners × 165 km = 1'320 km.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">When you pay</span><p class="txt">Monday 30 November 2026, after the runners finish. You will receive an email with payment details. It all goes to Fondation Planètes Enfants Malades, through the <a href="#donate">foundation TWINT code</a> with the comment “Charity Ultra”.</p></div>
+
+    <div class="c top" style="--s:7">
+      <div class="row-b" style="justify-content:space-between"><span class="mono">Ranking</span><span class="mono" id="lb-updated">Live with the first pledge</span></div>
+      <div class="tabs" role="tablist" aria-label="Ranking">
+        <button role="tab" id="t-classes" aria-selected="true" aria-controls="lb-table">Classes &amp; groups</button>
+        <button role="tab" id="t-ind" aria-selected="false" aria-controls="lb-table">Individuals</button>
+      </div>
+      <div class="tbl-wrap" id="lb-table" role="tabpanel"></div>
+    </div>
+    <div class="c top" style="--s:5">
+      <span class="mono">Make a pledge · payable 30.11.2026</span>
+      <form id="f-pledge" novalidate>
+        <fieldset class="f">
+          <legend>Pledge for</legend>
+          <div class="seg">
+            <label><input type="radio" name="entryType" value="class" checked><span>A class or group</span></label>
+            <label><input type="radio" name="entryType" value="individual"><span>Myself</span></label>
+          </div>
+        </fieldset>
+        <div class="f" data-for="class"><label for="p-class">Class or group</label><select id="p-class" name="classId"><option value="">Choose…</option></select></div>
+        <div class="f"><label for="p-name">Your name</label><input id="p-name" name="contributorName" type="text" autocomplete="name" required maxlength="120"></div>
+        <div class="f"><label for="p-email">Email <span class="opt">· private, for payment details</span></label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
+        <div class="f"><label for="p-amt">Amount in CHF</label><input id="p-amt" name="amount" type="number" inputmode="decimal" min="1" step="1" required><span class="km" id="p-km">= 0.00 km</span></div>
+        <div class="f" data-for="individual" hidden><label for="p-disp">Name on the ranking</label><input id="p-disp" name="displayName" type="text" maxlength="60"></div>
+        <label class="check" data-for="individual" hidden><input id="p-consent" type="checkbox" name="publicConsent"><span>Show my name on the public ranking. If unticked, I appear as “Anonymous”.</span></label>
+        <div class="hp" aria-hidden="true"><label for="p-web">Website</label><input id="p-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="check"><input id="p-ack" type="checkbox" name="ack" required><span>I understand this is a pledge, payable on Monday 30 November 2026, after the race.</span></label>
+        <div class="row-b"><button class="btn" type="submit">Pledge</button></div>
+        <div class="msg" aria-live="polite"></div>
+      </form>
+      <p class="note">The ranking shows your class name, or your own name for individual pledges, with CHF pledged, CHF received and kilometres. Your email stays private.</p>
+    </div>
+    <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
+  </div>
+</section>
+
+<!-- ================= SUPPORTERS ================= -->
+<section class="panel" data-panel="supporters" aria-labelledby="h-supporters" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:12;--h:40vh"><span class="mono">With thanks to</span><h1 class="big" id="h-supporters" tabindex="-1">Our partners</h1></div>
+    <div class="c half-m" style="--s:2;--h:200px"><span class="mono">01 · IMD</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/imd.png" alt="IMD" style="height:27px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">02 · Mount to Coast</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/mount-to-coast.png" alt="Mount to Coast" style="height:25px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">03 · COROS</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/coros.png" alt="COROS" style="height:22px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">04 · SEMS</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/sems.png" alt="SEMS" style="height:23px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">05 · PEAQ</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/peaq.png" alt="PEAQ" style="height:23px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">06 · Compressport</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/compressport.png" alt="Compressport" style="height:25px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">07 · Vitamin Well</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/vitamin-well.png" alt="Vitamin Well" style="height:29px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">08 · LEKI</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/leki.png" alt="LEKI" style="height:25px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">09 · Poltrax</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/poltrax.png" alt="Poltrax" style="height:25px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">10 · CGN</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/cgn.png" alt="CGN" style="height:25px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">11 · YETI</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/yeti.png" alt="YETI" style="height:24px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">12 · Lime</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/lime.png" alt="Lime" style="height:27px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">13 · Compex</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/compex.png" alt="Compex" style="height:17px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">14 · Condecta</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/condecta.png" alt="Condecta" style="height:17px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">15 · New Roots</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/new-roots.png" alt="New Roots" style="height:57px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">16 · Patagonia</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/patagonia.png" alt="Patagonia" style="height:20px;width:auto;max-width:100%"></div></div><div class="c half-m" style="--s:4;--h:200px"><span class="mono">17 · Leukotape</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><img src="assets/logos/leukotape.png" alt="Leukotape" style="height:20px;width:auto;max-width:100%"></div></div>
+    <div class="c" style="--s:12"><span class="mono">Become a partner</span><div class="row-b"><a href="mailto:david.gomezpereda@mba.imd.org" style="font-size:17px;font-weight:600;text-underline-offset:4px">david.gomezpereda@mba.imd.org</a><button class="copy" data-copy="david.gomezpereda@mba.imd.org">Copy</button></div></div>
+    <div class="c" style="--s:12"><div class="legal mono" style="opacity:1;padding:0"><span>STRAY is an association and takes no financial benefit from this event.</span><span>Made in Switzerland.</span></div></div>
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section class="panel" data-panel="checklist" aria-labelledby="h-checklist" role="dialog" aria-modal="true" hidden>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Race details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support race logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <div class="cells">
+    <div class="c" style="--s:12"><span class="mono">Organiser only</span><h1 class="big" id="h-checklist" tabindex="-1">Before launch</h1></div>
+    <div class="c" style="--s:12"><ul class="chk" id="chk"></ul></div>
+  </div>
+</section>
+
+
+<script>
+const CONFIG = {
+  // Google Apps Script web app URL (ends in /exec). See README.
+  endpoint: "",
+
+  // Class Pledge money goes to the foundation (decided 29 Oct 2026).
+  pledgeDestination: "foundation",
+  raceKm: 165,
+  runnersOnLoop: 8,          // board target = 165 × 8 = 1,320 km
+
+  // Owner-approved origin story (plain text). Leave "" to hide.
+  originStory: "",
+  foundationCopyApproved: false,
+
+  // Logos are AI-upscaled from the flyer. Set true once replaced with official files.
+  logosOfficial: false,
+
+  runners: [
+    { name: "David Gomez Pereda", photo: "assets/runners/david-gomez-pereda.jpg",
+      bio: "Grew up between Spain and the US. Doctor. Obese as a kid, more at home with paint than a ball. Sport got me out, and into hard things.",
+      story: "I grew up between Spain and the US. I studied medicine and work as a doctor.\n\nAs a kid I was obese. My world was art and painting. Sport is what got me out, and it is how I started doing hard things.\n\nI hated my legs, the way they looked. They are the same legs that carried me through all of it. I am grateful for what they let me do today.\n\nFor me, ultra running is where you show up as who you really are and show what you stand for.\n\nI started from nothing. I give this everything I am. I try to be kind to everyone and to do my best, and I am still working on both.\n\nIf you are reading this: you matter.",
+      linkedin: "https://www.linkedin.com/in/dgompe" },
+    { name: "Michele Gaeta",      photo: "", bio: "", linkedin: "https://www.linkedin.com/in/michele-gaeta" },
+    { name: "Francis Pfluger",    photo: "", bio: "", linkedin: "https://www.linkedin.com/in/francis-pfluger-2a581540" },
+    { name: "Clarinde Esculier",  photo: "assets/runners/clarinde-esculier.jpg", bio: "", linkedin: "https://www.linkedin.com/in/clarinde-tha%C3%AFs-esculier-6ab754150" },
+    { name: "Arthur Wong",        photo: "", bio: "", linkedin: "https://ch.linkedin.com/in/arthurhswong" },
+    { name: "Marthinus Erasmus",  photo: "", bio: "", linkedin: "https://www.linkedin.com/in/marthinus-erasmus" },
+    { name: "Angie Gisler",       photo: "", bio: "", linkedin: "" },
+    { name: "Vincent Leroy",      photo: "", bio: "", linkedin: "" }
+  ],
+  crew: [
+    { name: "David Gomez Pereda", role: "Founder, organiser and full-loop runner", linkedin: "https://www.linkedin.com/in/dgompe" },
+    { name: "Joan-Shiao Chen",    role: "", linkedin: "https://www.linkedin.com/in/joanshiaochen" },
+    { name: "Christian Morales",  role: "", linkedin: "https://www.linkedin.com/in/christianmoralesg" },
+    { name: "Kate Millican",      role: "", linkedin: "https://www.linkedin.com/in/kate-e-millican" }
+  ],
+  // confirmed:false = not shown on the site until you check the profile.
+  support: [
+    { name: "Iben Østergaard",          linkedin: "https://www.linkedin.com/in/iben-oestergaard", confirmed: true },
+    { name: "Mads Westergaard Thuesen", linkedin: "https://dk.linkedin.com/in/madswt",            confirmed: true },
+    { name: "Henry Dalby",              linkedin: "https://www.linkedin.com/in/henrydalby",        confirmed: true },
+    { name: "Emma Liv Weintraub",       linkedin: "https://www.linkedin.com/in/emmalivweintraub",  confirmed: true },
+    { name: "Ensa Bajo",                linkedin: "https://www.linkedin.com/in/ensa-bajo-6827a3104", confirmed: true },
+    { name: "Felix Yoon",               linkedin: "https://www.linkedin.com/in/felix-yoon",        confirmed: false },
+    { name: "Shivani Kalmane",          linkedin: "https://ch.linkedin.com/in/shivani-kalmane",    confirmed: false },
+    { name: "Esha Rawat",               linkedin: "https://www.linkedin.com/in/esha-rawat",        confirmed: false }
+  ]
+};
+
+
+(function(){
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const chf = n => new Intl.NumberFormat("de-CH",{minimumFractionDigits:0,maximumFractionDigits:2}).format(n||0);
+const km = n => ((Number(n)||0)/100).toFixed(2);
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
+const safeUrl = u => /^(https?:\/\/|[\w./-]+$)/i.test(u||"") ? u : "";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const TARGET = CONFIG.raceKm * CONFIG.runnersOnLoop;
+
+/* ---------- Countdown ---------- */
+const START = new Date("2026-11-28T11:00:00+01:00").getTime();
+const FINISH = new Date("2026-11-29T15:00:00+01:00").getTime();
+const cd = $("#cd"), cdl = $("#cd-label");
+function tick(){
+  const now = Date.now();
+  if (now >= FINISH){ cdl.textContent = "Lake Tour"; cd.innerHTML = `<div class="u"><b>DONE</b><i>Thank you</i></div>`; return; }
+  if (now >= START){ cdl.textContent = "Race"; cd.innerHTML = `<div class="u"><b>LIVE</b><i>On the road</i></div>`; return; }
+  let s = Math.floor((START - now)/1000);
+  const d = Math.floor(s/86400); s -= d*86400; const h = Math.floor(s/3600); s -= h*3600; const m = Math.floor(s/60); s -= m*60;
+  const p = n => String(n).padStart(2,"0");
+  cd.innerHTML = [[p(d),"Days"],[p(h),"Hrs"],[p(m),"Min"],[p(s),"Sec"]].map(([v,l],i)=>`${i?'<span class="sep" aria-hidden="true">:</span>':''}<div class="u"><b>${v}</b><i>${l}</i></div>`).join("");
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- Lake draw + km count ---------- */
+(function(){
+  const svg = $(".lake"), line = $("#lake-line"), out = $("#km-count");
+  if (reduce || !line.getTotalLength) return;
+  const len = line.getTotalLength();
+  svg.style.setProperty("--len", len); svg.classList.add("draw");
+  const t0 = performance.now() + 250, dur = 2800;
+  const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+  out.textContent = "000";
+  (function step(now){
+    const p = Math.min(1, Math.max(0, (now - t0)/dur));
+    out.textContent = String(Math.round(165 * ease(p))).padStart(3, "0");
+    if (p < 1) requestAnimationFrame(step); else out.textContent = "165";
+  })(performance.now());
+})();
+
+/* ---------- Routing ---------- */
+const ORDER = ["race","why","runners","logistics","donate","pledge"];
+const TITLES = {race:"Race details",why:"Why STRAY",runners:"Runners & crew",logistics:"Support race logistics",donate:"Donate to the foundation",pledge:"Class Pledge Challenge",supporters:"Our supporters",checklist:"Build checklist"};
+const landing = $("#landing");
+let lastTrigger = null, openedFromLanding = false, current = null;
+
+
+function scrambleIn(root){
+  if (reduce) return;
+  $$("[data-scramble]", root).forEach(el => {
+    const final = el.dataset.scramble; let f = 0;
+    const iv = setInterval(() => {
+      f++;
+      el.textContent = final.split("").map((ch, i) => /\d/.test(ch) && f < 14 + i*2 ? String((Math.random()*10)|0) : ch).join("");
+      if (f > 14 + final.length*2){ clearInterval(iv); el.textContent = final; }
+    }, 40);
+  });
+}
+function route(){
+  const id = (location.hash||"").slice(1);
+  const panel = id && $(`[data-panel="${CSS.escape(id)}"]`);
+  $$(".panel").forEach(p => { if (p !== panel){ p.hidden = true; p.classList.remove("play"); } });
+  if (panel){
+    panel.hidden = false;
+    panel.classList.remove("play"); void panel.offsetWidth; panel.classList.add("play");
+    $$(".c", panel).forEach((c, i) => c.style.setProperty("--i", i));
+    panel.scrollTop = 0;
+    landing.inert = true;
+    document.title = TITLES[id] + " · STRAY Lake Tour Edition";
+    current = id;
+    const h = panel.querySelector("h1"); h && h.focus({preventScroll:true});
+    scrambleIn(panel);
+    if (id === "pledge") loadBoard();
+    if (id === "runners") requestAnimationFrame(() => { buildField(); measure(); });
+  } else {
+    landing.inert = false;
+    document.title = "STRAY Lake Tour Edition";
+    current = null;
+    if (lastTrigger){ lastTrigger.focus(); lastTrigger = null; }
+  }
+}
+function closePanel(){
+  if (openedFromLanding && history.length > 1){ openedFromLanding = false; history.back(); return; }
+  try { history.pushState(null, "", location.pathname + location.search); } catch(e){ location.hash = ""; }
+  route();
+}
+addEventListener("hashchange", route);
+addEventListener("popstate", route);
+$$("[data-open]").forEach(a => a.addEventListener("click", () => { lastTrigger = a; openedFromLanding = true; }));
+$$("[data-close]").forEach(b => b.addEventListener("click", closePanel));
+$$("[data-home]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); closePanel(); }));
+addEventListener("keydown", e => { if (e.key === "Escape" && current) closePanel(); });
+$(".brand").addEventListener("click", e => { e.preventDefault(); if (current) closePanel(); });
+
+$$("[data-pager]").forEach(nav => {
+  const id = nav.closest(".panel").dataset.panel, i = ORDER.indexOf(id);
+  const prev = ORDER[i-1], next = ORDER[i+1] || "race";
+  nav.innerHTML = (prev ? `<a href="#${prev}"><span class="mono">Previous</span><b>${esc(TITLES[prev])}</b></a>` : "") +
+    `<a class="r" href="#${next}"><span class="mono">${ORDER[i+1] ? "Next" : "Back to start"}</span><b>${esc(TITLES[next])}</b></a>`;
+});
+
+/* ---------- Copy ---------- */
+$$("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+  const t = b.dataset.copy, label = b.textContent;
+  try { await navigator.clipboard.writeText(t); b.textContent = "Copied"; } catch(e){ b.textContent = t; }
+  setTimeout(() => b.textContent = label, 1600);
+}));
+
+/* ---------- People ---------- */
+const initials = n => n.split(/\s+/).map(w=>w[0]).slice(0,2).join("");
+$("#runner-cells").outerHTML = CONFIG.runners.map(r => `
+  <article class="c who" style="--s:3">
+    <div class="media">${safeUrl(r.photo) ? `<img src="${esc(r.photo)}" alt="${esc(r.name)}" loading="lazy">` : `<span class="ini" aria-hidden="true">${esc(initials(r.name))}</span>`}</div>
+    <h3 class="h3">${esc(r.name)}</h3>
+    ${r.bio ? `<p>${esc(r.bio)}</p>` : `<p>Profile coming soon.</p>`}
+    ${r.story ? `<details class="story"><summary>Read more</summary>${r.story.split(/\n\n/).map(p => `<p>${esc(p)}</p>`).join("")}</details>` : ""}
+    ${safeUrl(r.linkedin) ? `<a href="${esc(r.linkedin)}" target="_blank" rel="noopener" style="font-size:14px;text-underline-offset:3px">LinkedIn</a>` : ""}
+  </article>`).join("");
+const crewRow = c => `<tr><td>${esc(c.name)}</td><td>${esc(c.role || "")}</td><td class="n">${safeUrl(c.linkedin) ? `<a href="${esc(c.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}</td></tr>`;
+$("#crew").innerHTML = CONFIG.crew.map(crewRow).join("");
+const sup = CONFIG.support.filter(p => p.confirmed);
+$("#support").innerHTML = sup.map(crewRow).join("");
+$("#n-support").dataset.scramble = String(sup.length).padStart(2,"0"); $("#n-support").textContent = String(sup.length).padStart(2,"0");
+
+/* ---------- Photo field ---------- */
+const pad2 = n => String(n).padStart(2,"0");
+const FIELD = [["lavaux1", 506, 900], ["lavaux1-d1", 372, 720], ["summit", 900, 675], ["summit-d1", 461, 576], ["night", 900, 506], ["night-d1", 660, 473], ["night-d2", 660, 507], ["climb", 675, 900], ["climb-d1", 384, 563], ["peaks", 900, 675], ["peaks-d1", 540, 495], ["ski-ridge", 900, 600], ["ski-ridge-d1", 326, 398], ["trio", 900, 600], ["trio-d1", 540, 480], ["poles", 506, 900], ["poles-d1", 338, 420], ["skin-track", 900, 600], ["skin-track-d1", 326, 362], ["ibex", 900, 506], ["ibex-d1", 540, 371], ["ibex-d2", 384, 303], ["road", 675, 900], ["road-d1", 450, 420], ["belay", 675, 900], ["belay-d1", 461, 461], ["rocky", 539, 900], ["rocky-d1", 718, 480], ["lavaux2", 506, 900], ["lavaux2-d1", 438, 600], ["ski-slope", 600, 900], ["ski-slope-d1", 362, 543], ["recovery", 675, 900], ["recovery-d1", 360, 360], ["run-poster", 506, 900], ["david", 675, 900], ["david-d1", 525, 500], ["clarinde", 900, 599], ["clarinde-d1", 489, 507]];
+const field = $("#field");
+function shuffleSeeded(arr, seed){ const a = arr.slice(); let x = seed; const r = () => (x = (x*9301 + 49297) % 233280) / 233280;
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(r()*(i+1)); [a[i], a[j]] = [a[j], a[i]]; } return [a, r]; }
+let tiles = [], fieldBuilt = 0;
+function buildField(){
+  const W = field.clientWidth; if (!W) return;
+  const cols = W < 560 ? 3 : W < 980 ? 5 : 7;
+  if (fieldBuilt === cols) return; fieldBuilt = cols;
+  const [list, rnd] = shuffleSeeded(FIELD, 7);
+  const rows = Math.ceil(list.length / cols);
+  const cw = W / cols, ch = cw * 0.86;
+  const H = rows * ch + cw * 0.5;
+  field.style.setProperty("--fh", H + "px");
+  field.innerHTML = list.map(([n, w, h], i) => {
+    const c = i % cols, r = Math.floor(i / cols);
+    const size = [0.78, 0.95, 1.18, 1.38][Math.floor(rnd()*4)];
+    const tw = Math.min(cw * size * (w < h ? 0.82 : 1.08), W * 0.42);
+    const th = tw * h / w;
+    let x = c*cw + cw/2 - tw/2 + (rnd()-.5) * cw * .35 + (r % 2 ? cw*.22 : 0);
+    let y = r*ch + ch/2 - th/2 + (rnd()-.5) * ch * .35 + cw*.2;
+    x = Math.max(0, Math.min(W - tw, x)); y = Math.max(0, Math.min(H - th, y));
+    const ox = x < W*.15 ? "0%" : x + tw > W*.85 ? "100%" : "50%";
+    const oy = y < H*.1 ? "0%" : y + th > H*.9 ? "100%" : "50%";
+    const z = 1 + Math.floor(rnd()*6);
+    return `<button class="ph" type="button" data-full="assets/field/${n}.jpg" aria-label="Open photo ${i+1}" style="--x:${x.toFixed(1)}px;--y:${y.toFixed(1)}px;--w:${tw.toFixed(1)}px;--r:${w}/${h};--ox:${ox};--oy:${oy};--z0:${z};--z:${z}"><img src="assets/field/${n}.jpg" alt="" loading="lazy" decoding="async" width="${w}" height="${h}"></button>`;
+  }).join("");
+  tiles = $$(".ph", field).map(el => ({el, cx:0, cy:0, w:0, z0:+el.style.getPropertyValue("--z0")}));
+  measure();
+  $("#field-count").textContent = pad2(list.length) + " photos";
+}
+function measure(){ tiles.forEach(t => { t.cx = t.el.offsetLeft + t.el.offsetWidth/2; t.cy = t.el.offsetTop + t.el.offsetHeight/2; t.w = t.el.offsetWidth; }); }
+const hoverable = matchMedia("(hover:hover) and (pointer:fine)").matches;
+let mx = -1e4, my = -1e4, raf = 0;
+function paint(){
+  raf = 0;
+  let best = null, bd = Infinity;
+  tiles.forEach(t => { const d = Math.hypot(mx - t.cx, my - t.cy); t.d = d; if (d < bd){ bd = d; best = t; } });
+  tiles.forEach(t => {
+    const R = Math.max(220, t.w * 1.6);
+    const f = Math.max(0, 1 - t.d / R);
+    let k = 1 + 0.12 * f * f;
+    if (t === best && bd < Math.max(t.w * 0.75, 140)) k = 1.42;
+    const lit = k > 1.2;
+    const s = t.el.style;
+    s.setProperty("--k", k.toFixed(3));
+    s.setProperty("--z", lit ? 200 : f > 0 ? 20 + Math.round(f*40) + t.z0 : t.z0);
+    s.setProperty("--b", lit ? 1.05 : (0.94 + 0.06*f).toFixed(3));
+    s.setProperty("--ct", lit ? 1.06 : 1);
+    s.setProperty("--sh", lit ? 1 : (f*0.35).toFixed(2));
+  });
+}
+if (hoverable && !reduce){
+  field.addEventListener("pointermove", e => { const r = field.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; if (!raf) raf = requestAnimationFrame(paint); });
+  field.addEventListener("pointerleave", () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(paint); });
+}
+field.addEventListener("click", e => {
+  const b = e.target.closest(".ph"); if (!b) return;
+  const lb = document.createElement("div"); lb.className = "lb"; lb.setAttribute("role","dialog"); lb.setAttribute("aria-label","Photo");
+  lb.innerHTML = `<img src="${b.dataset.full}" alt=""><button type="button">Close</button>`;
+  const close = () => { lb.remove(); b.focus(); removeEventListener("keydown", onKey, true); };
+  const onKey = ev => { if (ev.key === "Escape"){ ev.stopPropagation(); close(); } };
+  lb.addEventListener("click", close); addEventListener("keydown", onKey, true);
+  document.body.appendChild(lb); lb.querySelector("button").focus();
+});
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { fieldBuilt = 0; if (current === "runners") buildField(); }, 200); });
+
+/* ---------- Pledge copy ---------- */
+$$("[data-target]").forEach(el => { const v = TARGET.toLocaleString("de-CH"); el.textContent = v; el.dataset.scramble = v; });
+
+/* ---------- Network + forms ---------- */
+const live = !!CONFIG.endpoint && /^https:\/\//.test(CONFIG.endpoint);
+async function post(payload){
+  const res = await fetch(CONFIG.endpoint, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload)});
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.ok) throw new Error(data.error || "The server did not accept the form.");
+  return data;
+}
+function validate(form){
+  for (const el of form.querySelectorAll("[required]")){
+    if (el.closest("[hidden]")) continue;
+    if (el.type === "checkbox" ? !el.checked : !el.value.trim()) return "Please fill in: " + (form.querySelector(`label[for="${el.id}"]`)?.textContent.replace(/·.*/,"").trim() || "all required fields") + ".";
+    if (el.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) return "Please check the email address.";
+  }
+  if (form.id === "f-pledge"){
+    if (!(Number(form.amount.value) >= 1)) return "Please enter an amount of at least CHF 1.";
+    if (form.entryType.value === "class" && !form.classId.value) return "Please choose a class or group.";
+    if (form.entryType.value === "individual" && !form.displayName.value.trim()) return "Please add the name to show on the ranking.";
+  }
+  return "";
+}
+function setupForm(form, build, done){
+  const msg = form.querySelector(".msg"), btn = form.querySelector("[type=submit]");
+  let sid = uid();
+  if (!live){
+    form.dataset.closed = "";
+    $$("input,select,textarea,button", form).forEach(el => el.disabled = true);
+    form.insertAdjacentHTML("afterbegin", `<div class="closed-banner">Connecting the form. Nothing can be sent yet.</div>`);
+    return;
+  }
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); msg.innerHTML = "";
+    if (form.website.value) return;
+    const err = validate(form);
+    if (err){ msg.innerHTML = `<div class="status err">${esc(err)}</div>`; return; }
+    btn.disabled = true; const label = btn.textContent; btn.textContent = "Sending…";
+    try {
+      const data = await post({...build(form), submissionId: sid});
+      msg.innerHTML = `<div class="status">${done(form, data)}</div>`;
+      form.reset(); sid = uid(); form.dispatchEvent(new Event("input"));
+    } catch(ex){
+      msg.innerHTML = `<div class="status err">Not sent. ${esc(ex.message || "Check your connection.")} Press the button again. It will only be counted once.</div>`;
+    } finally { btn.disabled = false; btn.textContent = label; }
+  });
+}
+setupForm($("#f-reg"), f => ({type:"registration", name:f.name.value.trim(), email:f.email.value.trim(), phone:f.phone.value.trim(), club:f.club.value.trim(), note:f.note.value.trim()}),
+  () => "Request received. It is not a confirmed place yet. We will reply by email.");
+const pf = $("#f-pledge");
+function syncPledge(){
+  const t = pf.entryType.value;
+  $$("[data-for]", pf).forEach(el => el.hidden = el.dataset.for !== t);
+  $("#p-km").textContent = "= " + km(pf.amount.value) + " km";
+}
+pf.addEventListener("input", syncPledge); pf.addEventListener("change", syncPledge); syncPledge();
+setupForm(pf, f => {
+  const t = f.entryType.value, sel = f.classId;
+  return {type:"pledge", entryType:t, classId: t === "class" ? sel.value : "", className: t === "class" ? sel.options[sel.selectedIndex]?.text || "" : "",
+    contributorName:f.contributorName.value.trim(), email:f.email.value.trim(), amount:Math.round(Number(f.amount.value)*100)/100,
+    displayName: t === "individual" ? f.displayName.value.trim() : "", publicConsent: t === "individual" ? f.publicConsent.checked : false};
+}, (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
+
+/* ---------- Ranking ---------- */
+let board = null, tab = "classes", btimer = null;
+const lbTable = $("#lb-table");
+function renderBoard(){
+  const t = (board && board.totals) || null;
+  $("#s-pledged").textContent = t ? chf(t.pledged) : "—";
+  $("#s-received").textContent = t ? chf(t.received) : "—";
+  $("#s-km").textContent = t ? km(t.pledged) : "—";
+  $("#prog i").style.width = t ? Math.min(100, t.pledged/100/TARGET*100) + "%" : "0";
+  if (!live){ lbTable.innerHTML = `<div class="empty">The ranking appears here with the first pledge.</div>`; return; }
+  if (!board){ lbTable.innerHTML = `<div class="empty">Loading…</div>`; return; }
+  const rows = ((tab === "classes" ? board.classes : board.individuals) || []).filter(r => r.pledged > 0);
+  lbTable.innerHTML = rows.length ? `<table class="tbl"><thead><tr><th>#</th><th>${tab === "classes" ? "Class or group" : "Name"}</th><th class="n">Pledged CHF</th><th class="n">Received CHF</th><th class="n">Km</th></tr></thead><tbody>${
+    rows.map((r, i) => `<tr><td class="mono">${pad2(i+1)}</td><td>${esc(r.name)}</td><td class="n">${chf(r.pledged)}</td><td class="n">${chf(r.received)}</td><td class="k">${km(r.pledged)}${r.pledged/100 > CONFIG.raceKm ? `<span class="lap">lap ${Math.floor(r.pledged/100/CONFIG.raceKm)+1}</span>` : ""}</td></tr>`).join("")
+  }</tbody></table>` : `<div class="empty">No pledges yet${tab === "classes" ? " from a class or group" : " from individuals"}. Be the first.</div>`;
+}
+async function loadBoard(){
+  if (!live){ renderBoard(); return; }
+  try {
+    const res = await fetch(CONFIG.endpoint + (CONFIG.endpoint.includes("?") ? "&" : "?") + "action=leaderboard", {cache:"no-store"});
+    const d = await res.json(); if (!d.ok) throw new Error();
+    board = d;
+    const sel = $("#p-class"), keep = sel.value;
+    sel.innerHTML = `<option value="">Choose…</option>` + (d.classes||[]).map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("");
+    sel.value = keep;
+    $("#lb-updated").textContent = "Updated " + new Date(d.updated).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+  } catch(e){ $("#lb-updated").textContent = "Could not refresh"; }
+  renderBoard();
+  clearTimeout(btimer); if (current === "pledge") btimer = setTimeout(loadBoard, 60000);
+}
+$$(".tabs [role=tab]").forEach(b => b.addEventListener("click", () => {
+  tab = b.id === "t-ind" ? "individuals" : "classes";
+  $$(".tabs [role=tab]").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  renderBoard();
+}));
+renderBoard(); if (live) loadBoard();
+
+/* ---------- Checklist ---------- */
+const items = [
+  [live, "Forms and ranking connected to the Google Sheet (endpoint) + Classes list filled"],
+  [true, "Logistics: Revolut @gompe and TWINT +41 76 612 25 56"],
+  [true, "Foundation TWINT QR"],
+  [true, "Pledges go to the foundation; past 165 km = new lap; target 1'320 km"],
+  [true, "Route map and GPX"],
+  [CONFIG.foundationCopyApproved, "Foundation description approved"],
+  [CONFIG.logosOfficial, "Official vector logos"],
+  ...CONFIG.runners.flatMap(r => [[!!r.photo, `${r.name}: photo`],[!!r.bio, `${r.name}: bio`],[!!r.linkedin, `${r.name}: LinkedIn`]]),
+  ...CONFIG.support.filter(p => !p.confirmed).map(p => [false, `${p.name}: confirm before showing`])
+];
+$("#chk").innerHTML = items.map(([ok, t]) => `<li class="${ok ? "ok" : "todo"}"><span class="mono">${ok ? "Done" : "Open"}</span><span>${esc(t)}</span></li>`).join("");
+
+route();
+})();
+</script>
+
+</body>
+</html>
