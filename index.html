@@ -811,7 +811,7 @@ const QUOTES = [
     setTimeout(() => { i = (i + 1) % QUOTES.length; el.textContent = "“" + QUOTES[i] + "”"; el.classList.remove("out"); }, 600);
   }, 6000);
 })();
-const FIELD = [["lavaux1", 506, 900], ["summit", 900, 675], ["night", 900, 506], ["climb", 675, 900], ["peaks", 900, 675], ["ski-ridge", 900, 600], ["trio", 900, 600], ["poles", 506, 900], ["skin-track", 900, 600], ["ibex", 900, 506], ["road", 675, 900], ["belay", 675, 900], ["rocky", 539, 900], ["lavaux2", 506, 900], ["ski-slope", 600, 900], ["recovery", 675, 900], ["run-poster", 506, 900], ["david", 675, 900], ["clarinde", 900, 599], ["angela-rock", 900, 900], ["angela-snow", 675, 900], ["angela-ridge", 675, 900], ["angela-summit", 675, 900], ["angela-track", 675, 900], ["angela-dusk-climb", 675, 900], ["angela-dusk", 675, 900], ["angela-race", 600, 900], ["angela-meadow", 675, 900], ["angela-goggles", 892, 900], ["arthur", 420, 900], ["michele", 506, 900], ["marthinus", 326, 900], ["francis", 900, 674], ["why-run", 447, 447], ["vincent", 738, 549], ["headlamp", 675, 900], ["summit-selfie", 675, 900], ["lake-selfie", 675, 900]];
+const FIELD = [["lavaux1", 506, 900], ["summit", 900, 675], ["night", 900, 506], ["climb", 675, 900], ["peaks", 900, 675], ["ski-ridge", 900, 600], ["poles", 506, 900], ["skin-track", 900, 600], ["ibex", 900, 506], ["road", 675, 900], ["belay", 675, 900], ["rocky", 539, 900], ["lavaux2", 506, 900], ["ski-slope", 600, 900], ["recovery", 675, 900], ["run-poster", 506, 900], ["david", 675, 900], ["clarinde", 900, 599], ["angela-rock", 900, 900], ["angela-snow", 675, 900], ["angela-ridge", 675, 900], ["angela-summit", 675, 900], ["angela-track", 675, 900], ["angela-dusk-climb", 675, 900], ["angela-dusk", 675, 900], ["angela-race", 600, 900], ["angela-meadow", 675, 900], ["angela-goggles", 892, 900], ["arthur", 420, 900], ["michele", 506, 900], ["marthinus", 326, 900], ["francis", 900, 674], ["why-run", 447, 447], ["vincent", 738, 549], ["headlamp", 675, 900], ["summit-selfie", 675, 900], ["lake-selfie", 675, 900]];
 const field = $("#field");
 function shuffleSeeded(arr, seed){ const a = arr.slice(); let x = seed; const r = () => (x = (x*9301 + 49297) % 233280) / 233280;
   for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(r()*(i+1)); [a[i], a[j]] = [a[j], a[i]]; } return [a, r]; }
@@ -848,16 +848,18 @@ function buildField(){
 }
 function measure(){ tiles.forEach(t => { t.cx = t.el.offsetLeft + t.el.offsetWidth/2; t.cy = t.el.offsetTop + t.el.offsetHeight/2; t.w = t.el.offsetWidth; }); }
 const hoverable = matchMedia("(hover:hover) and (pointer:fine)").matches;
-let mx = -1e4, my = -1e4, raf = 0;
+let mx = -1e4, my = -1e4, raf = 0, overEl = null;
 function paint(){
   raf = 0;
   let best = null, bd = Infinity;
   tiles.forEach(t => { const d = Math.hypot(mx - t.cx, my - t.cy); t.d = d; if (d < bd){ bd = d; best = t; } });
+  const hit = overEl && tiles.find(t => t.el === overEl);
+  if (hit){ best = hit; bd = 0; }
   tiles.forEach(t => {
     const R = Math.max(220, t.w * 1.6);
     const f = Math.max(0, 1 - t.d / R);
     let k = 1 + 0.12 * f * f;
-    if (t === best && bd < Math.max(t.w * 0.75, 140)) k = 1.42;
+    if (t === best && bd < Math.max(t.w * 0.75, 140)) k = 1.6;
     const lit = k > 1.2;
     const s = t.el.style;
     s.setProperty("--k", k.toFixed(3));
@@ -868,8 +870,8 @@ function paint(){
   });
 }
 if (hoverable && !reduce){
-  field.addEventListener("pointermove", e => { const r = field.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; if (!raf) raf = requestAnimationFrame(paint); });
-  field.addEventListener("pointerleave", () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(paint); });
+  field.addEventListener("pointermove", e => { overEl = e.target.closest(".ph:not(.q)"); const r = field.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; if (!raf) raf = requestAnimationFrame(paint); });
+  field.addEventListener("pointerleave", () => { overEl = null; mx = my = -1e4; if (!raf) raf = requestAnimationFrame(paint); });
 }
 field.addEventListener("click", e => {
   const b = e.target.closest(".ph"); if (!b) return;
