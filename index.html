@@ -46,7 +46,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .landing::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);opacity:.22}
 .gut{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
 .bar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-block:24px 0}
-.mini{margin:0;width:clamp(150px,15vw,230px);color:var(--on-photo);display:flex;flex-direction:column;gap:8px}
+.mini{margin:0;width:calc(clamp(78px,7vw,104px) * .86);color:var(--on-photo);display:flex;flex-direction:column;gap:8px}
 .mini svg{display:block;width:100%;height:auto;overflow:visible}
 .mini figcaption{display:flex;flex-direction:column;gap:2px;font-size:10px;opacity:.85}
 .lk-trail,.lk-comet{opacity:0}
@@ -275,7 +275,6 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
         <circle cx="594.9" cy="56.3" r="13" fill="currentColor"/>
         <circle class="lk-dot" r="12" fill="#fff" filter="url(#glow)"/>
       </svg>
-      <figcaption class="mono"><span>Lac Léman · one loop</span><span>IMD start · counterclockwise</span></figcaption>
     </figure>
     <a class="brand" href="#" aria-label="STRAY home"><img src="assets/stray.png" alt="STRAY" width="600" height="319"></a>
   </header>
