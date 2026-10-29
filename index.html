@@ -240,6 +240,17 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .why-lake{position:absolute;left:8%;right:8%;top:50%;width:84%;height:auto;transform:translateY(-50%);overflow:visible;z-index:1;filter:drop-shadow(0 0 6px #1d163a66)}
 .why-km{position:absolute;left:clamp(18px,1.8vw,26px);bottom:16px;z-index:1;color:#f6efe9;font-size:12px}
 .why-km b{font-family:var(--st);font-weight:400;font-size:42px;letter-spacing:.02em;margin-right:4px}
+.sup-all summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.sup-all summary::-webkit-details-marker{display:none}
+.sup-toggle{font-family:var(--st);font-size:clamp(22px,2vw,30px);text-transform:uppercase;display:inline-flex;gap:12px;align-items:baseline}
+.sup-toggle i{font-style:normal;display:inline-block;transition:transform .3s ease}
+.sup-all[open] .sup-toggle i{transform:rotate(45deg)}
+.sup-all summary:hover .sup-toggle{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.sup-list{list-style:none;margin:20px 0 0;padding:0;columns:3;column-gap:28px}
+.sup-list li{break-inside:avoid;display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--soft);padding:10px 0;font-size:15px}
+.sup-list .aff{color:var(--ink-2);text-align:right;font-size:13px}
+@media (max-width:900px){.sup-list{columns:2}}
+@media (max-width:560px){.sup-list{columns:1}}
 /* checklist */
 .chk{list-style:none;margin:0;padding:0}
 .chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
@@ -430,6 +441,11 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
     <div class="c" style="--s:6"><span class="mono">Organisation</span><blockquote class="pull" id="pull" aria-live="polite"></blockquote><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Role</th><th class="n">Profile</th></tr></thead><tbody id="crew"></tbody></table></div></div>
     <div class="c top" style="--s:6"><span class="mono">Support crew &amp; relay</span><ul class="names" id="support"></ul></div>
+    <div class="c" style="--s:12">
+      <details class="sup-all"><summary><span class="mono">Supporters</span><span class="sup-toggle">See all the supporters <i aria-hidden="true">+</i></span></summary>
+        <ul class="sup-list"><li><span>Agathe Schwaar</span><span class="aff">IMD Alumni</span></li><li><span>Alice Fauconnet</span><span class="aff">New Roots</span></li><li><span>Alison Andersen</span><span class="aff">IMD EMBA</span></li><li><span>Alyson Meister</span><span class="aff">IMD</span></li><li><span>Boris Gojanovic</span><span class="aff">Hôpital de La Tour</span></li><li><span>Cédric</span><span class="aff">Patagonia</span></li><li><span>Daniele Pagani</span><span class="aff">IMD</span></li><li><span>David Hemmrich</span><span class="aff">Compex</span></li><li><span>David Schöb</span><span class="aff">PEAQ / Adelbodner</span></li><li><span>Edouard Reatnoch</span><span class="aff">IMD</span></li><li><span>Fiona Brotschi</span><span class="aff">Essity / Leukotape</span></li><li><span>Gyopar Sipos</span><span class="aff">IMD</span></li><li><span>Ilan</span><span class="aff">REVIVR</span></li><li><span>Janick Knellwolf</span><span class="aff">Bucher+Walt / COROS</span></li><li><span>Julia Schmedding</span><span class="aff">Vitamin Well</span></li><li><span>Louis Leclézio</span><span class="aff">IMD</span></li><li><span>Louise Frechelin</span><span class="aff">IMD</span></li><li><span>Louise Thilo</span><span class="aff">physiotherapy</span></li><li><span>Luisa Santoro</span><span class="aff">IMD</span></li><li><span>Magali</span><span class="aff">Patagonia</span></li><li><span>Malo Scialpi</span><span class="aff">IMD</span></li><li><span>Marco Zumbrunn</span><span class="aff">LEKI</span></li><li><span>Marion Crausaz</span><span class="aff">CGN</span></li><li><span>Michał Piórkowski</span><span class="aff">Poltrax</span></li><li><span>Naomi Amoah</span><span class="aff">IMD</span></li><li><span>Paola Möhl Pignatelli</span><span class="aff">Fondation Planètes Enfants Malades</span></li><li><span>Serena Ciappei</span><span class="aff">Bucher+Walt / COROS</span></li><li><span>Sheng Li</span><span class="aff">Mount to Coast</span></li><li><span>Simon Jackson</span><span class="aff">IMD</span></li><li><span>Sonia Bel Hadj</span><span class="aff">IMD</span></li><li><span>Stéphane Fondement</span><span class="aff">IMD</span></li><li><span>Steve Wuerchoz</span><span class="aff">Condecta</span></li><li><span>Thomas Roos</span><span class="aff">STRAY adviser</span></li><li><span>Vincent Binaghi</span><span class="aff">IMD</span></li><li><span>William Trescazes</span><span class="aff">IMD</span></li></ul>
+      </details>
+    </div>
     <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
   </div>
 </section>
