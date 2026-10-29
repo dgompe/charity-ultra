@@ -223,6 +223,9 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .p-foot a:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
 .p-foot .r{text-align:right;margin-left:auto;align-items:flex-end}
 
+.names{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
+.names li{break-inside:avoid;border-bottom:1px solid var(--soft);padding:10px 0;font-size:16px}
+@media (max-width:480px){.names{columns:1}}
 /* checklist */
 .chk{list-style:none;margin:0;padding:0}
 .chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
@@ -405,7 +408,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
     <div id="runner-cells"></div>
 
     <div class="c" style="--s:6"><span class="mono">Organisation</span><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th>Role</th><th class="n">Profile</th></tr></thead><tbody id="crew"></tbody></table></div></div>
-    <div class="c" style="--s:6"><span class="mono">Support crew</span><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Name</th><th></th><th class="n">Profile</th></tr></thead><tbody id="support"></tbody></table></div></div>
+    <div class="c top" style="--s:6"><span class="mono">Support crew &amp; relay</span><ul class="names" id="support"></ul></div>
     <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
   </div>
 </section>
@@ -555,7 +558,7 @@ const CONFIG = {
     { name: "Clarinde Esculier",  photo: "assets/runners/clarinde-esculier.jpg", bio: "", linkedin: "https://www.linkedin.com/in/clarinde-tha%C3%AFs-esculier-6ab754150" },
     { name: "Arthur Wong",        photo: "", bio: "", linkedin: "https://ch.linkedin.com/in/arthurhswong" },
     { name: "Marthinus Erasmus",  photo: "", bio: "", linkedin: "https://www.linkedin.com/in/marthinus-erasmus" },
-    { name: "Angie Gisler",       photo: "assets/runners/angie-gisler.jpg", bio: "", linkedin: "" },
+    { name: "Angela Gisler",       photo: "assets/runners/angela-gisler.jpg", bio: "", linkedin: "" },
     { name: "Vincent Leroy",      photo: "", bio: "", linkedin: "" }
   ],
   crew: [
@@ -564,16 +567,30 @@ const CONFIG = {
     { name: "Christian Morales",  role: "Director of marketing and digital content", linkedin: "https://www.linkedin.com/in/christianmoralesg" },
     { name: "Kate Millican",      role: "Head of logistics", linkedin: "https://www.linkedin.com/in/kate-e-millican" }
   ],
-  // confirmed:false = not shown on the site until you check the profile.
+  // Support crew and relay runners. Names only, no profile links.
   support: [
-    { name: "Iben Østergaard",          linkedin: "https://www.linkedin.com/in/iben-oestergaard", confirmed: true },
-    { name: "Mads Westergaard Thuesen", linkedin: "https://dk.linkedin.com/in/madswt",            confirmed: true },
-    { name: "Henry Dalby",              linkedin: "https://www.linkedin.com/in/henrydalby",        confirmed: true },
-    { name: "Emma Liv Weintraub",       linkedin: "https://www.linkedin.com/in/emmalivweintraub",  confirmed: true },
-    { name: "Ensa Bajo",                linkedin: "https://www.linkedin.com/in/ensa-bajo-6827a3104", confirmed: true },
-    { name: "Felix Yoon",               linkedin: "https://www.linkedin.com/in/felix-yoon",        confirmed: false },
-    { name: "Shivani Kalmane",          linkedin: "https://ch.linkedin.com/in/shivani-kalmane",    confirmed: false },
-    { name: "Esha Rawat",               linkedin: "https://www.linkedin.com/in/esha-rawat",        confirmed: false }
+    { name: "Iben Østergaard", confirmed: true },
+    { name: "Mads Westergaard", confirmed: true },
+    { name: "Henry Dalby", confirmed: true },
+    { name: "Emma Liv Weintraub", confirmed: true },
+    { name: "Ensa Bajo", confirmed: true },
+    { name: "Shivani", confirmed: true },
+    { name: "Felix Yoon", confirmed: true },
+    { name: "Esha", confirmed: true },
+    { name: "Aman", confirmed: true },
+    { name: "Amanda", confirmed: true },
+    { name: "Amelia Laguía", confirmed: true },
+    { name: "Andrea Cotero", confirmed: true },
+    { name: "Caitlin Main", confirmed: true },
+    { name: "Christophe", confirmed: true },
+    { name: "Cris Barrero", confirmed: true },
+    { name: "Jenna Davidson", confirmed: true },
+    { name: "Kevin Marty", confirmed: true },
+    { name: "Kartik", confirmed: true },
+    { name: "Manoj", confirmed: true },
+    { name: "Parul", confirmed: true },
+    { name: "Jakob Nesvadba", confirmed: true },
+    { name: "Morges Running Club", confirmed: true }
   ]
 };
 
@@ -701,7 +718,7 @@ $("#runner-cells").outerHTML = CONFIG.runners.map(r => `
 const crewRow = c => `<tr><td>${esc(c.name)}</td><td>${esc(c.role || "")}</td><td class="n">${safeUrl(c.linkedin) ? `<a href="${esc(c.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}</td></tr>`;
 $("#crew").innerHTML = CONFIG.crew.map(crewRow).join("");
 const sup = CONFIG.support.filter(p => p.confirmed);
-$("#support").innerHTML = sup.map(crewRow).join("");
+$("#support").innerHTML = sup.map(p => `<li>${esc(p.name)}</li>`).join("");
 $("#n-support").dataset.scramble = String(sup.length).padStart(2,"0"); $("#n-support").textContent = String(sup.length).padStart(2,"0");
 
 /* ---------- Photo field ---------- */
