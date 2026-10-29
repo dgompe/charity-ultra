@@ -191,10 +191,16 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .who:hover .media img{filter:grayscale(0);transform:scale(1.03)}
 .who .ini{position:absolute;left:14px;bottom:8px;font-family:var(--st);font-size:72px;line-height:.8;color:#2e245230}
 .who p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
-.story summary{cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:3px;list-style:none}
+.story{display:flex;flex-direction:column}
+.story summary{order:2;cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:3px;list-style:none;align-self:flex-start}
 .story summary::-webkit-details-marker{display:none}
-.story[open] summary{margin-bottom:8px}
-.story p{margin:0 0 8px;color:var(--ink)}
+.story summary::before{content:"Read more"}
+.story[open] summary::before{content:"Read less"}
+.story[open] summary{margin-top:4px}
+.story summary:focus{outline:none}
+.story summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.story p{order:1;margin:0 0 8px;color:var(--ink)}
+.who:has(.story[open]) .lead{display:none}
 
 /* photo field */
 .field-cell{padding:0}
@@ -717,8 +723,8 @@ $("#runner-cells").outerHTML = CONFIG.runners.map(r => `
   <article class="c who" style="--s:3">
     <div class="media">${safeUrl(r.photo) ? `<img src="${esc(r.photo)}" alt="${esc(r.name)}" loading="lazy">` : `<span class="ini" aria-hidden="true">${esc(initials(r.name))}</span>`}</div>
     <h3 class="h3">${esc(r.name)}</h3>
-    ${r.bio ? `<p>${esc(r.bio)}</p>` : `<p>Profile coming soon.</p>`}
-    ${r.story ? `<details class="story"><summary>Read more</summary>${r.story.split(/\n\n/).map(p => `<p>${esc(p)}</p>`).join("")}</details>` : ""}
+    ${r.bio ? `<p class="${r.story ? "lead" : ""}">${esc(r.bio)}</p>` : `<p>Profile coming soon.</p>`}
+    ${r.story ? `<details class="story"><summary aria-label="Read more"></summary>${r.story.split(/\n\n/).map(p => `<p>${esc(p)}</p>`).join("")}</details>` : ""}
     ${safeUrl(r.linkedin) ? `<a href="${esc(r.linkedin)}" target="_blank" rel="noopener" style="font-size:14px;text-underline-offset:3px">LinkedIn</a>` : ""}
   </article>`).join("");
 const crewRow = c => `<tr><td>${esc(c.name)}</td><td>${esc(c.role || "")}</td><td class="n">${safeUrl(c.linkedin) ? `<a href="${esc(c.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}</td></tr>`;
