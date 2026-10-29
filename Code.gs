@@ -90,7 +90,7 @@ function addPledge(d, sid) {
 
   let classId = '', className = '', display = '', consent = false;
   if (type === 'class') {
-    const c = resolveClass(clean(d.classId, 64));
+    const c = d.classId === 'other' ? otherGroup(d.className) : resolveClass(clean(d.classId, 64));
     if (!c) return { ok: false, error: 'Please choose a class from the list.' };
     classId = c.id; className = c.name;
   } else {
@@ -126,7 +126,7 @@ function doGet(e) {
     totals.pledged += amt; totals.received += rec;
     if (r[2] === 'class') {
       let c = byClass[r[3]];
-      if (!c) { const rc = resolveClass(String(r[3])); if (rc) c = byClass[rc.id] = { id: rc.id, name: rc.name, pledged: 0, received: 0 }; }
+      if (!c) { const rc = /^other-/.test(String(r[3])) ? { id: String(r[3]), name: String(r[4]) } : resolveClass(String(r[3])); if (rc) c = byClass[rc.id] = { id: rc.id, name: rc.name, pledged: 0, received: 0 }; }
       if (c) { c.pledged += amt; c.received += rec; }
     } else {
       const k = r[8];
@@ -169,6 +169,11 @@ function resolveClass(id) {
     if (y >= YEAR_MIN && y <= YEAR_MAX) return { id: m[1] + '-' + y, name: YEAR_PROGRAMMES[m[1]] + ' ' + y };
   }
   return activeClasses().find(c => c.id === id) || null;
+}
+function otherGroup(name) {
+  const n = clean(name, 60).replace(/^'/, '');
+  const slug = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+  return n && slug ? { id: 'other-' + slug, name: n } : null;
 }
 function sheet(n) { return SpreadsheetApp.getActive().getSheetByName(n); }
 function exists(sh, sid) { return !!findRow(sh, sid); }
