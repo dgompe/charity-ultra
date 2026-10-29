@@ -814,30 +814,30 @@ const QUOTES = [
     setTimeout(() => { i = (i + 1) % QUOTES.length; el.textContent = "“" + QUOTES[i] + "”"; el.classList.remove("out"); }, 600);
   }, 6000);
 })();
-const FIELD = [["lavaux1", 506, 900], ["lavaux1-d1", 372, 720], ["summit", 900, 675], ["summit-d1", 461, 576], ["night", 900, 506], ["night-d1", 660, 473], ["night-d2", 660, 507], ["climb", 675, 900], ["climb-d1", 384, 563], ["peaks", 900, 675], ["peaks-d1", 540, 495], ["ski-ridge", 900, 600], ["ski-ridge-d1", 326, 398], ["trio", 900, 600], ["trio-d1", 540, 480], ["poles", 506, 900], ["poles-d1", 338, 420], ["skin-track", 900, 600], ["skin-track-d1", 326, 362], ["ibex", 900, 506], ["ibex-d1", 540, 371], ["ibex-d2", 384, 303], ["road", 675, 900], ["road-d1", 450, 420], ["belay", 675, 900], ["belay-d1", 461, 461], ["rocky", 539, 900], ["rocky-d1", 718, 480], ["lavaux2", 506, 900], ["lavaux2-d1", 438, 600], ["ski-slope", 600, 900], ["ski-slope-d1", 362, 543], ["recovery", 675, 900], ["recovery-d1", 360, 360], ["run-poster", 506, 900], ["david", 675, 900], ["david-d1", 525, 500], ["clarinde", 900, 599], ["clarinde-d1", 489, 507], ["angela-rock", 900, 900], ["angela-snow", 675, 900], ["angela-ridge", 675, 900], ["angela-summit", 675, 900], ["angela-track", 675, 900], ["angela-dusk-climb", 675, 900], ["angela-dusk", 675, 900], ["angela-race", 600, 900], ["angela-meadow", 675, 900], ["angela-goggles", 892, 900]];
+const FIELD = [["lavaux1", 506, 900], ["summit", 900, 675], ["night", 900, 506], ["climb", 675, 900], ["peaks", 900, 675], ["ski-ridge", 900, 600], ["trio", 900, 600], ["poles", 506, 900], ["skin-track", 900, 600], ["ibex", 900, 506], ["road", 675, 900], ["belay", 675, 900], ["rocky", 539, 900], ["lavaux2", 506, 900], ["ski-slope", 600, 900], ["recovery", 675, 900], ["run-poster", 506, 900], ["david", 675, 900], ["clarinde", 900, 599], ["angela-rock", 900, 900], ["angela-snow", 675, 900], ["angela-ridge", 675, 900], ["angela-summit", 675, 900], ["angela-track", 675, 900], ["angela-dusk-climb", 675, 900], ["angela-dusk", 675, 900], ["angela-race", 600, 900], ["angela-meadow", 675, 900], ["angela-goggles", 892, 900], ["arthur", 420, 900], ["michele", 506, 900], ["marthinus", 326, 900], ["francis", 900, 674], ["why-run", 447, 447]];
 const field = $("#field");
 function shuffleSeeded(arr, seed){ const a = arr.slice(); let x = seed; const r = () => (x = (x*9301 + 49297) % 233280) / 233280;
   for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(r()*(i+1)); [a[i], a[j]] = [a[j], a[i]]; } return [a, r]; }
 let tiles = [], fieldBuilt = 0;
 function buildField(){
   const W = field.clientWidth; if (!W) return;
-  const cols = W < 560 ? 3 : W < 980 ? 5 : 7;
+  const cols = W < 560 ? 4 : W < 980 ? 6 : 9;
   if (fieldBuilt === cols) return; fieldBuilt = cols;
   const [list0, rnd] = shuffleSeeded(FIELD, 7);
   const list = list0.slice();
-  const qAt = [4, 13, 22, 31, 38];
+  const qAt = [3, 11, 19, 27, 35];
   QUOTES.forEach((q, k) => list.splice(Math.min(qAt[k], list.length), 0, ["__q", 4, 3, q]));
   const rows = Math.ceil(list.length / cols);
-  const cw = W / cols, ch = cw * 0.86;
-  const H = rows * ch + cw * 0.5;
+  const cw = W / cols, ch = cw * 1.0;
+  const H = rows * ch + cw * 0.3;
   field.style.setProperty("--fh", H + "px");
   field.innerHTML = list.map(([n, w, h, qt], i) => {
     const c = i % cols, r = Math.floor(i / cols);
-    const size = [0.78, 0.95, 1.18, 1.38][Math.floor(rnd()*4)];
-    const tw = Math.min(cw * size * (w < h ? 0.82 : 1.08), W * 0.42);
+    const size = [0.72, 0.84, 0.96, 1.08][Math.floor(rnd()*4)];
+    const tw = Math.min(cw * size * (w < h ? 0.8 : 1.0), W * 0.3);
     const th = tw * h / w;
-    let x = c*cw + cw/2 - tw/2 + (rnd()-.5) * cw * .35 + (r % 2 ? cw*.22 : 0);
-    let y = r*ch + ch/2 - th/2 + (rnd()-.5) * ch * .35 + cw*.2;
+    let x = c*cw + cw/2 - tw/2 + (rnd()-.5) * cw * .22 + (r % 2 ? cw*.12 : 0);
+    let y = r*ch + ch/2 - th/2 + (rnd()-.5) * ch * .2 + cw*.1;
     x = Math.max(0, Math.min(W - tw, x)); y = Math.max(0, Math.min(H - th, y));
     const ox = x < W*.15 ? "0%" : x + tw > W*.85 ? "100%" : "50%";
     const oy = y < H*.1 ? "0%" : y + th > H*.9 ? "100%" : "50%";
