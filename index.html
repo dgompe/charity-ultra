@@ -236,6 +236,10 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .pull.out{opacity:0}
 .ph.q{cursor:default;background:var(--ink);color:var(--paper);display:flex;align-items:flex-end;padding:clamp(10px,1.2vw,18px)}
 .ph.q p{margin:0;font-family:var(--st);text-transform:uppercase;font-size:var(--qs,22px);line-height:1;text-wrap:balance}
+.why-media img{filter:saturate(.85) contrast(1.02)}
+.why-lake{position:absolute;left:8%;right:8%;top:50%;width:84%;height:auto;transform:translateY(-50%);overflow:visible;z-index:1;filter:drop-shadow(0 0 6px #1d163a66)}
+.why-km{position:absolute;left:clamp(18px,1.8vw,26px);bottom:16px;z-index:1;color:#f6efe9;font-size:12px}
+.why-km b{font-family:var(--st);font-weight:400;font-size:42px;letter-spacing:.02em;margin-right:4px}
 /* checklist */
 .chk{list-style:none;margin:0;padding:0}
 .chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
@@ -379,7 +383,9 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
       <span class="mono">02 — Why STRAY</span>
       <h1 class="big" id="h-why" tabindex="-1">Stray from the norm</h1>
     </div>
-    <div class="c flush" style="--s:4"><div class="media" style="--mh:62vh"><img src="assets/gallery/night.jpg" alt="Five runners after a night session"></div></div>
+    <div class="c flush" style="--s:4"><div class="media why-media" style="--mh:62vh"><img src="assets/gallery/why-run.jpg" alt="A runner moving fast across a high mountain slope">
+      <svg class="why-lake" viewBox="-4 -4 480 242" aria-hidden="true"><path class="wl" d="M0.02 231.09C0.05 229.77 3.50 228.31 4.09 226.70C4.23 226.32 4.30 225.94 4.30 225.94C4.44 225.11 4.19 224.49 4.64 221.53C4.64 221.53 4.75 220.72 5.52 216.79C6.07 212.31 6.42 208.64 6.65 206.05C6.97 202.43 6.95 201.94 7.24 200.48C8.38 194.76 11.03 191.00 10.68 190.79C10.36 190.60 8.37 193.94 7.95 193.72C7.53 193.50 8.30 189.46 11.15 186.82C12.51 185.55 14.98 184.02 15.00 184.01C19.59 175.07 20.98 172.89 21.22 173.00C21.63 173.20 20.69 176.57 20.59 176.55C20.56 176.55 20.96 173.78 21.77 168.23C21.78 168.21 21.99 166.32 22.57 160.68C24.24 160.12 26.55 159.05 28.27 156.85C29.68 155.06 29.33 154.27 30.76 152.29C33.35 148.69 37.19 147.60 36.93 146.91C36.71 146.32 33.95 147.11 33.76 146.57C33.57 146.02 36.42 145.02 39.41 142.34C40.53 141.34 42.04 139.99 43.09 137.90C44.95 134.18 44.44 130.00 44.17 129.97C43.91 129.94 43.03 133.74 43.50 133.93C43.98 134.12 46.32 130.91 47.03 127.06C47.03 127.06 47.11 126.63 47.54 122.28C49.57 120.00 51.09 118.08 52.12 116.74C52.46 116.30 53.12 115.41 54.45 113.63C57.69 109.31 57.60 109.40 57.72 109.28C60.82 106.12 65.39 104.86 65.39 104.86C66.00 103.25 66.96 101.10 68.44 98.75C69.24 97.48 70.32 95.79 72.15 93.91C72.81 93.24 74.89 91.18 78.24 89.32C81.06 87.76 82.46 86.98 84.08 87.12C84.08 87.12 85.39 87.24 90.52 90.62C92.94 85.94 94.01 83.78 94.47 82.79C94.50 82.73 94.53 82.68 94.57 82.60C95.53 80.91 97.94 81.54 98.39 80.59C98.82 79.66 96.69 78.66 96.78 76.80C96.85 75.51 97.95 74.22 99.18 73.84C100.94 73.30 102.10 74.88 103.06 74.24C104.44 73.34 103.60 69.07 103.60 69.07C103.09 64.10 103.96 62.48 104.92 61.97C106.25 61.28 107.43 62.87 109.90 62.50C112.46 62.12 114.18 59.98 115.56 58.27C117.53 55.82 118.96 52.59 118.96 52.59C119.34 48.70 120.49 47.32 121.57 46.84C123.67 45.89 127.51 47.46 127.51 47.46C129.18 45.49 130.86 43.52 132.54 41.56C132.81 40.28 133.66 37.12 136.38 35.53C136.38 35.53 137.95 34.75 145.55 35.85C145.55 35.85 151.06 32.76 156.64 33.24C157.00 33.27 157.55 33.33 158.22 33.47C161.38 34.13 164.10 35.89 163.92 36.42C163.73 36.97 160.59 35.79 160.31 36.44C159.90 37.38 165.57 41.92 170.63 41.15C170.86 41.11 171.07 41.07 171.31 41.02C174.19 40.41 175.36 39.45 178.05 39.12L178.05 39.12C180.56 37.77 182.85 36.73 184.79 35.92C189.13 34.12 191.29 33.23 193.90 33.14C196.29 33.07 203.40 34.18 201.03 33.89C207.40 30.43 208.58 29.15 208.39 28.64C208.33 28.48 208.14 28.40 207.85 28.28C206.40 27.66 205.25 28.62 204.82 28.26C204.05 27.62 205.48 22.40 209.26 20.69C209.26 20.69 209.90 20.39 214.94 19.68C219.13 21.37 220.66 21.02 221.28 20.35C222.19 19.33 220.90 17.75 221.78 15.57C222.49 13.80 224.11 12.96 226.60 11.65C226.60 11.65 227.94 10.96 233.27 9.14C237.82 3.09 238.25 1.28 237.76 0.77C237.03 0.00 244.41 1.69 244.48 1.91C244.56 2.16 237.79 0.13 242.13 1.12C244.48 1.65 246.51 2.98 247.10 3.36C248.69 4.40 250.81 6.16 250.81 6.16C252.37 8.77 254.13 9.80 255.18 10.24C256.69 10.89 258.56 10.92 262.31 11.00C262.31 11.00 262.57 11.00 266.31 11.01C267.86 10.24 269.41 9.47 270.97 8.69C276.39 6.98 279.89 5.63 279.76 5.01C279.64 4.45 276.60 4.79 276.59 4.67C276.59 4.53 281.55 3.09 285.73 5.41C286.92 6.07 286.74 6.31 289.04 8.18C291.24 9.97 292.27 10.45 296.15 12.95C300.73 15.90 303.51 17.95 303.65 17.77C303.80 17.57 300.44 15.29 300.77 14.65C301.46 13.30 317.57 19.88 317.39 20.42C317.32 20.61 315.24 20.09 313.86 19.65C313.62 19.57 310.33 18.50 310.42 18.08C310.55 17.53 316.71 17.25 321.43 20.04C322.18 20.49 323.33 21.26 325.22 22.05C326.28 22.49 327.67 23.06 329.50 23.31C332.19 23.67 332.32 22.88 333.90 23.37C336.71 24.24 338.67 27.49 338.67 27.49C342.52 27.74 344.29 29.02 345.19 30.19C346.46 31.83 345.87 33.08 347.50 34.86C348.75 36.21 349.40 35.82 352.00 37.74C354.02 39.23 353.91 39.68 355.32 40.50C357.06 41.53 358.65 41.68 360.78 41.88C365.88 42.37 368.60 40.94 368.91 40.46C368.94 40.42 368.96 40.38 368.95 40.33C368.92 39.70 365.56 39.18 365.43 39.56C365.26 40.04 370.75 40.83 374.83 45.38C376.56 47.30 376.40 48.08 378.37 49.77C380.21 51.36 380.86 51.12 384.41 53.23C388.45 55.62 388.55 56.48 390.46 56.68C392.73 56.92 395.73 56.03 395.73 56.03L403.45 58.85C412.98 60.08 415.62 60.84 415.60 61.34C415.57 61.88 412.32 61.59 411.82 62.95C411.00 65.21 418.23 70.70 419.95 69.44C420.93 68.72 419.94 65.96 420.33 65.86C420.89 65.71 421.39 71.94 425.43 74.44C428.15 76.12 430.65 74.98 431.60 76.70C432.72 78.72 429.89 81.38 430.97 82.66C430.97 82.66 431.55 83.35 437.83 82.18C440.95 88.76 442.17 90.48 442.58 90.32C443.09 90.13 442.25 87.01 442.96 86.74C443.70 86.46 444.59 89.98 447.33 90.82C447.33 90.82 448.24 91.10 453.44 89.86C457.57 92.87 458.39 95.19 458.32 96.81C458.25 98.20 457.51 99.05 457.90 100.79C457.95 101.03 458.62 103.86 460.73 104.30C461.77 104.52 463.07 104.13 463.86 103.37C464.27 102.96 464.31 102.69 464.50 102.69C465.23 102.70 465.06 106.53 466.52 110.14C468.24 114.38 471.86 116.48 471.40 117.09C471.02 117.59 468.76 116.04 468.17 116.67C467.28 117.62 471.84 121.63 470.66 124.25C469.94 125.84 467.10 126.92 464.98 126.94C464.15 126.96 463.76 126.80 463.13 127.08C461.41 127.85 461.90 130.19 460.69 131.24C458.70 132.97 454.50 127.02 449.81 128.09C447.54 128.60 447.32 130.20 445.60 130.06C442.02 129.76 440.16 122.62 439.14 122.94C438.26 123.22 439.93 128.47 438.03 129.66C437.52 129.98 437.02 129.83 433.32 128.76C430.15 127.84 428.55 127.39 427.82 127.78C427.82 127.78 427.29 128.06 425.42 131.55C424.01 132.20 422.61 132.86 421.21 133.52C418.18 132.74 415.75 132.67 414.08 132.77C411.96 132.88 411.46 133.22 409.64 133.10C406.61 132.90 404.36 131.74 403.42 131.24C400.67 129.78 398.22 127.47 398.22 127.47C397.32 125.29 396.06 123.31 394.28 123.04C392.18 122.72 391.23 125.08 388.44 125.24C386.80 125.33 386.15 124.57 381.96 122.14C381.96 122.14 378.39 120.07 374.37 118.12C369.20 115.62 368.97 116.10 366.74 114.50C364.37 112.81 363.90 111.75 362.24 111.62C359.73 111.42 358.55 113.68 356.88 113.06C355.19 112.44 355.84 109.88 354.13 108.75C351.21 106.82 344.95 111.42 344.69 110.97C344.51 110.68 347.58 109.24 347.40 108.04C347.14 106.40 341.11 107.16 330.06 105.41C327.15 104.95 324.74 104.45 321.30 104.89C318.26 105.28 318.28 105.90 315.15 106.25C313.29 106.46 309.42 106.84 305.25 105.21C302.79 104.24 302.97 103.65 301.06 103.16C297.95 102.35 296.43 103.64 292.53 104.27C286.88 105.18 281.72 103.83 279.81 103.33C276.08 102.36 275.17 101.40 272.77 101.78C269.58 102.30 269.64 104.23 266.41 105.13C263.30 106.00 262.69 104.38 255.32 103.97C252.42 103.80 250.12 103.82 250.12 103.82C245.85 103.86 244.93 104.25 243.35 103.51C242.76 103.23 242.86 103.16 239.48 99.88C236.69 97.17 236.08 96.69 235.31 96.23C234.71 95.87 233.20 95.02 231.08 94.57C230.07 94.36 226.46 93.61 222.99 95.33C221.26 96.19 221.55 96.67 219.09 98.14C216.38 99.75 215.89 99.24 214.04 100.42C213.71 100.63 209.30 103.52 208.84 107.92C208.63 110.00 209.48 110.67 208.78 112.33C207.97 114.25 206.06 115.18 205.23 115.58C203.38 116.48 202.94 115.96 200.31 116.67C197.93 117.31 197.97 117.82 193.60 119.58C191.64 120.37 191.84 120.19 189.43 121.15C187.10 122.09 186.68 122.36 184.40 123.24C182.46 124.00 182.33 123.98 180.65 124.65C177.79 125.80 177.53 126.12 176.45 126.49C172.14 127.97 167.29 125.86 167.34 125.53C167.38 125.27 170.75 125.24 170.90 125.91C171.22 127.25 158.64 131.45 158.69 131.59C158.73 131.70 162.22 130.41 162.38 130.77C162.61 131.28 155.98 134.89 155.94 134.92C148.96 136.48 148.47 136.49 147.76 136.47C144.12 136.37 140.28 134.43 138.28 131.45C136.98 129.50 137.87 129.21 136.14 125.19C134.31 120.94 133.29 121.20 132.12 117.73C131.01 114.48 131.49 113.00 129.95 111.67C129.57 111.34 128.92 110.88 125.68 110.41C122.55 109.96 119.62 109.54 115.69 110.16C113.55 110.51 114.07 110.69 109.94 111.57C105.55 112.50 105.18 112.25 103.79 112.93C101.19 114.20 101.80 115.41 98.42 118.27C98.42 118.27 97.52 119.03 91.13 122.86C93.67 120.87 94.38 120.64 94.55 120.81C94.94 121.20 92.67 124.34 90.31 126.79C89.52 127.62 89.51 127.54 86.77 130.04C83.89 132.66 82.46 133.96 81.43 135.11C75.89 142.99 74.75 145.93 74.06 148.00C72.73 151.98 72.68 153.76 70.93 154.91C68.71 156.37 66.74 154.90 64.73 156.67C63.54 157.73 63.14 159.22 62.69 160.88C61.87 163.91 62.72 164.77 61.75 166.01C60.51 167.60 58.81 166.61 57.10 168.34C55.71 169.74 56.50 170.73 55.05 172.55C53.45 174.56 52.05 173.89 50.71 175.71C49.32 177.60 50.66 178.59 49.34 181.19C49.34 181.19 48.85 182.14 44.83 185.95C39.15 189.76 35.18 191.82 34.30 190.87C33.55 190.07 35.29 187.44 35.07 187.33C34.79 187.19 31.09 191.28 30.46 196.90C30.23 198.95 30.60 199.48 30.23 202.91C30.16 203.52 29.91 205.66 29.24 208.43C28.62 211.02 28.31 212.32 27.47 213.88C26.83 215.06 26.11 215.91 24.67 217.61C24.04 218.35 23.20 219.30 20.17 222.36C18.44 224.10 18.36 224.14 16.14 226.36C12.78 229.70 12.03 230.53 11.29 231.09C11.17 231.17 11.02 231.28 10.80 231.43C9.74 232.12 7.24 233.78 4.56 233.61C2.48 233.48 0.00 232.22 0.02 231.09Z" fill="none" stroke="#f6efe9" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle class="wl-dot" r="4.5" fill="#f6efe9"/></svg>
+      <span class="why-km mono"><b id="why-km">000</b> km</span></div></div>
 
     <div class="c" style="--s:12;--h:220px"><span class="mono">Mission</span><p class="h2" style="max-width:24em">“Stray from the norm: promoting community through physical activity to push human limits together.”</p></div>
 
@@ -503,7 +509,11 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
             <label><input type="radio" name="entryType" value="individual"><span>Myself</span></label>
           </div>
         </fieldset>
-        <div class="f" data-for="class"><label for="p-class">Class or group</label><select id="p-class" name="classId"><option value="">Choose…</option></select></div>
+        <div class="frow" data-for="class">
+          <div class="f"><label for="p-prog">Programme or group</label><select id="p-prog" name="prog"><option value="">Choose…</option><option value="mba">MBA</option><option value="emba">EMBA</option></select></div>
+          <div class="f" id="p-year-wrap"><label for="p-year">Class year</label><select id="p-year" name="year"><option value="">Choose…</option></select></div>
+        </div>
+        <input type="hidden" id="p-class" name="classId">
         <div class="f"><label for="p-name">Your name</label><input id="p-name" name="contributorName" type="text" autocomplete="name" required maxlength="120"></div>
         <div class="f"><label for="p-email">Email <span class="opt">· private, for payment details</span></label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
         <div class="f"><label for="p-amt">Amount in CHF</label><input id="p-amt" name="amount" type="number" inputmode="decimal" min="1" step="1" required><span class="km" id="p-km">= 0.00 km</span></div>
@@ -645,6 +655,26 @@ tick(); setInterval(tick, 1000);
     out.textContent = String(Math.round(165 * ease(p))).padStart(3, "0");
     if (p < 1) requestAnimationFrame(step); else out.textContent = "165";
   })(performance.now());
+})();
+
+/* ---------- Why STRAY: lake drawn on loop ---------- */
+(function(){
+  const path = document.querySelector(".why-lake .wl"), dot = document.querySelector(".why-lake .wl-dot"), out = $("#why-km");
+  if (!path || !path.getTotalLength) return;
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  const DUR = 7000, HOLD = 1600;
+  if (reduce){ path.style.strokeDashoffset = 0; const pt = path.getPointAtLength(0); dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y); out.textContent = "165"; return; }
+  let t0 = performance.now();
+  (function step(now){
+    let e = now - t0;
+    if (e > DUR + HOLD){ t0 = now; e = 0; }
+    const p = Math.min(1, e / DUR), k = p < .5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2)/2;
+    path.style.strokeDashoffset = len * (1 - k);
+    const pt = path.getPointAtLength(len * k); dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y);
+    out.textContent = String(Math.round(165 * k)).padStart(3, "0");
+    requestAnimationFrame(step);
+  })(t0);
 })();
 
 /* ---------- Routing ---------- */
@@ -841,7 +871,7 @@ function validate(form){
   }
   if (form.id === "f-pledge"){
     if (!(Number(form.amount.value) >= 1)) return "Please enter an amount of at least CHF 1.";
-    if (form.entryType.value === "class" && !form.classId.value) return "Please choose a class or group.";
+    if (form.entryType.value === "class" && !form.classId.value) return YEAR_PROGS[$("#p-prog").value] ? "Please choose your class year." : "Please choose a programme or group.";
     if (form.entryType.value === "individual" && !form.displayName.value.trim()) return "Please add the name to show on the ranking.";
   }
   return "";
@@ -873,15 +903,28 @@ function setupForm(form, build, done){
 setupForm($("#f-reg"), f => ({type:"registration", name:f.name.value.trim(), email:f.email.value.trim(), phone:f.phone.value.trim(), club:f.club.value.trim(), note:f.note.value.trim()}),
   () => "Request received. It is not a confirmed place yet. We will reply by email.");
 const pf = $("#f-pledge");
+const YEAR_PROGS = {mba:"MBA", emba:"EMBA"};
+(function(){
+  const ys = $("#p-year"), now = 2027;
+  for (let y = now; y >= 1972; y--) ys.insertAdjacentHTML("beforeend", `<option value="${y}">${y}</option>`);
+})();
+function syncClass(){
+  const prog = $("#p-prog").value, yr = $("#p-year").value, isYear = !!YEAR_PROGS[prog];
+  $("#p-year-wrap").hidden = !isYear;
+  $("#p-class").value = isYear ? (yr ? prog + "-" + yr : "") : prog;
+  $("#p-class").dataset.name = isYear ? (yr ? YEAR_PROGS[prog] + " " + yr : "") : ($("#p-prog").selectedOptions[0]?.text || "");
+}
+$("#p-prog").addEventListener("change", syncClass); $("#p-year").addEventListener("change", syncClass); syncClass();
 function syncPledge(){
   const t = pf.entryType.value;
   $$("[data-for]", pf).forEach(el => el.hidden = el.dataset.for !== t);
   $("#p-km").textContent = "= " + km(pf.amount.value) + " km";
+  if (typeof syncClass === "function") syncClass();
 }
 pf.addEventListener("input", syncPledge); pf.addEventListener("change", syncPledge); syncPledge();
 setupForm(pf, f => {
   const t = f.entryType.value, sel = f.classId;
-  return {type:"pledge", entryType:t, classId: t === "class" ? sel.value : "", className: t === "class" ? sel.options[sel.selectedIndex]?.text || "" : "",
+  return {type:"pledge", entryType:t, classId: t === "class" ? sel.value : "", className: t === "class" ? sel.dataset.name || "" : "",
     contributorName:f.contributorName.value.trim(), email:f.email.value.trim(), amount:Math.round(Number(f.amount.value)*100)/100,
     displayName: t === "individual" ? f.displayName.value.trim() : "", publicConsent: t === "individual" ? f.publicConsent.checked : false};
 }, (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
@@ -908,9 +951,9 @@ async function loadBoard(){
     const res = await fetch(CONFIG.endpoint + (CONFIG.endpoint.includes("?") ? "&" : "?") + "action=leaderboard", {cache:"no-store"});
     const d = await res.json(); if (!d.ok) throw new Error();
     board = d;
-    const sel = $("#p-class"), keep = sel.value;
-    sel.innerHTML = `<option value="">Choose…</option>` + (d.classes||[]).map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("");
-    sel.value = keep;
+    const sel = $("#p-prog"), keep = sel.value;
+    sel.innerHTML = `<option value="">Choose…</option><option value="mba">MBA</option><option value="emba">EMBA</option>` + (d.groups||[]).filter(g => !YEAR_PROGS[g.id.split("-")[0]] || !/-\d{4}$/.test(g.id)).map(g => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join("");
+    sel.value = keep; syncClass();
     $("#lb-updated").textContent = "Updated " + new Date(d.updated).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
   } catch(e){ $("#lb-updated").textContent = "Could not refresh"; }
   renderBoard();

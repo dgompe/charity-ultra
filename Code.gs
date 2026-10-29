@@ -18,6 +18,9 @@ const SHEETS = {
 const PLEDGE_STATUS = ['pledged','received','partly received','cancelled','duplicate'];
 const EXCLUDED = ['cancelled','duplicate'];
 const REG_STATUS = ['requested','approved','declined','duplicate'];
+// Year-based classes: any MBA or EMBA class year can pledge without a row in the Classes tab.
+const YEAR_PROGRAMMES = { mba: 'MBA', emba: 'EMBA' };
+const YEAR_MIN = 1960, YEAR_MAX = 2030;
 // Sends each pledger an email with payment details, from the Google account that deploys this script.
 const SEND_PLEDGE_EMAIL = true;
 
@@ -87,7 +90,7 @@ function addPledge(d, sid) {
 
   let classId = '', className = '', display = '', consent = false;
   if (type === 'class') {
-    const c = activeClasses().find(c => c.id === clean(d.classId, 64));
+    const c = resolveClass(clean(d.classId, 64));
     if (!c) return { ok: false, error: 'Please choose a class from the list.' };
     classId = c.id; className = c.name;
   } else {
@@ -109,8 +112,9 @@ function doGet(e) {
   const hit = cache.get('board');
   if (hit) return ContentService.createTextOutput(hit).setMimeType(ContentService.MimeType.JSON);
 
-  const classes = activeClasses().map(c => ({ id: c.id, name: c.name, pledged: 0, received: 0 }));
-  const byClass = Object.fromEntries(classes.map(c => [c.id, c]));
+  const groups = activeClasses();
+  const byClass = {};
+  groups.forEach(c => { byClass[c.id] = { id: c.id, name: c.name, pledged: 0, received: 0 }; });
   const people = {};
   const totals = { pledged: 0, received: 0 };
 
@@ -121,7 +125,8 @@ function doGet(e) {
     const amt = Number(r[6]) || 0, rec = Number(r[12]) || 0;
     totals.pledged += amt; totals.received += rec;
     if (r[2] === 'class') {
-      const c = byClass[r[3]];
+      let c = byClass[r[3]];
+      if (!c) { const rc = resolveClass(String(r[3])); if (rc) c = byClass[rc.id] = { id: rc.id, name: rc.name, pledged: 0, received: 0 }; }
       if (c) { c.pledged += amt; c.received += rec; }
     } else {
       const k = r[8];
@@ -137,7 +142,8 @@ function doGet(e) {
     ok: true,
     updated: new Date().toISOString(),
     totals: { pledged: round(totals.pledged), received: round(totals.received) },
-    classes: classes.map(c => ({ id: c.id, name: c.name, pledged: round(c.pledged), received: round(c.received) }))
+    groups: groups.map(g => ({ id: g.id, name: g.name })),
+    classes: Object.values(byClass).map(c => ({ id: c.id, name: c.name, pledged: round(c.pledged), received: round(c.received) }))
                     .sort((a, b) => b.pledged - a.pledged || a.name.localeCompare(b.name)),
     individuals: Object.values(people).map(p => ({ name: p.name, pledged: round(p.pledged), received: round(p.received) }))
                     .sort((a, b) => b.pledged - a.pledged)
@@ -155,6 +161,14 @@ function activeClasses() {
   return sheet(SHEETS.classes.name).getDataRange().getValues().slice(1)
     .filter(r => r[0] && r[1] && r[2] === true)
     .map(r => ({ id: String(r[0]).trim(), name: String(r[1]).trim() }));
+}
+function resolveClass(id) {
+  const m = /^([a-z]+)-(\d{4})$/.exec(id || '');
+  if (m && YEAR_PROGRAMMES[m[1]]) {
+    const y = +m[2];
+    if (y >= YEAR_MIN && y <= YEAR_MAX) return { id: m[1] + '-' + y, name: YEAR_PROGRAMMES[m[1]] + ' ' + y };
+  }
+  return activeClasses().find(c => c.id === id) || null;
 }
 function sheet(n) { return SpreadsheetApp.getActive().getSheetByName(n); }
 function exists(sh, sid) { return !!findRow(sh, sid); }
@@ -191,4 +205,12 @@ function sendPledgeEmail(to, name, amount, target) {
         'Questions: david.gomezpereda@mba.imd.org\n\nSTRAY'
     });
   } catch (e) { /* the pledge is saved even if the email fails */ }
+}
+
+/* One-off: keeps only non-year groups in the Classes tab. MBA and EMBA years work automatically. */
+function seedClasses() {
+  const sh = SpreadsheetApp.getActive().getSheetByName('Classes');
+  sh.getRange('A2:E200').clearContent();
+  sh.getRange(2, 1, 2, 3).setValues([['imd-faculty','IMD Faculty',true],['imd-staff','IMD Staff',true]]);
+  CacheService.getScriptCache().remove('board');
 }
