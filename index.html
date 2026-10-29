@@ -706,6 +706,8 @@ $$("[data-copy]").forEach(b => b.addEventListener("click", async () => {
 }));
 
 /* ---------- People ---------- */
+const byName = (x, y) => x.name.localeCompare(y.name, "en", {sensitivity:"base"});
+["runners","crew","support"].forEach(k => CONFIG[k].sort(byName));
 const initials = n => n.split(/\s+/).map(w=>w[0]).slice(0,2).join("");
 $("#runner-cells").outerHTML = CONFIG.runners.map(r => `
   <article class="c who" style="--s:3">
