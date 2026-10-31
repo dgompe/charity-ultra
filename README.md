@@ -45,6 +45,8 @@ The old **Classes** tab is no longer used. You can delete it from the Sheet when
 
 ## 5. Notes
 
+- Languages: EN, DE, FR, ES. The switcher sits top right. A saved choice wins; then `?lang=de` (or fr, es, en) in the link; then the visitor's location from their IP address (get.geojs.io: Swiss French cantons get French, the rest of Switzerland German, Spain and Latin America Spanish); then the browser language; otherwise English. Translations live in `i18n.json` in the build folder and are inlined into `index.html`.
+
 - Landing: the artboard photo upscaled to 4K, small STRAY mark top right, LAKE TOUR EDITION with the lake drawing on the left. Both are cut from the poster's vector file.
 - The poster says "29 NOV". The site uses 28–29 Nov because the start is Saturday 28 Nov at 11:00. The date and distance beside the wordmark are live text; the wordmark itself is the poster's vector artwork.
 - Links: `#race`, `#why`, `#runners`, `#logistics`, `#donate`, `#pledge`, `#supporters`. Back button and Esc close a panel.
