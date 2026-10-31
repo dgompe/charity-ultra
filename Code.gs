@@ -12,10 +12,12 @@
 
 const SHEETS = {
   reg:     { name: 'Registrations', head: ['submission_id','timestamp','name','email','phone','club','note','status','organiser_notes'] },
-  pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','group_id','group_name','contributor_name','amount_chf','email','unused_1','unused_2','unused_3','status','received_chf','organiser_notes'] }
+  pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','group_id','group_name','contributor_name','amount_chf','email','anonymous','unused_2','unused_3','status','received_chf','organiser_notes'] }
 };
 // Individual pledges share one line on the ranking, so no personal names are shown.
 const INDIVIDUALS = { id: 'individuals', name: 'Individuals' };
+// Groups that tick "anonymous" share one line on the ranking. The group name is still kept in the Sheet.
+const ANONYMOUS = { id: 'anonymous', name: 'Anonymous' };
 const PLEDGE_STATUS = ['pledged','received','partly received','cancelled','duplicate'];
 const EXCLUDED = ['cancelled','duplicate'];
 const REG_STATUS = ['requested','approved','declined','duplicate'];
@@ -86,9 +88,10 @@ function addPledge(d, sid) {
   if (!name || !isEmail(email)) return { ok: false, error: 'Name and a valid email are required.' };
   if (!(amount >= 1) || amount > 1000000) return { ok: false, error: 'Please check the amount.' };
 
-  // Columns: submission_id, timestamp, entry_type, group_id, group_name, contributor_name, amount_chf, email, (unused), (unused), (unused), status, received_chf, organiser_notes
+  // Columns: submission_id, timestamp, entry_type, group_id, group_name, contributor_name, amount_chf, email, anonymous (yes/blank), (unused), (unused), status, received_chf, organiser_notes
+  const anon = !solo && d.anonymous === true;
   const label = solo ? INDIVIDUALS.name : group.name;
-  sh.appendRow([sid, new Date(), solo ? 'individual' : 'group', solo ? INDIVIDUALS.id : group.id, solo ? '' : group.name, name, amount, email, '', '', '', 'pledged', 0, '']);
+  sh.appendRow([sid, new Date(), solo ? 'individual' : 'group', solo ? INDIVIDUALS.id : group.id, solo ? '' : group.name, name, amount, email, anon ? 'yes' : '', '', '', 'pledged', 0, '']);
   CacheService.getScriptCache().remove('board');
   if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, label);
   return { ok: true, amount, target: solo ? '' : label };
@@ -109,7 +112,9 @@ function doGet(e) {
     if (!r[0] || EXCLUDED.indexOf(status) >= 0) return;
     const amt = Number(r[6]) || 0, rec = Number(r[12]) || 0;
     totals.pledged += amt; totals.received += rec;
-    const g = String(r[2]).toLowerCase() === 'individual' ? INDIVIDUALS : groupFrom(String(r[4] || r[9] || ''));
+    const g = String(r[2]).toLowerCase() === 'individual' ? INDIVIDUALS
+            : String(r[8]).toLowerCase() === 'yes' ? ANONYMOUS
+            : groupFrom(String(r[4] || r[9] || ''));
     if (!g) return;
     const row = byGroup[g.id] || (byGroup[g.id] = { name: g.name, pledged: 0, received: 0 });
     row.pledged += amt; row.received += rec;
