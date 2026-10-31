@@ -7,53 +7,41 @@ Upload the whole folder (keep `assets/` next to `index.html`). Host it anywhere 
 - `Code.gs` — the Google Sheets backend for the 5 km registration form, the pledge form and the leaderboard.
 - `README.md` — this file.
 
-## 1. Connect the Google Sheet (15 min)
+## 1. Google Sheet backend
 
-1. Create a new Google Sheet in the organiser account. Keep it private.
-2. Extensions → Apps Script. Delete the sample code, paste `Code.gs`, save.
-3. Run `setup` once (select it in the toolbar, press Run, accept the permissions). It creates three tabs: **Registrations**, **Pledges**, **Classes**.
-4. Fill the **Classes** tab. This is the controlled list people pick from. One row per class or group:
-   `class_id` (short, never changes, e.g. `mba-2026`) · `display_name` (what the board shows) · `active` (tick).
-5. Deploy → New deployment → type **Web app** · Execute as **Me** · Who has access **Anyone** → Deploy. Copy the URL ending in `/exec`.
-6. In `index.html`, find `const CONFIG` near the bottom and paste the URL into `endpoint`.
+The Sheet "STRAY Lake Tour – Forms (private)" and its Apps Script are already set up and connected. `CONFIG.endpoint` in `index.html` holds the web-app link.
 
-Until `endpoint` is set, both forms show "This form opens soon" and are disabled, and the leaderboard says it is not live. Nothing fake shows.
+If you change `Code.gs` later: paste it into the Apps Script editor, save, then Deploy → Manage deployments → edit → New version. The link stays the same.
 
-If you change `Code.gs` later: Deploy → Manage deployments → edit → New version. The URL stays the same.
+## 2. Run the Pledge Challenge from the Sheet
 
-## 2. Run the pledge challenge from the Sheet
+Pledges are group pledges only. There are no individual pledges and no pre-set list of groups: people type a group name (friends, a running crew, a club, a team, an association). STRAY is organised by an independent association; it is not an IMD fundraising event.
 
-Each pledge is one row with its own ID. Nothing is merged or overwritten.
+Each pledge is one row in **Pledges** with its own ID. Nothing is merged or overwritten.
 
+- **group_name**: what the person typed. The ranking groups pledges by this name, ignoring case, accents and extra spaces ("Lavaux Crew" and "lavaux crew" count together). Different spellings ("Morges RC" vs "Morges Running Club") stay separate: fix the spelling in the row to merge them.
 - **status**: `pledged` (default) · `received` · `partly received` · `cancelled` · `duplicate`. Cancelled and duplicate rows drop out of every total.
-- **received_chf**: type the amount that actually arrived. The board's RECEIVED column only counts this.
-- Fix a typo in a name or amount directly in the row.
-- Classes total by `class_id`. Individuals total by a salted hash of their email, so the same person pledging twice adds up, and the email never leaves the Sheet.
-- An individual shows on the board by display name only if they ticked consent. Otherwise "Anonymous".
+- **received_chf**: type the amount that actually arrived. The RECEIVED column only counts this.
 - A network retry sends the same ID and is stored once. A real second pledge gets a new ID and is kept.
-- Board refreshes on the site every 60 seconds and after each pledge. The backend caches for 30 seconds.
+- Each pledger gets an email with payment details from the Google account that deployed the script.
+- The ranking refreshes on the site every 60 seconds and after each pledge. The backend caches for 30 seconds.
 
-Registrations land in **Registrations** with status `requested`. Change to `approved` / `decline## 3. What is already filled in
+Registrations for the first 5 km land in **Registrations** with status `requested`. Change to `approved` / `declined` and reply by email yourself.
 
-- Logistics: Revolut @gompe (QR checked: opens revolut.me/gompe) and TWINT to +41 76 612 25 56, message "Race logistics".
-- Foundation: the TWINT QR you sent. It is an in-app TWINT code, so there is no web link; people scan it.
-- Pledges go to the foundation. Past 165 km a class starts a new lap. Board target: 8 × 165 = 1,320 km.
+The old **Classes** tab is no longer used. You can delete it from the Sheet whenever you like.
+
+## 3. What is already filled in
+
+- Logistics: Revolut @gompe and TWINT to +41 76 612 25 56, message "Race logistics".
+- Foundation: the TWINT QR. It is an in-app TWINT code, so there is no web link; people scan it.
+- Pledges go to the foundation. Past 165 km a group starts a new lap. Target: 8 × 165 = 1,320 km.
 - Route: map drawn from the GPX (Ride with GPS 56646783), GPX download.
-- LinkedIn for 6 runners, 4 organisers, 5 support crew. Felix Yoon, Shivani Kalmane, Esha Rawat are in CONFIG with `confirmed: false` and stay hidden until you flip them.
-- Association footer lines are on.
 
 ## 4. Still open (see `index.html#checklist`)
 
-- Sheet connection (`endpoint`) and the Classes list
-- Runner photos and short bios (all 8); LinkedIn for Angie Gisler and Vincent Leroy
-- Foundation paragraph approval; origin story (optional)
-- Official logo files. Current ones are AI-upscaled from the flyer: big marks are clean, the SEMS small text is still soft.
-- Permit wording on launch day
-
-To add a runner photo: drop it in `assets/` and set `photo: "assets/name.jpg"` in CONFIG.
-To add gallery photos: grade them like the others (muted colour, purple shadows, grain) and add a line to `SHOTS` in the script.
-
-ach partner. REVIVR is not listed (product support only, not a partner).
+- Runner bios (all except David and Francis); LinkedIn for Angela Gisler and Vincent Leroy
+- Foundation paragraph approval
+- Official logo files
 
 ## 5. Notes
 

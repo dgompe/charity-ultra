@@ -255,6 +255,8 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 .lg-link:hover{opacity:.7}
 .sup-list a{text-underline-offset:3px;text-decoration-thickness:1px}
 .sup-list a:hover{text-decoration-thickness:2px}
+.disclaimer{margin:0;font-size:15px;line-height:1.5;padding:12px 14px;border:1px solid var(--line);max-width:60em}
+.disclaimer.small{font-size:13px;padding:10px 12px;color:var(--ink-2);border-color:var(--soft)}
 /* checklist */
 .chk{list-style:none;margin:0;padding:0}
 .chk li{display:grid;grid-template-columns:90px 1fr;gap:16px;border-top:1px solid var(--soft);padding:10px 0;font-size:15px}
@@ -311,7 +313,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
         <li><a href="#runners" data-open>Runners &amp; crew</a></li>
         <li><a href="#logistics" data-open>Support challenge logistics</a></li>
         <li><a href="#donate" data-open>Donate to the foundation</a></li>
-        <li><a href="#pledge" data-open>Class Pledge Challenge</a></li>
+        <li><a href="#pledge" data-open>Pledge Challenge</a></li>
       </ul>
     </nav>
   </div>
@@ -331,7 +333,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= RACE ================= -->
 <section class="panel" data-panel="race" aria-labelledby="h-race" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race" aria-current="page">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race" aria-current="page">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:8;--h:62vh">
       <span class="mono">01 — Challenge details</span>
@@ -397,7 +399,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= WHY ================= -->
 <section class="panel" data-panel="why" aria-labelledby="h-why" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why" aria-current="page">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why" aria-current="page">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:8;--h:62vh">
       <span class="mono">02 — Why STRAY</span>
@@ -426,7 +428,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= RUNNERS ================= -->
 <section class="panel" data-panel="runners" aria-labelledby="h-runners" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners" aria-current="page">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners" aria-current="page">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:6;--h:52vh"><span class="mono">03 — Runners &amp; crew</span><h1 class="big" id="h-runners" tabindex="-1">Eight runners. One loop.</h1></div>
     <div class="c half-m" style="--s:2"><span class="mono">Runners</span><div class="num" data-scramble="08">08</div></div>
@@ -456,7 +458,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= LOGISTICS ================= -->
 <section class="panel" data-panel="logistics" aria-labelledby="h-logistics" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics" aria-current="page">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics" aria-current="page">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:8;--h:52vh"><span class="mono">04 — Support challenge logistics</span><h1 class="big" id="h-logistics" tabindex="-1">Keep the challenge moving</h1></div>
     <div class="c" style="--s:4"><span class="mono">What it pays for</span><p class="lede">The event itself: support vans, fuel, safety equipment, insurance and food for the crew.</p></div>
@@ -486,7 +488,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= DONATE ================= -->
 <section class="panel" data-panel="donate" aria-labelledby="h-donate" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate" aria-current="page">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate" aria-current="page">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:8;--h:52vh"><span class="mono">05 — Donate to the foundation</span><h1 class="big" id="h-donate" tabindex="-1">Every franc to the children</h1></div>
     <div class="c" style="--s:4"><span class="mono">Goes to the foundation</span><div class="num"><span data-scramble="100">100</span><small>%</small></div></div>
@@ -502,55 +504,39 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= PLEDGE ================= -->
 <section class="panel" data-panel="pledge" aria-labelledby="h-pledge" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge" aria-current="page">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge" aria-current="page">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
-    <div class="c" style="--s:8;--h:52vh"><span class="mono">06 — Class Pledge Challenge · open now</span><h1 class="big" id="h-pledge" tabindex="-1">CHF 100 = 1 km</h1></div>
-    <div class="c" style="--s:4"><span class="mono">How it works</span><p class="lede">Pledge for your class or for yourself. Every CHF 100 credits one kilometre to your name on the ranking. Pay after the challenge.</p></div>
+    <div class="c" style="--s:12"><p class="disclaimer">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups, not by IMD classes or programs.</p></div>
+    <div class="c" style="--s:8;--h:52vh"><span class="mono">06 — Pledge Challenge · open now</span><h1 class="big" id="h-pledge" tabindex="-1">CHF 100 = 1 km</h1></div>
+    <div class="c" style="--s:4"><span class="mono">How it works</span><p class="lede">Make a group pledge. Every CHF 100 credits one kilometre to your group on the ranking. Pay after the challenge.</p></div>
 
     <div class="c" style="--s:3;--h:260px"><span class="mono">Pledged · CHF</span><div class="num" id="s-pledged">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">Received · CHF</span><div class="num" id="s-received">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">Credited · km</span><div class="num" id="s-km">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">8 runners × 165 km</span><div><div class="num"><span data-target>1'320</span><small>KM</small></div><div class="prog" id="prog" style="margin-top:14px"><i></i></div></div></div>
 
-    <div class="c top" style="--s:4"><span class="mono">Who</span><p class="txt">MBA and EMBA classes, IMD faculty, staff, academia and individuals.</p></div>
-    <div class="c top" style="--s:4"><span class="mono">Kilometres</span><p class="txt">Fundraising kilometres, not distance you run. CHF 50 = 0.50 km. Past 165 km you start a new lap. Eight runners × 165 km = 1'320 km.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">Who</span><p class="txt">IMD students and friends. Groups and associations. IMD faculty, staff and academia. Individuals, as part of a group.</p><p class="txt">You form the group you want: friends, a running crew, a club, a team, an association.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">Kilometres</span><p class="txt">Fundraising kilometres, not distance you run. CHF 50 = 0.50 km. Past 165 km your group starts a new lap. Eight runners × 165 km = 1'320 km.</p></div>
     <div class="c top" style="--s:4"><span class="mono">When you pay</span><p class="txt">Monday 30 November 2026, after the runners finish. You will receive an email with payment details. It all goes to Fondation Planètes Enfants Malades, through the <a href="#donate">foundation TWINT code</a> with the comment “Charity Ultra”.</p></div>
 
     <div class="c top" style="--s:7">
-      <div class="row-b" style="justify-content:space-between"><span class="mono">Ranking</span><span class="mono" id="lb-updated">Live with the first pledge</span></div>
-      <div class="tabs" role="tablist" aria-label="Ranking">
-        <button role="tab" id="t-classes" aria-selected="true" aria-controls="lb-table">Classes &amp; groups</button>
-        <button role="tab" id="t-ind" aria-selected="false" aria-controls="lb-table">Individuals</button>
-      </div>
-      <div class="tbl-wrap" id="lb-table" role="tabpanel"></div>
+      <div class="row-b" style="justify-content:space-between"><span class="mono">Group ranking</span><span class="mono" id="lb-updated">Live with the first pledge</span></div>
+      <div class="tbl-wrap" id="lb-table"></div>
     </div>
     <div class="c top" style="--s:5">
-      <span class="mono">Make a pledge · payable 30.11.2026</span>
+      <span class="mono">Make a group pledge · payable 30.11.2026</span>
       <form id="f-pledge" novalidate>
-        <fieldset class="f">
-          <legend>Pledge for</legend>
-          <div class="seg">
-            <label><input type="radio" name="entryType" value="class" checked><span>A class or group</span></label>
-            <label><input type="radio" name="entryType" value="individual"><span>Myself</span></label>
-          </div>
-        </fieldset>
-        <div class="frow" data-for="class">
-          <div class="f"><label for="p-prog">Programme or group</label><select id="p-prog" name="prog"><option value="">Choose…</option><option value="mba">MBA</option><option value="emba">EMBA</option><option value="other">Other</option></select></div>
-          <div class="f" id="p-year-wrap"><label for="p-year">Class year</label><select id="p-year" name="year"><option value="">Choose…</option></select></div>
-          <div class="f" id="p-other-wrap" hidden><label for="p-other">Group name</label><input id="p-other" name="otherGroup" type="text" maxlength="60" placeholder="e.g. Morges Running Club"></div>
-        </div>
-        <input type="hidden" id="p-class" name="classId">
-        <div class="f"><label for="p-name">Your name (or class name)</label><input id="p-name" name="contributorName" type="text" autocomplete="name" required maxlength="120"></div>
+        <div class="f"><label for="p-group">Group name</label><input id="p-group" name="groupName" type="text" required maxlength="60" placeholder="e.g. your classmates, running crew, club, team, association"></div>
+        <div class="f"><label for="p-name">Your name</label><input id="p-name" name="contributorName" type="text" autocomplete="name" required maxlength="120"></div>
         <div class="f"><label for="p-email">Email <span class="opt">· private, for payment details</span></label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
         <div class="f"><label for="p-amt">Amount in CHF</label><input id="p-amt" name="amount" type="number" inputmode="decimal" min="1" step="1" required><span class="km" id="p-km">= 0.00 km</span></div>
-        <div class="f" data-for="individual" hidden><label for="p-disp">Name on the ranking</label><input id="p-disp" name="displayName" type="text" maxlength="60"></div>
-        <label class="check" data-for="individual" hidden><input id="p-consent" type="checkbox" name="publicConsent"><span>Show my name on the public ranking. If unticked, I appear as “Anonymous”.</span></label>
         <div class="hp" aria-hidden="true"><label for="p-web">Website</label><input id="p-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <label class="check"><input id="p-ack" type="checkbox" name="ack" required><span>I understand this is a pledge, payable on Monday 30 November 2026, after the challenge.</span></label>
+        <label class="check"><input id="p-ack" type="checkbox" name="ack" required><span>I understand this is a pledge on behalf of my group, payable on Monday 30 November 2026, after the challenge.</span></label>
+        <p class="disclaimer small">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups, not by IMD classes or programs.</p>
         <div class="row-b"><button class="btn" type="submit">Pledge</button></div>
         <div class="msg" aria-live="polite"></div>
       </form>
-      <p class="note">The ranking shows your class name, or your own name for individual pledges, with CHF pledged, CHF received and kilometres. Your email stays private.</p>
+      <p class="note">The ranking shows each group name with CHF pledged, CHF received and kilometres. Several people can pledge for the same group; their pledges add up. Your email stays private.</p>
     </div>
     <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
   </div>
@@ -558,7 +544,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= SUPPORTERS ================= -->
 <section class="panel" data-panel="supporters" aria-labelledby="h-supporters" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:12;--h:40vh"><span class="mono">With thanks to</span><h1 class="big" id="h-supporters" tabindex="-1">Our partners</h1></div>
     <div class="c half-m" style="--s:2;--h:200px"><span class="mono">01 · IMD</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.imd.org/" target="_blank" rel="noopener"><img src="assets/logos/imd.png" alt="IMD" style="height:27px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">02 · Mount to Coast</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://ch.mounttocoast.com/" target="_blank" rel="noopener"><img src="assets/logos/mount-to-coast.png" alt="Mount to Coast" style="height:25px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">03 · COROS</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://coros.com/" target="_blank" rel="noopener"><img src="assets/logos/coros.png" alt="COROS" style="height:22px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">04 · SEMS</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://sems.ch/" target="_blank" rel="noopener"><img src="assets/logos/sems.png" alt="SEMS" style="height:23px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">05 · PEAQ</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://peaqhydration.com/" target="_blank" rel="noopener"><img src="assets/logos/peaq.png" alt="PEAQ" style="height:23px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">06 · Compressport</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.compressport.com/" target="_blank" rel="noopener"><img src="assets/logos/compressport.png" alt="Compressport" style="height:25px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">07 · Vitamin Well</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.vitaminwell.com/" target="_blank" rel="noopener"><img src="assets/logos/vitamin-well.png" alt="Vitamin Well" style="height:29px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">08 · S-REHAB</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://s-rehab.ch/" target="_blank" rel="noopener"><img src="assets/logos/s-rehab.png" alt="S-REHAB" style="height:33px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">09 · LEKI</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.leki.com/" target="_blank" rel="noopener"><img src="assets/logos/leki.png" alt="LEKI" style="height:25px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">10 · Poltrax</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://poltrax.live/en" target="_blank" rel="noopener"><img src="assets/logos/poltrax.png" alt="Poltrax" style="height:25px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">11 · CGN</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.cgn.ch/" target="_blank" rel="noopener"><img src="assets/logos/cgn.png" alt="CGN" style="height:25px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">12 · YETI</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.yeti.com/" target="_blank" rel="noopener"><img src="assets/logos/yeti.png" alt="YETI" style="height:24px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">13 · Lime</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.li.me/" target="_blank" rel="noopener"><img src="assets/logos/lime.png" alt="Lime" style="height:27px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">14 · Compex</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.compex.com/" target="_blank" rel="noopener"><img src="assets/logos/compex.png" alt="Compex" style="height:17px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">15 · Condecta</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://www.condecta.ch/" target="_blank" rel="noopener"><img src="assets/logos/condecta.png" alt="Condecta" style="height:17px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">16 · New Roots</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://newroots.ch/" target="_blank" rel="noopener"><img src="assets/logos/new-roots.png" alt="New Roots" style="height:57px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:2;--h:200px"><span class="mono">17 · Patagonia</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://eu.patagonia.com/ch/" target="_blank" rel="noopener"><img src="assets/logos/patagonia.png" alt="Patagonia" style="height:20px;width:auto;max-width:100%"></a></div></div><div class="c half-m" style="--s:4;--h:200px"><span class="mono">18 · Leukotape</span><div style="display:flex;justify-content:center;align-items:center;flex:1"><a class="lg-link" href="https://leukotape.com/ch/de/produkte" target="_blank" rel="noopener"><img src="assets/logos/leukotape.png" alt="Leukotape" style="height:20px;width:auto;max-width:100%"></a></div></div>
@@ -569,7 +555,7 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 
 <!-- ================= CHECKLIST ================= -->
 <section class="panel" data-panel="checklist" aria-labelledby="h-checklist" role="dialog" aria-modal="true" hidden>
-  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Class Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
+  <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
     <div class="c" style="--s:12"><span class="mono">Organiser only</span><h1 class="big" id="h-checklist" tabindex="-1">Before launch</h1></div>
     <div class="c" style="--s:12"><ul class="chk" id="chk"></ul></div>
@@ -582,7 +568,7 @@ const CONFIG = {
   // Google Apps Script web app URL (ends in /exec). See README.
   endpoint: "https://script.google.com/macros/s/AKfycbwV4ssz_plzEkojwrkFqi7vxsZlgv6p8beLgqzianswYfF0MURM2fPfeE6L4UvyWbiB/exec",
 
-  // Class Pledge money goes to the foundation (decided 29 Oct 2026).
+  // Pledge Challenge money goes to the foundation (decided 29 Oct 2026).
   pledgeDestination: "foundation",
   raceKm: 165,
   runnersOnLoop: 8,          // board target = 165 × 8 = 1,320 km
@@ -729,7 +715,7 @@ tick(); setInterval(tick, 1000);
 
 /* ---------- Routing ---------- */
 const ORDER = ["race","why","runners","logistics","donate","pledge"];
-const TITLES = {race:"Challenge details",why:"Why STRAY",runners:"Runners & crew",logistics:"Support challenge logistics",donate:"Donate to the foundation",pledge:"Class Pledge Challenge",supporters:"Our supporters",checklist:"Build checklist"};
+const TITLES = {race:"Challenge details",why:"Why STRAY",runners:"Runners & crew",logistics:"Support challenge logistics",donate:"Donate to the foundation",pledge:"Pledge Challenge",supporters:"Our supporters",checklist:"Build checklist"};
 const landing = $("#landing");
 let lastTrigger = null, openedFromLanding = false, current = null;
 
@@ -923,8 +909,6 @@ function validate(form){
   }
   if (form.id === "f-pledge"){
     if (!(Number(form.amount.value) >= 1)) return "Please enter an amount of at least CHF 1.";
-    if (form.entryType.value === "class" && !form.classId.value) return YEAR_PROGS[$("#p-prog").value] ? "Please choose your class year." : $("#p-prog").value === "other" ? "Please type your group name." : "Please choose a programme or group.";
-    if (form.entryType.value === "individual" && !form.displayName.value.trim()) return "Please add the name to show on the ranking.";
   }
   return "";
 }
@@ -955,36 +939,14 @@ function setupForm(form, build, done){
 setupForm($("#f-reg"), f => ({type:"registration", name:f.name.value.trim(), email:f.email.value.trim(), phone:f.phone.value.trim(), club:f.club.value.trim(), note:f.note.value.trim()}),
   () => "Request received. It is not a confirmed place yet. We will reply by email.");
 const pf = $("#f-pledge");
-const YEAR_PROGS = {mba:"MBA", emba:"EMBA"};
-(function(){
-  const ys = $("#p-year"), now = 2027;
-  for (let y = now; y >= 1972; y--) ys.insertAdjacentHTML("beforeend", `<option value="${y}">${y}</option>`);
-})();
-function syncClass(){
-  const prog = $("#p-prog").value, yr = $("#p-year").value, isYear = !!YEAR_PROGS[prog];
-  const isOther = prog === "other", oname = $("#p-other").value.trim();
-  $("#p-year-wrap").hidden = !isYear;
-  $("#p-other-wrap").hidden = !isOther;
-  $("#p-class").value = isYear ? (yr ? prog + "-" + yr : "") : isOther ? (oname ? "other" : "") : prog;
-  $("#p-class").dataset.name = isYear ? (yr ? YEAR_PROGS[prog] + " " + yr : "") : isOther ? oname : ($("#p-prog").selectedOptions[0]?.text || "");
-}
-$("#p-prog").addEventListener("change", syncClass); $("#p-year").addEventListener("change", syncClass); $("#p-other").addEventListener("input", syncClass); syncClass();
-function syncPledge(){
-  const t = pf.entryType.value;
-  $$("[data-for]", pf).forEach(el => el.hidden = el.dataset.for !== t);
-  $("#p-km").textContent = "= " + km(pf.amount.value) + " km";
-  if (typeof syncClass === "function") syncClass();
-}
-pf.addEventListener("input", syncPledge); pf.addEventListener("change", syncPledge); syncPledge();
-setupForm(pf, f => {
-  const t = f.entryType.value, sel = f.classId;
-  return {type:"pledge", entryType:t, classId: t === "class" ? sel.value : "", className: t === "class" ? sel.dataset.name || "" : "",
-    contributorName:f.contributorName.value.trim(), email:f.email.value.trim(), amount:Math.round(Number(f.amount.value)*100)/100,
-    displayName: t === "individual" ? f.displayName.value.trim() : "", publicConsent: t === "individual" ? f.publicConsent.checked : false};
-}, (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
+function syncPledge(){ $("#p-km").textContent = "= " + km(pf.amount.value) + " km"; }
+pf.addEventListener("input", syncPledge); syncPledge();
+setupForm(pf, f => ({type:"pledge", groupName:f.groupName.value.trim().replace(/\s+/g, " "),
+    contributorName:f.contributorName.value.trim(), email:f.email.value.trim(), amount:Math.round(Number(f.amount.value)*100)/100}),
+  (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Your group pledge is payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
 
 /* ---------- Ranking ---------- */
-let board = null, tab = "classes", btimer = null;
+let board = null, btimer = null;
 const lbTable = $("#lb-table");
 function renderBoard(){
   const t = (board && board.totals) || null;
@@ -994,10 +956,10 @@ function renderBoard(){
   $("#prog i").style.width = t ? Math.min(100, t.pledged/100/TARGET*100) + "%" : "0";
   if (!live){ lbTable.innerHTML = `<div class="empty">The ranking appears here with the first pledge.</div>`; return; }
   if (!board){ lbTable.innerHTML = `<div class="empty">Loading…</div>`; return; }
-  const rows = ((tab === "classes" ? board.classes : board.individuals) || []).filter(r => r.pledged > 0);
-  lbTable.innerHTML = rows.length ? `<table class="tbl"><thead><tr><th>#</th><th>${tab === "classes" ? "Class or group" : "Name"}</th><th class="n">Pledged CHF</th><th class="n">Received CHF</th><th class="n">Km</th></tr></thead><tbody>${
+  const rows = (board.groups || []).filter(r => r.pledged > 0);
+  lbTable.innerHTML = rows.length ? `<table class="tbl"><thead><tr><th>#</th><th>Group</th><th class="n">Pledged CHF</th><th class="n">Received CHF</th><th class="n">Km</th></tr></thead><tbody>${
     rows.map((r, i) => `<tr><td class="mono">${pad2(i+1)}</td><td>${esc(r.name)}</td><td class="n">${chf(r.pledged)}</td><td class="n">${chf(r.received)}</td><td class="k">${km(r.pledged)}${r.pledged/100 > CONFIG.raceKm ? `<span class="lap">lap ${Math.floor(r.pledged/100/CONFIG.raceKm)+1}</span>` : ""}</td></tr>`).join("")
-  }</tbody></table>` : `<div class="empty">No pledges yet${tab === "classes" ? " from a class or group" : " from individuals"}. Be the first.</div>`;
+  }</tbody></table>` : `<div class="empty">No pledges yet. Be the first group.</div>`;
 }
 async function loadBoard(){
   if (!live){ renderBoard(); return; }
@@ -1005,24 +967,16 @@ async function loadBoard(){
     const res = await fetch(CONFIG.endpoint + (CONFIG.endpoint.includes("?") ? "&" : "?") + "action=leaderboard", {cache:"no-store"});
     const d = await res.json(); if (!d.ok) throw new Error();
     board = d;
-    const sel = $("#p-prog"), keep = sel.value;
-    sel.innerHTML = `<option value="">Choose…</option><option value="mba">MBA</option><option value="emba">EMBA</option>` + (d.groups||[]).filter(g => !YEAR_PROGS[g.id.split("-")[0]] || !/-\d{4}$/.test(g.id)).map(g => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join("") + `<option value="other">Other</option>`;
-    sel.value = keep; syncClass();
     $("#lb-updated").textContent = "Updated " + new Date(d.updated).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
   } catch(e){ $("#lb-updated").textContent = "Could not refresh"; }
   renderBoard();
   clearTimeout(btimer); if (current === "pledge") btimer = setTimeout(loadBoard, 60000);
 }
-$$(".tabs [role=tab]").forEach(b => b.addEventListener("click", () => {
-  tab = b.id === "t-ind" ? "individuals" : "classes";
-  $$(".tabs [role=tab]").forEach(x => x.setAttribute("aria-selected", String(x === b)));
-  renderBoard();
-}));
 renderBoard(); if (live) loadBoard();
 
 /* ---------- Checklist ---------- */
 const items = [
-  [live, "Forms and ranking connected to the Google Sheet (endpoint) + Classes list filled"],
+  [live, "Forms and ranking connected to the Google Sheet (endpoint)"],
   [true, "Logistics: Revolut @gompe and TWINT +41 76 612 25 56"],
   [true, "Foundation TWINT QR"],
   [true, "Pledges go to the foundation; past 165 km = new lap; target 1'320 km"],

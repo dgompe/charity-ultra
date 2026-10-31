@@ -12,15 +12,11 @@
 
 const SHEETS = {
   reg:     { name: 'Registrations', head: ['submission_id','timestamp','name','email','phone','club','note','status','organiser_notes'] },
-  pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','class_id','class_name','contributor_name','amount_chf','email','identity_key','display_name','public_consent','status','received_chf','organiser_notes'] },
-  classes: { name: 'Classes',       head: ['class_id','display_name','active'] }
+  pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','group_id','group_name','contributor_name','amount_chf','email','unused_1','unused_2','unused_3','status','received_chf','organiser_notes'] }
 };
 const PLEDGE_STATUS = ['pledged','received','partly received','cancelled','duplicate'];
 const EXCLUDED = ['cancelled','duplicate'];
 const REG_STATUS = ['requested','approved','declined','duplicate'];
-// Year-based classes: any MBA or EMBA class year can pledge without a row in the Classes tab.
-const YEAR_PROGRAMMES = { mba: 'MBA', emba: 'EMBA' };
-const YEAR_MIN = 1960, YEAR_MAX = 2030;
 // Sends each pledger an email with payment details, from the Google account that deploys this script.
 const SEND_PLEDGE_EMAIL = true;
 
@@ -41,8 +37,6 @@ function setup() {
   p.getRange('M2:M').setNumberFormat('0.00');
   ss.getSheetByName(SHEETS.reg.name).getRange('H2:H')
     .setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(REG_STATUS, true).build());
-  ss.getSheetByName(SHEETS.classes.name).getRange('C2:C')
-    .setDataValidation(SpreadsheetApp.newDataValidation().requireCheckbox().build());
   const props = PropertiesService.getScriptProperties();
   if (!props.getProperty('SALT')) props.setProperty('SALT', Utilities.getUuid());
 }
@@ -79,62 +73,42 @@ function addRegistration(d, sid) {
 function addPledge(d, sid) {
   const sh = sheet(SHEETS.pledge.name);
   const prior = findRow(sh, sid);
-  if (prior) return { ok: true, duplicate: true, amount: Number(prior[6]), target: prior[2] === 'class' ? prior[4] : prior[9] };
+  if (prior) return { ok: true, duplicate: true, amount: Number(prior[6]), target: prior[4] };
 
-  const type = d.entryType === 'individual' ? 'individual' : 'class';
   const name = clean(d.contributorName, 120);
   const email = clean(d.email, 160).toLowerCase();
   const amount = Math.round(Number(d.amount) * 100) / 100;
+  const group = groupFrom(d.groupName);
+  if (!group) return { ok: false, error: 'Please add a group name.' };
   if (!name || !isEmail(email)) return { ok: false, error: 'Name and a valid email are required.' };
   if (!(amount >= 1) || amount > 1000000) return { ok: false, error: 'Please check the amount.' };
 
-  let classId = '', className = '', display = '', consent = false;
-  if (type === 'class') {
-    const c = d.classId === 'other' ? otherGroup(d.className) : resolveClass(clean(d.classId, 64));
-    if (!c) return { ok: false, error: 'Please choose a class from the list.' };
-    classId = c.id; className = c.name;
-  } else {
-    display = clean(d.displayName, 60);
-    if (!display) return { ok: false, error: 'Please add a display name.' };
-    consent = d.publicConsent === true;
-  }
-  sh.appendRow([sid, new Date(), type, classId, className, name, amount, email,
-                type === 'individual' ? identityKey(email) : '', display, consent, 'pledged', 0, '']);
+  // Columns: submission_id, timestamp, entry_type, group_id, group_name, contributor_name, amount_chf, email, (unused), (unused), (unused), status, received_chf, organiser_notes
+  sh.appendRow([sid, new Date(), 'group', group.id, group.name, name, amount, email, '', '', '', 'pledged', 0, '']);
   CacheService.getScriptCache().remove('board');
-  if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, type === 'class' ? className : display);
-  return { ok: true, amount, target: type === 'class' ? className : display };
+  if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, group.name);
+  return { ok: true, amount, target: group.name };
 }
 
 /* ---------- reads ---------- */
+// Ranking: every pledge counts for its group. Groups match on a normalised name (case, accents and spacing ignored).
 function doGet(e) {
   if ((e.parameter.action || '') !== 'leaderboard') return json({ ok: false, error: 'Unknown action.' });
   const cache = CacheService.getScriptCache();
   const hit = cache.get('board');
   if (hit) return ContentService.createTextOutput(hit).setMimeType(ContentService.MimeType.JSON);
 
-  const groups = activeClasses();
-  const byClass = {};
-  groups.forEach(c => { byClass[c.id] = { id: c.id, name: c.name, pledged: 0, received: 0 }; });
-  const people = {};
+  const byGroup = {};
   const totals = { pledged: 0, received: 0 };
-
-  const rows = sheet(SHEETS.pledge.name).getDataRange().getValues().slice(1);
-  rows.forEach(r => {
+  sheet(SHEETS.pledge.name).getDataRange().getValues().slice(1).forEach(r => {
     const status = String(r[11] || '').toLowerCase();
     if (!r[0] || EXCLUDED.indexOf(status) >= 0) return;
     const amt = Number(r[6]) || 0, rec = Number(r[12]) || 0;
     totals.pledged += amt; totals.received += rec;
-    if (r[2] === 'class') {
-      let c = byClass[r[3]];
-      if (!c) { const rc = /^other-/.test(String(r[3])) ? { id: String(r[3]), name: String(r[4]) } : resolveClass(String(r[3])); if (rc) c = byClass[rc.id] = { id: rc.id, name: rc.name, pledged: 0, received: 0 }; }
-      if (c) { c.pledged += amt; c.received += rec; }
-    } else {
-      const k = r[8];
-      if (!k) return;
-      const p = people[k] || (people[k] = { name: 'Anonymous', pledged: 0, received: 0 });
-      p.pledged += amt; p.received += rec;
-      if (r[10] === true && r[9]) p.name = String(r[9]);   // latest consenting display name wins
-    }
+    const g = groupFrom(String(r[4] || r[9] || ''));
+    if (!g) return;
+    const row = byGroup[g.id] || (byGroup[g.id] = { name: g.name, pledged: 0, received: 0 });
+    row.pledged += amt; row.received += rec;
   });
 
   const round = n => Math.round(n * 100) / 100;
@@ -142,11 +116,8 @@ function doGet(e) {
     ok: true,
     updated: new Date().toISOString(),
     totals: { pledged: round(totals.pledged), received: round(totals.received) },
-    groups: groups.map(g => ({ id: g.id, name: g.name })),
-    classes: Object.values(byClass).map(c => ({ id: c.id, name: c.name, pledged: round(c.pledged), received: round(c.received) }))
-                    .sort((a, b) => b.pledged - a.pledged || a.name.localeCompare(b.name)),
-    individuals: Object.values(people).map(p => ({ name: p.name, pledged: round(p.pledged), received: round(p.received) }))
-                    .sort((a, b) => b.pledged - a.pledged)
+    groups: Object.values(byGroup).map(g => ({ name: g.name, pledged: round(g.pledged), received: round(g.received) }))
+              .sort((a, b) => b.pledged - a.pledged || a.name.localeCompare(b.name))
   };
   const s = JSON.stringify(out);
   cache.put('board', s, 30);
@@ -157,23 +128,10 @@ function doGet(e) {
 function onEdit() { CacheService.getScriptCache().remove('board'); }
 
 /* ---------- helpers ---------- */
-function activeClasses() {
-  return sheet(SHEETS.classes.name).getDataRange().getValues().slice(1)
-    .filter(r => r[0] && r[1] && r[2] === true)
-    .map(r => ({ id: String(r[0]).trim(), name: String(r[1]).trim() }));
-}
-function resolveClass(id) {
-  const m = /^([a-z]+)-(\d{4})$/.exec(id || '');
-  if (m && YEAR_PROGRAMMES[m[1]]) {
-    const y = +m[2];
-    if (y >= YEAR_MIN && y <= YEAR_MAX) return { id: m[1] + '-' + y, name: YEAR_PROGRAMMES[m[1]] + ' ' + y };
-  }
-  return activeClasses().find(c => c.id === id) || null;
-}
-function otherGroup(name) {
-  const n = clean(name, 60).replace(/^'/, '');
-  const slug = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
-  return n && slug ? { id: 'other-' + slug, name: n } : null;
+function groupFrom(raw) {
+  const name = clean(raw, 60).replace(/^'/, '').replace(/\s+/g, ' ').trim();
+  const id = name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
+  return name && id ? { id: 'group-' + id, name: name } : null;
 }
 function sheet(n) { return SpreadsheetApp.getActive().getSheetByName(n); }
 function exists(sh, sid) { return !!findRow(sh, sid); }
@@ -212,10 +170,9 @@ function sendPledgeEmail(to, name, amount, target) {
   } catch (e) { /* the pledge is saved even if the email fails */ }
 }
 
-/* One-off: keeps only non-year groups in the Classes tab. MBA and EMBA years work automatically. */
-function seedClasses() {
-  const sh = SpreadsheetApp.getActive().getSheetByName('Classes');
-  sh.getRange('A2:E200').clearContent();
-  sh.getRange(2, 1, 2, 3).setValues([['imd-faculty','IMD Faculty',true],['imd-staff','IMD Staff',true]]);
+/* One-off: relabels the Pledges header row for group pledges. Safe to run more than once. */
+function relabelPledgeHeaders() {
+  const sh = sheet(SHEETS.pledge.name);
+  sh.getRange(1, 1, 1, SHEETS.pledge.head.length).setValues([SHEETS.pledge.head]);
   CacheService.getScriptCache().remove('board');
 }
