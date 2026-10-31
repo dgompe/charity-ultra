@@ -45,6 +45,7 @@ The old **Classes** tab is no longer used. You can delete it from the Sheet when
 
 ## 5. Notes
 
+- Why STRAY → "The people who shaped the first STRAY": the people are in `CONFIG.shapers` at the top of the script in `index.html` (name, tag, km, story, link, linkText). Set `km` to a number to fill the KM slot; add a person by copying a block. New text also needs a DE/FR/ES line in `i18n.json`, or it shows in English.
 - Languages: EN, DE, FR, ES. The switcher sits top right. A saved choice wins; then `?lang=de` (or fr, es, en) in the link; then the visitor's location from their IP address (get.geojs.io: Swiss French cantons get French, the rest of Switzerland German, Spain and Latin America Spanish); then the browser language; otherwise English. Translations live in `i18n.json` in the build folder and are inlined into `index.html`.
 
 - Landing: the artboard photo upscaled to 4K, small STRAY mark top right, LAKE TOUR EDITION with the lake drawing on the left. Both are cut from the poster's vector file.
