@@ -14,6 +14,8 @@ const SHEETS = {
   reg:     { name: 'Registrations', head: ['submission_id','timestamp','name','email','phone','club','note','status','organiser_notes'] },
   pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','group_id','group_name','contributor_name','amount_chf','email','unused_1','unused_2','unused_3','status','received_chf','organiser_notes'] }
 };
+// Individual pledges share one line on the ranking, so no personal names are shown.
+const INDIVIDUALS = { id: 'individuals', name: 'Individuals' };
 const PLEDGE_STATUS = ['pledged','received','partly received','cancelled','duplicate'];
 const EXCLUDED = ['cancelled','duplicate'];
 const REG_STATUS = ['requested','approved','declined','duplicate'];
@@ -78,20 +80,22 @@ function addPledge(d, sid) {
   const name = clean(d.contributorName, 120);
   const email = clean(d.email, 160).toLowerCase();
   const amount = Math.round(Number(d.amount) * 100) / 100;
-  const group = groupFrom(d.groupName);
-  if (!group) return { ok: false, error: 'Please add a group name.' };
+  const solo = d.pledgeAs === 'individual';
+  const group = solo ? null : groupFrom(d.groupName);
+  if (!solo && !group) return { ok: false, error: 'Please add a group name.' };
   if (!name || !isEmail(email)) return { ok: false, error: 'Name and a valid email are required.' };
   if (!(amount >= 1) || amount > 1000000) return { ok: false, error: 'Please check the amount.' };
 
   // Columns: submission_id, timestamp, entry_type, group_id, group_name, contributor_name, amount_chf, email, (unused), (unused), (unused), status, received_chf, organiser_notes
-  sh.appendRow([sid, new Date(), 'group', group.id, group.name, name, amount, email, '', '', '', 'pledged', 0, '']);
+  const label = solo ? INDIVIDUALS.name : group.name;
+  sh.appendRow([sid, new Date(), solo ? 'individual' : 'group', solo ? INDIVIDUALS.id : group.id, solo ? '' : group.name, name, amount, email, '', '', '', 'pledged', 0, '']);
   CacheService.getScriptCache().remove('board');
-  if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, group.name);
-  return { ok: true, amount, target: group.name };
+  if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, label);
+  return { ok: true, amount, target: solo ? '' : label };
 }
 
 /* ---------- reads ---------- */
-// Ranking: every pledge counts for its group. Groups match on a normalised name (case, accents and spacing ignored).
+// Ranking: every pledge counts for its group; individual pledges add up on one "Individuals" line. Groups match on a normalised name (case, accents and spacing ignored).
 function doGet(e) {
   if ((e.parameter.action || '') !== 'leaderboard') return json({ ok: false, error: 'Unknown action.' });
   const cache = CacheService.getScriptCache();
@@ -105,7 +109,7 @@ function doGet(e) {
     if (!r[0] || EXCLUDED.indexOf(status) >= 0) return;
     const amt = Number(r[6]) || 0, rec = Number(r[12]) || 0;
     totals.pledged += amt; totals.received += rec;
-    const g = groupFrom(String(r[4] || r[9] || ''));
+    const g = String(r[2]).toLowerCase() === 'individual' ? INDIVIDUALS : groupFrom(String(r[4] || r[9] || ''));
     if (!g) return;
     const row = byGroup[g.id] || (byGroup[g.id] = { name: g.name, pledged: 0, received: 0 });
     row.pledged += amt; row.received += rec;
@@ -161,7 +165,7 @@ function sendPledgeEmail(to, name, amount, target) {
       subject: 'STRAY Lake Tour — your pledge of CHF ' + amount,
       body:
         'Hi ' + name + ',\n\n' +
-        'Thank you. Your pledge is recorded: CHF ' + amount + ' = ' + km + ' km for ' + target + '.\n\n' +
+        'Thank you. Your pledge is recorded: CHF ' + amount + ' = ' + km + ' km' + (target === INDIVIDUALS.name ? ', as an individual pledge' : ' for ' + target) + '.\n\n' +
         'Please pay on Monday 30 November 2026, after the runners finish.\n' +
         'Pay with TWINT to Fondation Planètes Enfants Malades (QR code on the site, Donate page) and add the comment "Charity Ultra".\n' +
         '100% goes to the foundation.\n\n' +

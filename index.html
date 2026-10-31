@@ -164,7 +164,7 @@ h1.big:focus{outline:none}
 form{display:flex;flex-direction:column;gap:16px;max-width:680px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .f{display:flex;flex-direction:column;gap:7px;min-width:0}
-.f label,.f legend{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.f label,.f legend,.f .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .f .opt{color:var(--ink-2)}
 input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper-2);border:1px solid transparent;border-bottom-color:var(--ink);border-radius:0;padding:11px 12px;width:100%;min-width:0}
 textarea{min-height:84px;resize:vertical}
@@ -506,37 +506,38 @@ form[data-closed] .f,form[data-closed] .check{opacity:.55}
 <section class="panel" data-panel="pledge" aria-labelledby="h-pledge" role="dialog" aria-modal="true" hidden>
   <header class="p-head"><a class="home" href="#" data-home aria-label="STRAY home"><img src="assets/stray-ink.png" alt="STRAY" width="600" height="319"></a><ul class="p-nav"><li><a href="#race">Challenge details</a></li><li><a href="#why">Why STRAY</a></li><li><a href="#runners">Runners &amp; crew</a></li><li><a href="#logistics">Support challenge logistics</a></li><li><a href="#donate">Donate to the foundation</a></li><li><a href="#pledge" aria-current="page">Pledge Challenge</a></li></ul><button class="close" data-close>Close <span aria-hidden="true">×</span></button></header>
   <div class="cells">
-    <div class="c" style="--s:12"><p class="disclaimer">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups, not by IMD classes or programs.</p></div>
+    <div class="c" style="--s:12"><p class="disclaimer">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups or individuals, not by IMD classes or programs.</p></div>
     <div class="c" style="--s:8;--h:52vh"><span class="mono">06 — Pledge Challenge · open now</span><h1 class="big" id="h-pledge" tabindex="-1">CHF 100 = 1 km</h1></div>
-    <div class="c" style="--s:4"><span class="mono">How it works</span><p class="lede">Make a group pledge. Every CHF 100 credits one kilometre to your group on the ranking. Pay after the challenge.</p></div>
+    <div class="c" style="--s:4"><span class="mono">How it works</span><p class="lede">Pledge as a group or on your own. Every CHF 100 credits one kilometre on the ranking. Pay after the challenge.</p></div>
 
     <div class="c" style="--s:3;--h:260px"><span class="mono">Pledged · CHF</span><div class="num" id="s-pledged">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">Received · CHF</span><div class="num" id="s-received">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">Credited · km</span><div class="num" id="s-km">—</div></div>
     <div class="c" style="--s:3;--h:260px"><span class="mono">8 runners × 165 km</span><div><div class="num"><span data-target>1'320</span><small>KM</small></div><div class="prog" id="prog" style="margin-top:14px"><i></i></div></div></div>
 
-    <div class="c top" style="--s:4"><span class="mono">Who</span><p class="txt">IMD students and friends. Groups and associations. IMD faculty, staff and academia. Individuals, as part of a group.</p><p class="txt">You form the group you want: friends, a running crew, a club, a team, an association.</p></div>
-    <div class="c top" style="--s:4"><span class="mono">Kilometres</span><p class="txt">Fundraising kilometres, not distance you run. CHF 50 = 0.50 km. Past 165 km your group starts a new lap. Eight runners × 165 km = 1'320 km.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">Who</span><p class="txt">IMD students and friends. Groups and associations. IMD faculty, staff and academia. Individuals.</p><p class="txt">Form the group you want: friends, a running crew, a club, a team, an association. Or pledge on your own.</p></div>
+    <div class="c top" style="--s:4"><span class="mono">Kilometres</span><p class="txt">Fundraising kilometres, not distance you run. CHF 50 = 0.50 km. Past 165 km a group starts a new lap. Eight runners × 165 km = 1'320 km.</p></div>
     <div class="c top" style="--s:4"><span class="mono">When you pay</span><p class="txt">Monday 30 November 2026, after the runners finish. You will receive an email with payment details. It all goes to Fondation Planètes Enfants Malades, through the <a href="#donate">foundation TWINT code</a> with the comment “Charity Ultra”.</p></div>
 
     <div class="c top" style="--s:7">
-      <div class="row-b" style="justify-content:space-between"><span class="mono">Group ranking</span><span class="mono" id="lb-updated">Live with the first pledge</span></div>
+      <div class="row-b" style="justify-content:space-between"><span class="mono">Ranking</span><span class="mono" id="lb-updated">Live with the first pledge</span></div>
       <div class="tbl-wrap" id="lb-table"></div>
     </div>
     <div class="c top" style="--s:5">
-      <span class="mono">Make a group pledge · payable 30.11.2026</span>
+      <span class="mono">Make a pledge · payable 30.11.2026</span>
       <form id="f-pledge" novalidate>
-        <div class="f"><label for="p-group">Group name</label><input id="p-group" name="groupName" type="text" required maxlength="60" placeholder="e.g. your classmates, running crew, club, team, association"></div>
+        <div class="f"><span class="lbl" id="p-as-l">Pledge as</span><div class="seg" role="radiogroup" aria-labelledby="p-as-l"><label><input type="radio" name="pledgeAs" value="group" checked>A group</label><label><input type="radio" name="pledgeAs" value="individual">An individual</label></div></div>
+        <div class="f" id="p-group-f"><label for="p-group">Group name</label><input id="p-group" name="groupName" type="text" required maxlength="60" placeholder="e.g. your classmates, running crew, club, team, association"></div>
         <div class="f"><label for="p-name">Your name</label><input id="p-name" name="contributorName" type="text" autocomplete="name" required maxlength="120"></div>
         <div class="f"><label for="p-email">Email <span class="opt">· private, for payment details</span></label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
         <div class="f"><label for="p-amt">Amount in CHF</label><input id="p-amt" name="amount" type="number" inputmode="decimal" min="1" step="1" required><span class="km" id="p-km">= 0.00 km</span></div>
         <div class="hp" aria-hidden="true"><label for="p-web">Website</label><input id="p-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <label class="check"><input id="p-ack" type="checkbox" name="ack" required><span>I understand this is a pledge on behalf of my group, payable on Monday 30 November 2026, after the challenge.</span></label>
-        <p class="disclaimer small">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups, not by IMD classes or programs.</p>
+        <label class="check"><input id="p-ack" type="checkbox" name="ack" required><span>I understand this pledge is payable on Monday 30 November 2026, after the challenge.</span></label>
+        <p class="disclaimer small">This is not an IMD fundraising event. STRAY is organized externally by an independent association. Pledges are made by groups or individuals, not by IMD classes or programs.</p>
         <div class="row-b"><button class="btn" type="submit">Pledge</button></div>
         <div class="msg" aria-live="polite"></div>
       </form>
-      <p class="note">The ranking shows each group name with CHF pledged, CHF received and kilometres. Several people can pledge for the same group; their pledges add up. Your email stays private.</p>
+      <p class="note">The ranking shows each group with CHF pledged, CHF received and kilometres. Several people can pledge for the same group; their pledges add up. Individual pledges are combined into one line, “Individuals”, so your name stays off the ranking. Your email stays private.</p>
     </div>
     <div class="c" style="--s:12"><nav class="p-foot" data-pager></nav></div>
   </div>
@@ -939,11 +940,14 @@ function setupForm(form, build, done){
 setupForm($("#f-reg"), f => ({type:"registration", name:f.name.value.trim(), email:f.email.value.trim(), phone:f.phone.value.trim(), club:f.club.value.trim(), note:f.note.value.trim()}),
   () => "Request received. It is not a confirmed place yet. We will reply by email.");
 const pf = $("#f-pledge");
-function syncPledge(){ $("#p-km").textContent = "= " + km(pf.amount.value) + " km"; }
+function syncPledge(){
+  $("#p-km").textContent = "= " + km(pf.amount.value) + " km";
+  $("#p-group-f").hidden = pf.pledgeAs.value === "individual";
+}
 pf.addEventListener("input", syncPledge); syncPledge();
-setupForm(pf, f => ({type:"pledge", groupName:f.groupName.value.trim().replace(/\s+/g, " "),
+setupForm(pf, f => ({type:"pledge", pledgeAs:f.pledgeAs.value, groupName:f.pledgeAs.value === "individual" ? "" : f.groupName.value.trim().replace(/\s+/g, " "),
     contributorName:f.contributorName.value.trim(), email:f.email.value.trim(), amount:Math.round(Number(f.amount.value)*100)/100}),
-  (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Your group pledge is payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
+  (f, d) => { loadBoard(); return `Pledge recorded: CHF ${esc(chf(d.amount))} = ${esc(km(d.amount))} km${d.target ? " for " + esc(d.target) : ""}. You will receive an email with payment details. Your pledge is payable on Monday 30 November 2026.${d.duplicate ? " (Already received earlier, counted once.)" : ""}`; });
 
 /* ---------- Ranking ---------- */
 let board = null, btimer = null;
@@ -959,7 +963,7 @@ function renderBoard(){
   const rows = (board.groups || []).filter(r => r.pledged > 0);
   lbTable.innerHTML = rows.length ? `<table class="tbl"><thead><tr><th>#</th><th>Group</th><th class="n">Pledged CHF</th><th class="n">Received CHF</th><th class="n">Km</th></tr></thead><tbody>${
     rows.map((r, i) => `<tr><td class="mono">${pad2(i+1)}</td><td>${esc(r.name)}</td><td class="n">${chf(r.pledged)}</td><td class="n">${chf(r.received)}</td><td class="k">${km(r.pledged)}${r.pledged/100 > CONFIG.raceKm ? `<span class="lap">lap ${Math.floor(r.pledged/100/CONFIG.raceKm)+1}</span>` : ""}</td></tr>`).join("")
-  }</tbody></table>` : `<div class="empty">No pledges yet. Be the first group.</div>`;
+  }</tbody></table>` : `<div class="empty">No pledges yet. Be the first.</div>`;
 }
 async function loadBoard(){
   if (!live){ renderBoard(); return; }

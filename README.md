@@ -15,7 +15,7 @@ If you change `Code.gs` later: paste it into the Apps Script editor, save, then 
 
 ## 2. Run the Pledge Challenge from the Sheet
 
-Pledges are group pledges only. There are no individual pledges and no pre-set list of groups: people type a group name (friends, a running crew, a club, a team, an association). STRAY is organised by an independent association; it is not an IMD fundraising event.
+People pledge as a group or as an individual. There is no pre-set list of groups: people type a group name (friends, a running crew, a club, a team, an association). Individual pledges have entry_type `individual`, an empty group_name, and add up on one "Individuals" line on the ranking, so no personal names are shown. STRAY is organised by an independent association; it is not an IMD fundraising event.
 
 Each pledge is one row in **Pledges** with its own ID. Nothing is merged or overwritten.
 
