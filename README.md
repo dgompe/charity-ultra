@@ -15,7 +15,7 @@ If you change `Code.gs` later: paste it into the Apps Script editor, save, then 
 
 ## 2. Run the Pledge Challenge from the Sheet
 
-People pledge as a group or as an individual. There is no pre-set list of groups: people type a group name (friends, a running crew, a club, a team, an association). Individual pledges have entry_type `individual`, an empty group_name, and add up on one "Individuals" line on the ranking, so no personal names are shown. STRAY is organised by an independent association; it is not an IMD fundraising event.
+People pledge as a group or as an individual. There is no pre-set list of groups: people type a group name (friends, a running crew, a club, a team, an association). Individual pledges have entry_type `individual` and show the person's name (contributor_name) on the ranking. STRAY is organised by an independent association; it is not an IMD fundraising event.
 
 Each pledge is one row in **Pledges** with its own ID. Nothing is merged or overwritten.
 
@@ -23,7 +23,7 @@ Each pledge is one row in **Pledges** with its own ID. Nothing is merged or over
 - **status**: `pledged` (default) · `received` · `partly received` · `cancelled` · `duplicate`. Cancelled and duplicate rows drop out of every total.
 - **received_chf**: type the amount that actually arrived. The RECEIVED column only counts this.
 - A network retry sends the same ID and is stored once. A real second pledge gets a new ID and is kept.
-- Groups can tick "anonymous": column **anonymous** says `yes`, the group name stays in the Sheet, and the pledge counts on one "Anonymous" line on the ranking. Clear the `yes` to show the group name again.
+- Groups and individuals can tick "anonymous": column **anonymous** says `yes`, names stay in the Sheet, and the pledge counts on one "Anonymous" line on the ranking. Clear the `yes` to show the name again.
 - Each pledger gets an email with payment details from the Google account that deployed the script.
 - The ranking refreshes on the site every 60 seconds and after each pledge. The backend caches for 30 seconds.
 

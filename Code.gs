@@ -14,9 +14,9 @@ const SHEETS = {
   reg:     { name: 'Registrations', head: ['submission_id','timestamp','name','email','phone','club','note','status','organiser_notes'] },
   pledge:  { name: 'Pledges',       head: ['submission_id','timestamp','entry_type','group_id','group_name','contributor_name','amount_chf','email','anonymous','unused_2','unused_3','status','received_chf','organiser_notes'] }
 };
-// Individual pledges share one line on the ranking, so no personal names are shown.
+// Individual pledges show the person's name on the ranking (contributor_name).
 const INDIVIDUALS = { id: 'individuals', name: 'Individuals' };
-// Groups that tick "anonymous" share one line on the ranking. The group name is still kept in the Sheet.
+// Groups and individuals that tick "anonymous" share one line on the ranking. Names are still kept in the Sheet.
 const ANONYMOUS = { id: 'anonymous', name: 'Anonymous' };
 const PLEDGE_STATUS = ['pledged','received','partly received','cancelled','duplicate'];
 const EXCLUDED = ['cancelled','duplicate'];
@@ -89,16 +89,16 @@ function addPledge(d, sid) {
   if (!(amount >= 1) || amount > 1000000) return { ok: false, error: 'Please check the amount.' };
 
   // Columns: submission_id, timestamp, entry_type, group_id, group_name, contributor_name, amount_chf, email, anonymous (yes/blank), (unused), (unused), status, received_chf, organiser_notes
-  const anon = !solo && d.anonymous === true;
+  const anon = d.anonymous === true;
   const label = solo ? INDIVIDUALS.name : group.name;
-  sh.appendRow([sid, new Date(), solo ? 'individual' : 'group', solo ? INDIVIDUALS.id : group.id, solo ? '' : group.name, name, amount, email, anon ? 'yes' : '', '', '', 'pledged', 0, '']);
+  sh.appendRow([sid, new Date(), solo ? 'individual' : 'group', solo ? personFrom(name).id : group.id, solo ? '' : group.name, name, amount, email, anon ? 'yes' : '', '', '', 'pledged', 0, '']);
   CacheService.getScriptCache().remove('board');
   if (SEND_PLEDGE_EMAIL) sendPledgeEmail(email, name, amount, label);
   return { ok: true, amount, target: solo ? '' : label };
 }
 
 /* ---------- reads ---------- */
-// Ranking: every pledge counts for its group; individual pledges add up on one "Individuals" line. Groups match on a normalised name (case, accents and spacing ignored).
+// Ranking: every pledge counts for its group, or for the person's name if pledged as an individual; anonymous pledges add up on one "Anonymous" line. Groups match on a normalised name (case, accents and spacing ignored).
 function doGet(e) {
   if ((e.parameter.action || '') !== 'leaderboard') return json({ ok: false, error: 'Unknown action.' });
   const cache = CacheService.getScriptCache();
@@ -112,8 +112,8 @@ function doGet(e) {
     if (!r[0] || EXCLUDED.indexOf(status) >= 0) return;
     const amt = Number(r[6]) || 0, rec = Number(r[12]) || 0;
     totals.pledged += amt; totals.received += rec;
-    const g = String(r[2]).toLowerCase() === 'individual' ? INDIVIDUALS
-            : String(r[8]).toLowerCase() === 'yes' ? ANONYMOUS
+    const g = String(r[8]).toLowerCase() === 'yes' ? ANONYMOUS
+            : String(r[2]).toLowerCase() === 'individual' ? (personFrom(String(r[5] || '')) || ANONYMOUS)
             : groupFrom(String(r[4] || r[9] || ''));
     if (!g) return;
     const row = byGroup[g.id] || (byGroup[g.id] = { name: g.name, pledged: 0, received: 0 });
@@ -142,6 +142,7 @@ function groupFrom(raw) {
   const id = name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
   return name && id ? { id: 'group-' + id, name: name } : null;
 }
+function personFrom(raw) { const g = groupFrom(raw); return g ? { id: 'person-' + g.id.slice(6), name: g.name } : null; }
 function sheet(n) { return SpreadsheetApp.getActive().getSheetByName(n); }
 function exists(sh, sid) { return !!findRow(sh, sid); }
 function findRow(sh, sid) {
