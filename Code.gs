@@ -172,9 +172,12 @@ function sendPledgeEmail(to, name, amount, target) {
       body:
         'Hi ' + name + ',\n\n' +
         'Thank you. Your pledge is recorded: CHF ' + amount + ' = ' + km + ' km' + (target === INDIVIDUALS.name ? ', as an individual pledge' : ' for ' + target) + '.\n\n' +
-        'Please pay on Monday 30 November 2026, after the runners finish.\n' +
-        'Pay with TWINT to Fondation Planètes Enfants Malades (QR code on the site, Donate page) and add the comment "Charity Ultra".\n' +
-        '100% goes to the foundation.\n\n' +
+        'HOW TO PAY\n' +
+        'Pay Fondation Plan\u00e8tes Enfants Malades directly. You can pay now, or on Monday 30 November 2026, after the runners finish.\n\n' +
+        '- Online or by bank transfer: https://fpem.ch/don/\n' +
+        '- TWINT: scan the foundation QR code on our site: https://dgompe.github.io/charity-ultra/#donate\n\n' +
+        'Always add "Charity Ultra" in the payment comment. That is how the foundation knows the money came from this challenge.\n\n' +
+        '100% goes to the foundation. Donations are tax-deductible.\n\n' +
         'Questions: david.gomezpereda@mba.imd.org\n\nSTRAY'
     });
   } catch (e) { /* the pledge is saved even if the email fails */ }
