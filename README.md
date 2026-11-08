@@ -51,6 +51,6 @@ The old **Classes** tab is no longer used. You can delete it from the Sheet when
 
 - Landing: the artboard photo upscaled to 4K, small STRAY mark top right, LAKE TOUR EDITION with the lake drawing on the left. Both are cut from the poster's vector file.
 - The poster says "29 NOV". The site uses 28–29 Nov because the start is Saturday 28 Nov at 11:00. The date and distance beside the wordmark are live text; the wordmark itself is the poster's vector artwork.
-- Links: `#race`, `#why`, `#runners`, `#logistics`, `#donate`, `#pledge`, `#supporters`. Back button and Esc close a panel.
+- Links: `#race`, `#run` (Run with us: relay and first 5 km), `#relay`, `#pledge-form`, `#why`, `#runners`, `#logistics`, `#donate`, `#pledge`, `#supporters`. Back button and Esc close a panel.
 - No card details are ever collected. Payment happens in TWINT or Revolut.
 - Logistics money and foundation money are never added together on the site.
