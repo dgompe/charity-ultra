@@ -33,7 +33,7 @@ The old **Classes** tab is no longer used. You can delete it from the Sheet when
 
 ## 3. What is already filled in
 
-- Logistics: Revolut @gompe and TWINT to +41 76 612 25 56, message "Race logistics".
+- Logistics: covered (book sale, Social Club, in-kind donations from partners). The Revolut and TWINT details are no longer shown on the site.
 - Foundation: the TWINT QR. It is an in-app TWINT code, so there is no web link; people scan it.
 - Pledges go to the foundation. Past 165 km a group starts a new lap. No total fundraising target is published.
 - Route: map drawn from the GPX (Ride with GPS 56646783), GPX download.
