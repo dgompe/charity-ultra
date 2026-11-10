@@ -176,7 +176,7 @@ function sendPledgeEmail(to, name, amount, target) {
         'Pay Fondation Plan\u00e8tes Enfants Malades directly. You can pay now, or on Monday 30 November 2026, after the runners finish.\n\n' +
         '- Online or by bank transfer: https://fpem.ch/don/\n' +
         '- TWINT: scan the foundation QR code on our site: https://dgompe.github.io/charity-ultra/#donate\n\n' +
-        'Always add "Charity Ultra" in the payment comment. That is how the foundation knows the money came from this challenge.\n\n' +
+        'Always add "STRAY" in the payment comment. That is how the foundation knows the money came from this challenge.\n\n' +
         '100% goes to the foundation. Donations are tax-deductible.\n\n' +
         'Questions: david.gomezpereda@mba.imd.org\n\nSTRAY'
     });
