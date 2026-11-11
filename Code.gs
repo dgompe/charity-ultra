@@ -171,7 +171,7 @@ function sendPledgeEmail(to, name, amount, target) {
       subject: 'STRAY Lake Tour — your pledge of CHF ' + amount,
       body:
         'Hi ' + name + ',\n\n' +
-        'Thank you. Your pledge is recorded: CHF ' + amount + ' = ' + km + ' km' + (target === INDIVIDUALS.name ? ', as an individual pledge' : ' for ' + target) + '.\n\n' +
+        'Thank you. Your pledge is recorded: CHF ' + amount + (target === INDIVIDUALS.name ? ', as an individual pledge' : ' for ' + target) + '.\n\n' +
         'HOW TO PAY\n' +
         'Pay Fondation Plan\u00e8tes Enfants Malades directly. You can pay now, or on Monday 30 November 2026, after the runners finish.\n\n' +
         '- Online or by bank transfer: https://fpem.ch/don/\n' +
