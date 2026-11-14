@@ -43,7 +43,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* ---------- Landing ---------- */
 .landing{position:relative;min-height:100%;display:grid;grid-template-rows:auto 1fr auto;color:var(--on-photo);isolation:isolate;overflow:hidden}
 .landing::before{content:"";position:absolute;inset:0;z-index:-2;background:#3a3156 url(assets/hero-4k.jpg) center 42%/cover no-repeat}
-.landing::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);opacity:.22}
+.landing::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(20,15,34,.7),rgba(20,15,34,0) 32%),linear-gradient(to right,rgba(20,15,34,.62),rgba(20,15,34,.18) 48%,rgba(20,15,34,.5))}
+@media (max-width:760px){.landing::after{background:linear-gradient(to top,rgba(20,15,34,.7),rgba(20,15,34,0) 32%),rgba(20,15,34,.45)}}
+.hero-slides{position:absolute;inset:0;z-index:-2;pointer-events:none}
+.hero-slides i{position:absolute;inset:0;background:#141018 center/cover no-repeat;opacity:0;transition:opacity 1.4s ease}
+.hero-slides i.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.hero-slides i{transition:none}}
 .gut{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
 .lang{display:flex;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em}
 .lang button{background:none;border:0;color:inherit;font:inherit;letter-spacing:inherit;padding:8px 6px;cursor:pointer;opacity:.55}
@@ -306,6 +311,7 @@ html[lang=es] .story summary::before{content:"Leer más"}html[lang=es] .story[op
 
 <!-- ================= LANDING ================= -->
 <main class="landing" id="landing">
+  <div class="hero-slides" aria-hidden="true"><i class="on" style="background-image:url(assets/hero/hero-1.jpg);background-position:32% 50%"></i><i data-bg="assets/hero/hero-2.jpg" style="background-position:55% 40%"></i><i data-bg="assets/hero/hero-3.jpg" style="background-position:42% 55%"></i><i data-bg="assets/hero/hero-4.jpg" style="background-position:50% 62%"></i></div>
   <header class="bar gut">
     <figure class="mini" aria-label="Route: one loop of Lac Léman from IMD Lausanne">
       <svg viewBox="0 0 1000 619" aria-hidden="true">
@@ -877,6 +883,18 @@ tick(); setInterval(tick, 1000);
 const ORDER = ["race","run","why","runners","donate","pledge"];
 const TITLES = {race:"Challenge details",run:"Run with us",why:"Why STRAY",runners:"Runners & crew",donate:"Donate to the foundation",pledge:"Pledge Challenge",supporters:"Our supporters",checklist:"Build checklist"};
 const landing = $("#landing");
+/* Landing background: crossfade every 5 seconds */
+(function(){
+  const slides = $$(".hero-slides i"); if (slides.length < 2) return;
+  let k = 0;
+  const load = el => { if (el.dataset.bg){ el.style.backgroundImage = `url(${el.dataset.bg})`; delete el.dataset.bg; } };
+  window.addEventListener("load", () => slides.forEach(load));
+  setInterval(() => {
+    if (document.hidden || landing.inert) return;
+    const next = slides[(k + 1) % slides.length]; load(next);
+    slides[k].classList.remove("on"); k = (k + 1) % slides.length; next.classList.add("on");
+  }, 5000);
+})();
 let lastTrigger = null, openedFromLanding = false, current = null;
 
 
