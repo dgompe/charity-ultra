@@ -40,7 +40,7 @@ The old **Classes** tab is no longer used. You can delete it from the Sheet when
 
 ## 4. Still open (see `index.html#checklist`)
 
-- Runner bios (all except David and Francis); LinkedIn for Angela Gisler and Vincent Leroy
+- Runner bios (all except David and Francis); LinkedIn for Angela Gisler
 - Foundation paragraph approval
 - Official logo files
 
